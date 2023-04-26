@@ -17,14 +17,14 @@ spec:
         name: broidery-frontend
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           name: http
           protocol: TCP
         livenessProbe:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 8080
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
@@ -32,7 +32,7 @@ spec:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 8080
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 20
           timeoutSeconds: 2
