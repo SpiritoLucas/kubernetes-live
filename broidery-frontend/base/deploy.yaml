@@ -16,20 +16,20 @@ spec:
       - image: spirito/broidery-fe:latest
         name: broidery-frontend
         imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
         livenessProbe:
-        - failureThreshold: 4
+          failureThreshold: 4
           httpGet:
             path: /health
             port: 8080
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
-        ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
         readinessProbe:
-        - failureThreshold: 4
+          failureThreshold: 4
           httpGet:
             path: /health
             port: 8080
