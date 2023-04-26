@@ -6,7 +6,7 @@ patches:
 
 images:
 - name: spirito/broidery-fe
-  newTag: latest
+  newTag: k3s
 
 resources:
 - ../../base
