@@ -18,21 +18,21 @@ spec:
         livenessProbe:
           failureThreshold: 4
           httpGet:
-            path: /health
-            port: 8080
+            path: /health-check
+            port: 5000
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
         name: broidery-backend
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
           name: http
           protocol: TCP
         readinessProbe:
           failureThreshold: 4
           httpGet:
-            path: /health
-            port: 8080
+            path: /health-check
+            port: 5000
           initialDelaySeconds: 5
           periodSeconds: 20
           timeoutSeconds: 2
