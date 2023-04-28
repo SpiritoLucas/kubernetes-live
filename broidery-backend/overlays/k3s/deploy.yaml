@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broidery-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broidery-backend
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+      containers:
+      - image: spirito/broidery-be:latest
+        env:
+          - name: CORS_URL
+            value: 'http://broidery.k3s'
+          - name: DEFAULT_CONNECTION
+            value: 'Server=mysql.default.svc.cluster.local;Port=3306;Database=Broidery-api-db;User Id=broidery-user; Password=gQ93Q1ihANsg+Nmp'
+        name: broidery-backend
