@@ -14,7 +14,7 @@ spec:
         app: mysql
     spec:
       nodeSelector: 
-        - db=true 
+        - selector: db=true 
       containers:
         - name: mysql
           image: mysql:latest
