@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
 - cluster-b.yaml
 - k3s-autodiscovery.yaml
-- kustomization.yaml
 - project.yaml
