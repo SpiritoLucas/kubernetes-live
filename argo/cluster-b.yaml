@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://gitlab.com/fravega-it/infrastructure/argo/argocd-live.git
     targetRevision: master
-    path: .
+    path: argo/
     directory:
       recurse: true
   destination:
