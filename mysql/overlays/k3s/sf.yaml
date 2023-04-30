@@ -13,6 +13,8 @@ spec:
       labels:
         app: mysql
     spec:
+      nodeSelector:
+        db: true 
       containers:
         - name: mysql
           image: mysql:latest
