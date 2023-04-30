@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
-    targetRevision: master
+    targetRevision: HEAD
     path: argo/k3s
     directory:
       recurse: true

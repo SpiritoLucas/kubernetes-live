@@ -10,7 +10,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
-      revision: master
+      revision: HEAD
       directories:
       - path: '**/overlays/k3s'
   template:
@@ -20,7 +20,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
-        targetRevision: master
+        targetRevision: HEAD
         path: '{{ path }}'
       destination:
         server: https://kubernetes.default.svc
