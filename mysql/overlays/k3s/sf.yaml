@@ -21,7 +21,7 @@ spec:
                 - key: db
                   operator: In
                   values:
-                  - true
+                  - "true"
       containers:
         - name: mysql
           image: mysql:latest
