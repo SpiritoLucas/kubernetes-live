@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
+  nodeName: n3
   selector:
     matchLabels:
       app: mysql
