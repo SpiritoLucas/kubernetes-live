@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mysql
 spec:
@@ -15,11 +15,5 @@ spec:
       containers:
         - name: mysql
           image: mysql:latest
-          volumeMounts:
-            - name: task-pv-storage
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: task-pv-storage
-          persistentVolumeClaim:
-            claimName: task-pv-claim
+
 
