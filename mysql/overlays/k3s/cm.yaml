@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: database-config
+data:
+  MYSQL_DATABASE: 'Broidery-api-db'
+  MYSQL_USER: 'broidery-user'
+
+
+
+
+
+
+
+

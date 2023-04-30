@@ -3,6 +3,7 @@ kind: Kustomization
 
 patches:
 - path: sf.yaml
+- path: cm.yaml
 
 images:
 - name: mysql

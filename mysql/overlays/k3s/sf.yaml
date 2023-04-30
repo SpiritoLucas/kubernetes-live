@@ -26,9 +26,15 @@ spec:
           image: mysql:latest
           env:
             - name: MYSQL_DATABASE
-              value: 'Broidery-api-db'
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: MYSQL_DATABASE
             - name: MYSQL_USER
-              value: 'broidery-user'
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: MYSQL_USER
             - name: MYSQL_PASSWORD
               value: 'gQ93Q1ihANsg+Nmp'
             - name: MYSQL_ROOT_PASSWORD
