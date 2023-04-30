@@ -13,9 +13,15 @@ spec:
       labels:
         app: mysql
     spec:
-      nodeSelector: 
-        - selector: 
-          db: "true" 
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: db
+                  operator: In
+                  values:
+                  - true
       containers:
         - name: mysql
           image: mysql:latest
