@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://gitlab.com/fravega-it/infrastructure/argo/argocd-live.git
+    repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
     targetRevision: master
     path: argo/
     directory:
