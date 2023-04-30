@@ -16,11 +16,10 @@ spec:
         - name: mysql
           image: mysql:latest
           volumeMounts:
-            - name: mysql-persistent-storage
+            - name: task-pv-storage
               mountPath: /var/lib/mysql
       volumes:
-        - name: mysql-persistent-storage
-          hostPath:
-            path: /mnt/data/mysql
-            type: DirectoryOrCreate
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
 
