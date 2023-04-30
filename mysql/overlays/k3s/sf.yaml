@@ -3,11 +3,10 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
-  nodeSelector: n2
   selector:
     matchLabels:
       app: mysql
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:
