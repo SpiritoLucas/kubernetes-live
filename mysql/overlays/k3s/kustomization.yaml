@@ -11,5 +11,6 @@ images:
 
 resources:
 - ../../base
+- sealed-secret.yaml
 
 namespace: default
