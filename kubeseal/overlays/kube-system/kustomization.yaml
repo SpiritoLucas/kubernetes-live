@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
 - controller.yaml
 
-namespace: default
+namespace: kube-system 
