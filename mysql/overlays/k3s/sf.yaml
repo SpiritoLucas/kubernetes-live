@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: mysql
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -37,13 +37,15 @@ spec:
                   key: MYSQL_USER
                   valueFrom:
             - name: MYSQL_PASSWORD
-              secretKeyRef:
-                name: db-secret
-                key: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_PASSWORD
             - name: MYSQL_ROOT_PASSWORD
-              secretKeyRef:
-                name: db-secret
-                key: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
               name: mysql
