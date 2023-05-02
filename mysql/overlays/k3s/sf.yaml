@@ -37,13 +37,13 @@ spec:
                   key: MYSQL_USER
                   valueFrom:
             - name: MYSQL_PASSWORD
-              value: 'gQ93Q1ihANsg+Nmp'
+              value: 'xo4MZlh56Cfci3UL'
               # valueFrom:
               #   secretKeyRef:
               #     name: db-secret
               #     key: MYSQL_PASSWORD
             - name: MYSQL_ROOT_PASSWORD
-              value: 'EGwyETUz+eUOGuDe'
+              value: 'GHKQCJrIJzr0LnnW'
               # valueFrom:
               #   secretKeyRef:
               #     name: db-secret
