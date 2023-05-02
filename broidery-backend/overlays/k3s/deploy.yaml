@@ -20,6 +20,6 @@ spec:
           - name: DEFAULT_CONNECTION
             valueFrom:
               secretKeyRef:
-                name: db-secret
+                name: database-connection
                 key: DEFAULT_CONNECTION
         name: broidery-backend
