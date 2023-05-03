@@ -37,17 +37,15 @@ spec:
                   key: MYSQL_USER
                   valueFrom:
             - name: MYSQL_PASSWORD
-              value: 'xo4MZlh56Cfci3UL'
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: db-secret
-              #     key: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_PASSWORD
             - name: MYSQL_ROOT_PASSWORD
-              value: 'GHKQCJrIJzr0LnnW'
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: db-secret
-              #     key: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
               name: mysql
