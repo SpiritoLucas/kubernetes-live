@@ -16,7 +16,7 @@ spec:
       - image: sleeyax/stremio-streaming-server:latest
         env:
           - name: FIX_UNSUPPORTED_MEDIA
-            value: 1
+            value: '1'
         name: stremio
         volumeMounts:
           - name: stremio-persistent-storage
