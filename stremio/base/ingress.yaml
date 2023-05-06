@@ -4,7 +4,7 @@ metadata:
   name: stremio
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    kubernetes.io/ingress.class: ingress-class
+    kubernetes.io/ingress.class: ingress-nginx
 spec:
   rules:
   - host: stremio.k3s
