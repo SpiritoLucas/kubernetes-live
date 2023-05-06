@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stremio
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stremio
+  template:
+    metadata:
+      labels:
+        app: stremio
+    spec:
+      containers:
+      - image: sleeyax/stremio-streaming-server:latest
+        env:
+          - name: FIX_UNSUPPORTED_MEDIA
+            value: 1
+        name: stremio
+        volumeMounts:
+          - name: stremio-persistent-storage
+            mountPath: /root/.stremio-server
+      volumes:
+        - name: stremio-persistent-storage
+          hostPath:
+            path: /mnt/data/stremio
+            type: DirectoryOrCreate

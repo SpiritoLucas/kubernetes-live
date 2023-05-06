@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stremio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio
+  template:
+    metadata:
+      labels:
+        app: stremio
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: stremio
+                  operator: In
+                  values:
+                  - "true"
+      containers:
+      - image: sleeyax/stremio-streaming-server:latest
+        name: stremio
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 11470
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        ports:
+        - containerPort: 11470
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 11470
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
