@@ -1,0 +1,75 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager-appset
+  namespace: argocd
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+  - git:
+      repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
+      revision: HEAD
+      directories:
+      - path: '**/overlays/cert-manager'
+  template:
+    metadata:
+      name: '{{ path[0] }}-k3s'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
+        targetRevision: HEAD
+        path: '{{ path }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: cert-manager
+      syncPolicy:  
+        automated:
+          # Autodelete objects removed from YAMLs (deployments, services, ingress)
+          prune: true
+          # If kubectl apply or edit happens, auto-revert those changes
+          selfHeal: true
+          # Allows deleting all application resources during automatic syncing ( false by default ).
+          allowEmpty: false
+        syncOptions:
+        - CreateNamespace=true
+        - PruneLast=true
+        retry:
+          # number of failed sync attempt retries; unlimited number of attempts if less than 0
+          limit: 5
+          backoff:
+            # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+            duration: 5s
+            # a factor to multiply the base duration after each failed retry
+            factor: 2
+            # the maximum amount of time allowed for the backoff strategy
+            maxDuration: 3m
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cert-manager
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    notifications.argoproj.io/subscribe.discord_mkp_success: ""
+    notifications.argoproj.io/subscribe.discord_mkp_error: ""
+spec:
+  syncWindows:
+    - kind: allow
+      schedule: '* * * * *'
+      duration: 24h
+      namespaces:
+        - cert-manager
+      clusters:
+        - in-cluster
+  description: k3s Team
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+    - 'https://github.com/SpiritoLucas/**'
+  # Allow managing monitoring namespace
+  destinations:
+    - namespace: cert-manager
+      server: https://kubernetes.default.svc
