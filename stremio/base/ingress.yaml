@@ -26,5 +26,4 @@ spec:
 status:
   loadBalancer:
     ingress:
-      - hostname: >-
-          192.168.64.6
+      - hostname: 192.168.64.6
