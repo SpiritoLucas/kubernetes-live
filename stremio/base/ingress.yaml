@@ -11,7 +11,7 @@ spec:
   tls:
     - hosts:
         - stremio.k3s
-      secretName: k3s-serving
+      secretName: wildcard.k3s.cloud-tls
   rules:
   - host: stremio.k3s
     http:
