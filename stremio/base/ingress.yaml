@@ -8,6 +8,7 @@ metadata:
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
     cert-manager.io/issuer-kind: "ClusterIssuer"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - stremio.k3s
