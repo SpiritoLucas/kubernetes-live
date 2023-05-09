@@ -8,6 +8,10 @@ spec:
     name: http
     protocol: TCP
     targetPort: http
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: http
   selector:
     app: stremio
   sessionAffinity: None
