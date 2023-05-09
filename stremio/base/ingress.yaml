@@ -6,6 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: ingress-nginx
 spec:
+  tls:
+    - hosts:
+        - stremio.k3s
+      secretName: k3s-serving
   rules:
   - host: stremio.k3s
     http:
