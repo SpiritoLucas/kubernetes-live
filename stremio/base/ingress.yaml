@@ -22,4 +22,4 @@ spec:
           service:
             name: stremio
             port:
-              name: http
+              port: 82
