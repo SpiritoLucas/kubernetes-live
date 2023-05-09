@@ -21,5 +21,4 @@ spec:
         backend:
           service:
             name: stremio
-            port:
-              port: 82
+            port: 82
