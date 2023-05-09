@@ -6,8 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: ingress-nginx
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
-    cert-manager.io/issuer-kind: ClusterIssuer
-    nginx.ingress.kubernetes.io/upstream-hash-by: 192.168.64.6
+    cert-manager.io/issuer-kind: "ClusterIssuer"
 spec:
   tls:
     - hosts:
