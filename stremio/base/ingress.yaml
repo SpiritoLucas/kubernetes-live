@@ -5,6 +5,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: ingress-nginx
+    cert-manager.io/issuer: "letsencrypt-staging" # nombre del emisor de certificados definido en cert-manager
+    cert-manager.io/issuer-kind: "ClusterIssuer
 spec:
   tls:
     - hosts:
@@ -21,7 +23,3 @@ spec:
             name: stremio
             port:
               name: http
-status:
-  loadBalancer: {
-    192.168.64.6
-  }

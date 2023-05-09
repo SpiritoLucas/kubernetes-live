@@ -10,4 +10,5 @@ spec:
   selector:
     app: stremio
   sessionAffinity: None
-  type: LoadBalancer
+  #type: LoadBalancer
+  type: ClusterIP
