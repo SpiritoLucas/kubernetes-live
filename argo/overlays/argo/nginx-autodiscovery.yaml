@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: nginx-appset
+  name: metallb-appset
   namespace: argocd
 spec:
   syncPolicy:
@@ -12,7 +12,7 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: '**/overlays/nginx'
+      - path: '**/overlays/metallb'
   template:
     metadata:
       name: '{{ path[0] }}-k3s'
@@ -24,7 +24,7 @@ spec:
         path: '{{ path }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: ingress-nginx
+        namespace: metallb-system
       syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)
@@ -50,7 +50,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: k3s
+  name: stremio
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
@@ -62,7 +62,7 @@ spec:
       schedule: '* * * * *'
       duration: 24h
       namespaces:
-        - ingress-nginx
+        - metallb-system
       clusters:
         - in-cluster
   description: k3s Team
@@ -71,5 +71,5 @@ spec:
     - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
-    - namespace: ingress-nginx
+    - namespace: metallb-system
       server: https://kubernetes.default.svc
