@@ -16,7 +16,7 @@ spec:
       secretName: wildcard.k3s.cloud-tls
   rules:
   - host: stremio.k3s
-    https:
+    http:
       paths:
       - path: /
         pathType: Prefix
