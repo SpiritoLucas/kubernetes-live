@@ -7,7 +7,6 @@ resources:
 - crds.yaml
 - daemonset.yaml
 - deploy.yaml
-- ns-matal.yaml
 - ns.yaml
 - rolebindings.yaml
 - roles.yaml
