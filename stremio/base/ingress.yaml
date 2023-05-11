@@ -24,4 +24,4 @@ spec:
           service:
             name: stremio
             port: 
-              name: http
+              number: 443
