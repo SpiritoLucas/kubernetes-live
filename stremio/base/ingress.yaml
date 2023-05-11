@@ -18,8 +18,8 @@ spec:
   - host: stremio.k3s
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /.*
+        pathType: ImplementationSpecific
         backend:
           service:
             name: stremio
