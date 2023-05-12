@@ -24,4 +24,6 @@ spec:
   destinations:
     - namespace: metallb-system
       server: https://kubernetes.default.svc
-
+  clusterResourceWhitelist:
+    - group: ''
+      kind: '*'

@@ -25,3 +25,6 @@ spec:
   destinations:
     - namespace: stremio
       server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: '*'
