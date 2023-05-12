@@ -6,8 +6,8 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-    notifications.argoproj.io/subscribe.discord_mkp_success: ""
-    notifications.argoproj.io/subscribe.discord_mkp_error: ""
+    notifications.argoproj.io/subscribe.discord_k3s_success: ""
+    notifications.argoproj.io/subscribe.discord_k3s_error: ""
 spec:
   syncWindows:
     - kind: allow
