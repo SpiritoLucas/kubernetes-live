@@ -17,7 +17,7 @@ spec:
     metadata:
       name: '{{ path[0] }}-k3s'
     spec:
-      project: default
+      project: broidery
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
@@ -50,7 +50,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: stremio
+  name: broidery
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"

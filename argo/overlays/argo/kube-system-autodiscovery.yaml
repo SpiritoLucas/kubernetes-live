@@ -17,7 +17,7 @@ spec:
     metadata:
       name: '{{ path[0] }}-k3s'
     spec:
-      project: default
+      project: kube-system
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
