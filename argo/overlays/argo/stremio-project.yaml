@@ -26,5 +26,5 @@ spec:
     - namespace: stremio
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
-    - group: ''
+    - group: '*'
       kind: '*'

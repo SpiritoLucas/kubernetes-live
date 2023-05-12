@@ -26,5 +26,5 @@ spec:
     - namespace: ingress-nginx
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
-    - group: ''
+    - group: '*'
       kind: '*'
