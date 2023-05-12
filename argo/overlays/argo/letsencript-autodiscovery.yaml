@@ -46,30 +46,4 @@ spec:
             factor: 2
             # the maximum amount of time allowed for the backoff strategy
             maxDuration: 3m
----
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: cert-manager
-  namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
-    notifications.argoproj.io/subscribe.discord_mkp_success: ""
-    notifications.argoproj.io/subscribe.discord_mkp_error: ""
-spec:
-  syncWindows:
-    - kind: deny
-      schedule: '* * * * *'
-      duration: 24h
-      namespaces:
-        - cert-manager
-      clusters:
-        - in-cluster
-  description: k3s Team
-  # Allow manifests to deploy from any Git repos
-  sourceRepos:
-    - 'https://github.com/SpiritoLucas/**'
-  # Allow managing monitoring namespace
-  destinations:
-    - namespace: cert-manager
-      server: https://kubernetes.default.svc
+

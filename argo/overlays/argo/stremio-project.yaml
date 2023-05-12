@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: stremio
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    notifications.argoproj.io/subscribe.discord_mkp_success: ""
+    notifications.argoproj.io/subscribe.discord_mkp_error: ""
+spec:
+  syncWindows:
+    - kind: allow
+      schedule: '* * * * *'
+      duration: 24h
+      namespaces:
+        - stremio
+      clusters:
+        - in-cluster
+  description: k3s Team
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+    - 'https://github.com/SpiritoLucas/**'
+  # Allow managing monitoring namespace
+  destinations:
+    - namespace: stremio
+      server: https://kubernetes.default.svc
