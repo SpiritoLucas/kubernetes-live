@@ -3,6 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- resources/certificates.namespace.yaml
-- resources/cluster-issuer-selfsigned.cluster-issuer.cert-manager.yaml
-- resources/wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
+- certificates.namespace.yaml
+- cluster-issuer-selfsigned.cluster-issuer.cert-manager.yaml
+- wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
