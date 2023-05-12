@@ -29,3 +29,8 @@ spec:
         - "*"
       resources:
         - "*"
+  namespaceResourceAllowList:
+    - apiGroups:
+        - "*"
+      resources:
+        - "*"

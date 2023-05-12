@@ -9,7 +9,7 @@ metadata:
     notifications.argoproj.io/subscribe.discord_mkp_error: ""
 spec:
   syncWindows:
-    - kind: deny
+    - kind: allow
       schedule: '* * * * *'
       duration: 24h
       namespaces:
