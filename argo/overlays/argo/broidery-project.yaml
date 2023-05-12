@@ -24,3 +24,8 @@ spec:
   destinations:
     - namespace: default
       server: https://kubernetes.default.svc
+  clusterResourceAllowList:
+    - apiGroups:
+        - "*"
+      resources:
+        - "*"
