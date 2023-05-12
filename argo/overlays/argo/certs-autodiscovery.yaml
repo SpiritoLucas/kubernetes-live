@@ -15,7 +15,7 @@ spec:
       - path: '**/overlays/certs'
   template:
     metadata:
-      name: '{{ path[0] }}-k3s'
+      name: '{{ path[0] }}-certs-k3s'
     spec:
       project: certificates
       source:
