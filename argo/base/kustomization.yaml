@@ -13,10 +13,10 @@ resources:
 - statefullSets.yaml
 - svcAccounts.yaml
 - svcs.yaml
-- overlays/argocd-server
-- overlays/argocd-applicationset-controller
-- overlays/argocd-dex-server
-- overlays/argocd-notifications-controller
-- overlays/argocd-redis
-- overlays/argocd-repo-server
+- ../overlays/argocd-server
+- ../overlays/argocd-applicationset-controller
+- ../overlays/argocd-dex-server
+- ../overlays/argocd-notifications-controller
+- ../overlays/argocd-redis
+- ../overlays/argocd-repo-server
 
