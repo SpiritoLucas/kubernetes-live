@@ -12,4 +12,6 @@ resources:
 - stremio-autodiscovery.yaml
 - ../../projects
 
+namespace: argocd
+
 
