@@ -6,7 +6,6 @@ resources:
 - clusterRoles.yaml
 - cms.yaml
 - crds.yaml
-- deployments.yaml
 - nwPolicies.yaml
 - roleBindings.yaml
 - roles.yaml
