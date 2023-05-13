@@ -27,6 +27,7 @@ spec:
   dnsNames:
   - "*.k3s"
   - "stremio.k3s"
+  - "argocd.k3s"
   issuerRef:
     name: cluster-issuer-selfsigned
     kind: ClusterIssuer
