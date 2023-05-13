@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- clusterRoleBindings.yaml
+- clusterRoles.yaml
+- cms.yaml
+- crds.yaml
+- deployments.yaml
+- nwPolicies.yaml
+- roleBindings.yaml
+- roles.yaml
+- secrets.yaml
+- statefullSets.yaml
+- svcAccounts.yaml
+- svcs.yaml
+
+
