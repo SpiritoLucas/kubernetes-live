@@ -4,7 +4,7 @@ metadata:
   name: config
 data:
   config: |
-    address-pools:
+    IPAddressPool:
     - name: default
       protocol: layer2
       addresses:
