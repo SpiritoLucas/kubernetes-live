@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: broidery-appset
+  name: argocd-appset
   namespace: argocd
 spec:
   syncPolicy:
