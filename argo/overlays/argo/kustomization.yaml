@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- broidery-autodiscovery.yaml
+- certs-autodiscovery.yaml
+- cluster-b.yaml
+- kube-system-autodiscovery.yaml
+- letsencript-autodiscovery.yaml
+- metallb-autodiscovery.yaml
+- nginx-autodiscovery.yaml
+- stremio-autodiscovery.yaml
+- ../../projects
+
+
