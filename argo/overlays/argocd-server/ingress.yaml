@@ -10,10 +10,10 @@ metadata:
     metallb.uniberse.tf/address-pool: default
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - argocd.k3s
-      secretName: wildcard.k3s.cloud-tls
+  #tls:
+  #  - hosts:
+  #      - argocd.k3s
+  #    secretName: wildcard.k3s.cloud-tls
   rules:
   - host: argocd.k3s
     http:
