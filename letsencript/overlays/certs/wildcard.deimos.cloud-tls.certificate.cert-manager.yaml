@@ -19,6 +19,8 @@ spec:
   subject:
     organizations:
     - "Broidery"
+  issuer:
+    name: cluster-issuer-selfsigned
   privateKey:
     algorithm: ECDSA
     size: 384
