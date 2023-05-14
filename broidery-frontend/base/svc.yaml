@@ -4,10 +4,10 @@ metadata:
   name: broidery-frontend
 spec:
   ports:
-  - port: 81
+  - port: 80
     protocol: TCP
     targetPort: http
   selector:
     app: broidery-frontend
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
