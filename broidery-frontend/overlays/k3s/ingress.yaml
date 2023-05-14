@@ -15,7 +15,7 @@ spec:
   #      - argocd.k3s
   #    secretName: wildcard.k3s.cloud-tls
   rules:
-  - host: argocd.k3s
+  - host: broidery.k3s
     http:
       paths:
       - path: /.*
