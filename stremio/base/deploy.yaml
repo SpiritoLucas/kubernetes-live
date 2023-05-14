@@ -22,7 +22,7 @@ spec:
       #            values:
       #            - "true"
       containers:
-      - image: sleeyax/stremio-streaming-server:latest
+      - image: n0bodysec/stremio:latest
         name: stremio
         imagePullPolicy: IfNotPresent
         livenessProbe:
