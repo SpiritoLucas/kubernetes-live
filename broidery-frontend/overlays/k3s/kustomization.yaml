@@ -11,5 +11,6 @@ images:
 resources:
 - ../../base
 - hpa.yaml
+- ingress.yaml
 
 namespace: default
