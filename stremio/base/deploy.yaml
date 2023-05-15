@@ -29,7 +29,7 @@ spec:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 12470
+            port: 11470
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
@@ -41,7 +41,7 @@ spec:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 12470
+            port: 11470
           initialDelaySeconds: 5
           periodSeconds: 20
           timeoutSeconds: 2
