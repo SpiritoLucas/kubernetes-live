@@ -8,3 +8,4 @@ resources:
 - wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
 - broidery.deimos.cloud-tls.certificate.cert-manager.yaml
 - argocd.cloud-tls.certificate.cert-manager.yaml
+- broidery-backend.deimos.cloud-tls.certificate.cert-manager.yaml
