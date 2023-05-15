@@ -20,7 +20,10 @@ spec:
   - host: broidery.k3s
     http:
       paths:
-      - path: /
+      - path: /.*
+        pathType: ImplementationSpecific
         backend:
-          serviceName: broidery-frontend
-          servicePort: http
+          service:
+            name: broidery-frontend
+            port: 
+              name: http
