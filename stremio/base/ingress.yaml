@@ -10,6 +10,11 @@ metadata:
     metallb.uniberse.tf/address-pool: default
 spec:
   ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: stremio
+      port:
+        name: http
   tls:
     - hosts:
         - stremio.k3s
