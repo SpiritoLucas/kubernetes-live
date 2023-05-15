@@ -15,8 +15,7 @@ spec:
       containers:
       - image: spirito/broidery-fe:latest
         name: broidery-frontend
-        #imagePullPolicy: IfNotPresent
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
           name: http
