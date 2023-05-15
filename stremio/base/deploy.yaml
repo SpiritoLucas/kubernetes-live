@@ -22,26 +22,26 @@ spec:
       #            values:
       #            - "true"
       containers:
-      - image: n0bodysec/stremio:latest
+      - image: spirito/stremio-server:latest
         name: stremio
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 11470
+            port: 8080
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
         ports:
-        - containerPort: 11470
+        - containerPort: 8080
           name: http
           protocol: TCP
         readinessProbe:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 11470
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 20
           timeoutSeconds: 2
