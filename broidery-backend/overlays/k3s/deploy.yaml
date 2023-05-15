@@ -16,7 +16,7 @@ spec:
       - image: spirito/broidery-be:latest
         env:
           - name: CORS_URL
-            value: 'http://broidery.k3s'
+            value: 'https://broidery.k3s'
           - name: DEFAULT_CONNECTION
             valueFrom:
               secretKeyRef:
