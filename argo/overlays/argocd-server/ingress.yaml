@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - argocd.k3s
-      secretName: argocd-secret
+      secretName: argocd.k3s.cloud-tls
   rules:
   - host: argocd.k3s
     http:
