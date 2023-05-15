@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: broidery-frontend
   annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 #    nginx.ingress.kubernetes.io/rewrite-target: /
     #kubernetes.io/ingress.class: nginx
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
