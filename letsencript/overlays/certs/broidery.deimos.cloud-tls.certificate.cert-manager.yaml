@@ -15,7 +15,7 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "kube-system"
   duration: 8760h0m0s # No certificate should last more than a year
   renewBefore: 720h0m0s # Certificates must be renewed some time before they expire (30 days)
-  isCA: false
+  #isCA: false
   subject:
     organizations:
     - "Broidery"
