@@ -29,19 +29,19 @@ spec:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 8081
+            port: 11470
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
         ports:
-        - containerPort: 8081
+        - containerPort: 11470
           name: http
           protocol: TCP
         readinessProbe:
           failureThreshold: 4
           httpGet:
             path: /
-            port: 8081
+            port: 11470
           initialDelaySeconds: 5
           periodSeconds: 20
           timeoutSeconds: 2
