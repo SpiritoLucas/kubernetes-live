@@ -10,4 +10,4 @@ spec:
   selector:
     app: broidery-backend
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
