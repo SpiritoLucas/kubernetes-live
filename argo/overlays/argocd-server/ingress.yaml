@@ -11,6 +11,11 @@ metadata:
     metallb.uniberse.tf/address-pool: default
 spec:
   ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: argocd-server
+      port:
+        name: http
   tls:
     - hosts:
         - argocd.k3s
