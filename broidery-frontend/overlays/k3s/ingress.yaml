@@ -24,4 +24,5 @@ spec:
         backend:
           service:
             name: broidery-frontend
-            servicePort: 80
+            port: 
+              name: http
