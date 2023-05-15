@@ -5,7 +5,7 @@ patches:
 - path: deploy.yaml
 
 images:
-- name: n0bodysec/stremio
+- name: spirito/stremio-server
   newTag: latest
 
 resources:
