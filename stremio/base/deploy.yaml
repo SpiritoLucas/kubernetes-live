@@ -34,7 +34,7 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 2
         ports:
-        - containerPort: 12470
+        - containerPort: 11470
           name: http
           protocol: TCP
         readinessProbe:
