@@ -1,0 +1,35 @@
+# Wilcard certificate for k3s
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: broidery.k3s.cloud-tls
+  namespace: certificates
+spec:
+  secretName: broidery.k3s.cloud-tls
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "kube-system"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "kube-system"
+  duration: 8760h0m0s # No certificate should last more than a year
+  renewBefore: 720h0m0s # Certificates must be renewed some time before they expire (30 days)
+  #isCA: false
+  subject:
+    organizations:
+    - "Broidery"
+  privateKey:
+    algorithm: ECDSA
+    size: 384
+    encoding: PKCS8
+    rotationPolicy: Always
+  dnsNames:
+  - "broidery.k3s"
+  #- "*.k3s"
+  #- "stremio.k3s"
+  #- "argocd.k3s"
+  issuerRef:
+    name: cluster-issuer-selfsigned
+    kind: ClusterIssuer
+    group: cert-manager.io

@@ -6,3 +6,4 @@ resources:
 - certificates.namespace.yaml
 - cluster-issuer-selfsigned.cluster-issuer.cert-manager.yaml
 - wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
+- broidery.deimos.cloud-tls.certificate.cert-manager.yaml

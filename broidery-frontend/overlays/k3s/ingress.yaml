@@ -13,7 +13,7 @@ spec:
   tls:
     - hosts:
         - broidery.k3s
-      secretName: wildcard.k3s.cloud-tls
+      secretName: broidery.k3s.cloud-tls
   rules:
   - host: broidery.k3s
     http:
