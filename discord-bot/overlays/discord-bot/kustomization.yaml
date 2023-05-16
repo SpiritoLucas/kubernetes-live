@@ -3,6 +3,5 @@ kind: Kustomization
 
 resources:
 - deploy.yaml
-- svc.yaml
 
 namespace: discord-bot

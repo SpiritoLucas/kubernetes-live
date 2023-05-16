@@ -13,7 +13,7 @@ spec:
         app: discord-bot
     spec:
       containers:
-      - image: spirito/discord_bot:latest
+      - image: spirito/discord-bot:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 4
