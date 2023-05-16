@@ -23,7 +23,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
-        name: discord_bot
+        name: discord-bot
         ports:
         - containerPort: 8080
           name: http
