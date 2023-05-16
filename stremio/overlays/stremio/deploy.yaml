@@ -13,7 +13,7 @@ spec:
         app: stremio
     spec:
       containers:
-      - image: spirito/stremio-server:latest
+      - image: sleeyax/stremio-streaming-server:latest
         env:
           - name: FIX_UNSUPPORTED_MEDIA
             value: '1'

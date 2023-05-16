@@ -5,7 +5,7 @@ patches:
 - path: deploy.yaml
 
 images:
-- name: spirito/stremio-server
+- name: sleeyax/stremio-streaming-server
   newTag: latest
 
 resources:
