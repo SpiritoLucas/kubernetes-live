@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: discord_bot
+      app: discord-bot
   template:
     metadata:
       labels:
-        app: discord_bot
+        app: discord-bot
     spec:
       containers:
       - image: spirito/discord_bot:latest
