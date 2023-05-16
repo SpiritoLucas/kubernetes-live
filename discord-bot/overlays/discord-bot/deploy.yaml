@@ -16,26 +16,26 @@ spec:
       - image: spirito/discord_bot:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
-        - failureThreshold: 4
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 2
+          - failureThreshold: 4
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
         name: discord_bot
         ports:
         - containerPort: 8080
           name: http
           protocol: TCP
         readinessProbe:
-        - failureThreshold: 4
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 20
-          timeoutSeconds: 2
+          - failureThreshold: 4
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 2
         resources:
           limits:
             cpu: 500m
