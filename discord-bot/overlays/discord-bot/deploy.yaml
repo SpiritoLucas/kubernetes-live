@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord_bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discord_bot
+  template:
+    metadata:
+      labels:
+        app: discord_bot
+    spec:
+      containers:
+      - image: spirito/discord_bot:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+        - failureThreshold: 4
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: discord_bot
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+        - failureThreshold: 4
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
