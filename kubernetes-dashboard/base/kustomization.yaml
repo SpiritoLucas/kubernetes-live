@@ -5,7 +5,6 @@ resources:
 - clusterRole.yaml
 - clusterRoleBindings.yaml
 - cm.yaml
-- dashboard.yaml
 - deploys.yaml
 - ns.yaml
 - role.yaml
