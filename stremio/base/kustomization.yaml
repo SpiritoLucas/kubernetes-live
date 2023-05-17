@@ -7,3 +7,4 @@ resources:
 - hpa.yaml
 - ingress.yaml
 - vpa.yaml
+- vpa-crd.yaml
