@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: metrics-server
+  name: kubernetes-dashboard
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
@@ -14,21 +14,21 @@ spec:
   ingressClassName: nginx
   defaultBackend:
     service:
-      name: metrics-server
+      name: kubernetes-dashboard
       port:
         name: https
   tls:
     - hosts:
-        - metrics-server.k3s
-      secretName: metrics-server.k3s.cloud-tls
+        - kubernetes-dashboard.k3s
+      secretName: kubernetes-dashboard.k3s.cloud-tls
   rules:
-  - host: metrics-server.k3s
+  - host: kubernetes-dashboard
     http:
       paths:
       - path: /.*
         pathType: ImplementationSpecific
         backend:
           service:
-            name: metrics-server
+            name: kubernetes-dashboard
             port: 
               name: https
