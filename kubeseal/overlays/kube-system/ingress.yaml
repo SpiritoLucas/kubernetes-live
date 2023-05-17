@@ -14,7 +14,7 @@ spec:
   ingressClassName: nginx
   defaultBackend:
     service:
-      name: metrics-server
+      k8s-app: metrics-server
       port:
         name: https
   tls:
