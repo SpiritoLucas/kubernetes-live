@@ -22,7 +22,7 @@ spec:
         - kubernetes-dashboard.k3s
       secretName: kubernetes-dashboard.k3s.cloud-tls
   rules:
-  - host: kubernetes-dashboard
+  - host: kubernetes-dashboard.k3s
     http:
       paths:
       - path: /.*
