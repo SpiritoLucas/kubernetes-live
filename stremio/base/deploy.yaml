@@ -49,8 +49,8 @@ spec:
           limits:
             cpu: 900m
             #memory: 1000Mi
-            memory: 2G
+            memory: 2Gi
           requests:
             cpu: 800m
             #memory: 800Mi
-            memory: 1G
+            memory: 1Gi
