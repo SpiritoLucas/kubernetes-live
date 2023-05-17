@@ -16,7 +16,7 @@ spec:
     service:
       name: kubernetes-dashboard
       port:
-        name: kubernetes-dashboard
+        name: https
   tls:
     - hosts:
         - kubernetes-dashboard.k3s
@@ -31,4 +31,4 @@ spec:
           service:
             name: kubernetes-dashboard
             port: 
-              name: kubernetes-dashboard
+              name: https
