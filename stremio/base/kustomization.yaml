@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - deploy.yaml
 - svc.yaml
-- hpa.yaml
+#- hpa.yaml
 - ingress.yaml
-#- vpa.yaml
+- vpa.yaml
 #- vpa-crd.yaml
