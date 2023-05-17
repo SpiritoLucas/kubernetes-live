@@ -77,7 +77,7 @@ spec:
           image: kubernetesui/dashboard:v2.7.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8443
+            - containerPort: 9090
               protocol: TCP
           args:
             #- --auto-generate-certificates

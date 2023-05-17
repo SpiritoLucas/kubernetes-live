@@ -23,7 +23,7 @@ spec:
   ports:
     - port: 443
       name: https
-      targetPort: 8443
+      targetPort: 9090
   selector:
     k8s-app: kubernetes-dashboard
   type: ClusterIP
