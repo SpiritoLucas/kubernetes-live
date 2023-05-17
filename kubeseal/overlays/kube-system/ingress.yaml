@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stremio
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    #kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: metrics-server
+      port:
+        name: https
+  tls:
+    - hosts:
+        - metrics-server.k3s
+      secretName: metrics-server.k3s.cloud-tls
+  rules:
+  - host: metrics-server.k3s
+    http:
+      paths:
+      - path: /.*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: metrics-server
+            port: 
+              name: https
