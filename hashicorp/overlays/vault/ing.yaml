@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: vault-ingress
 spec:
+  tls:
+    - hosts:
+        - vault.k3s
+      secretName: vault.k3s.cloud-tls
   rules:
     - host: vault.k3s
       http:
