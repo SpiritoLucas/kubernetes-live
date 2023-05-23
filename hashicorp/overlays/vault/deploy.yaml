@@ -23,7 +23,11 @@ spec:
             - name: VAULT_API_ADDR
               value: http://localhost:8200
             - name: VAULT_LOCAL_CONFIG
-              value: /vault/config/vault.hcl
+              valueFrom:
+                configMapKeyRef:
+                  key: vault.hcl
+                  name: vault-config
+              #value: /vault/config/vault.hcl
           command:
             - vault
             - server
@@ -40,10 +44,3 @@ spec:
               port: 8200
             initialDelaySeconds: 10
             periodSeconds: 10
-          volumeMounts:
-            - name: vault-storage
-              mountPath: /vault/data
-      volumes:
-        - name: vault-config
-          configMap:
-            name: vault-config
