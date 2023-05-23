@@ -45,7 +45,5 @@ spec:
               mountPath: /vault/data
       volumes:
         - name: vault-storage
-          emptyDir: {}
-        - name: vault-config
           configMap:
             name: vault-config
