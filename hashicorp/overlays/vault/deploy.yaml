@@ -25,8 +25,11 @@ spec:
             - name: VAULT_LOCAL_CONFIG
               value: '/vault/config/vault.hcl'
           command:
+            #- vault
+            #- server
             - vault
-            - server
+            - operator
+            - init
             - --config=/vault/config/vault.hcl
           readinessProbe:
             httpGet:
