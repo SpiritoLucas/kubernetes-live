@@ -48,5 +48,5 @@ spec:
           configMap:
             name:  vault-config
             items: 
-              - key: redis-config
+              - key: vault-config
                 path: vault.hcl
