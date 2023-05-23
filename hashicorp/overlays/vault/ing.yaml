@@ -2,7 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vault-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
 spec:
+  defaultBackend:
+    service:
+      name: vault
+      port:
+        name: http
+  ingressClassName: nginx
   tls:
     - hosts:
         - vault.k3s
