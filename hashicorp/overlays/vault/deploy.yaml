@@ -44,6 +44,6 @@ spec:
             - name: vault-storage
               mountPath: /vault/data
       volumes:
-        - name: vault-storage
+        - name: vault-config
           configMap:
             name: vault-config
