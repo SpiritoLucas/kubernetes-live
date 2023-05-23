@@ -49,4 +49,4 @@ spec:
             name:  vault-config
             items: 
               - key: redis-config
-                path: /vault/config/vault.hcl
+                path: vault.hcl
