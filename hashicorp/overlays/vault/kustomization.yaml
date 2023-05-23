@@ -8,7 +8,7 @@ patches:
 
 images:
 - name: hashicorp/vault
-  newTag: 1.13
+  newTag: "1.13"
 
 resources:
 - ../../base
