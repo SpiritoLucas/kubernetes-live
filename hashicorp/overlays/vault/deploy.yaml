@@ -32,13 +32,13 @@ spec:
             httpGet:
               path: /v1/sys/health
               port: 8200
-            initialDelaySeconds: 5
+            initialDelaySeconds: 50000
             periodSeconds: 5
           livenessProbe:
             httpGet:
               path: /v1/sys/health
               port: 8200
-            initialDelaySeconds: 10
+            initialDelaySeconds: 100000
             periodSeconds: 10
           volumeMounts:
           - mountPath: /vault/config/vault.hcl
