@@ -48,5 +48,5 @@ spec:
           configMap:
             name:  vault-config
             items: 
-              - key: vault-config
-                path: vault.hcl
+              - key: vault.hcl
+                path: vault/config/vault.hcl
