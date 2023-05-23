@@ -25,10 +25,11 @@ spec:
             - name: VAULT_LOCAL_CONFIG
               value: '/vault/config/vault.hcl'
           command:
-            - export SHELL=sh && ls /vault/config/
-            - vault
-            - server
-            - -config=/vault/config/vault.hcl
+            - ls 
+            - /vault/config/
+            #- vault
+            #- server
+            #- -config=/vault/config/vault.hcl
           readinessProbe:
             httpGet:
               path: /v1/sys/health
