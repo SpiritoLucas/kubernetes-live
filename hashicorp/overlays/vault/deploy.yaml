@@ -17,9 +17,6 @@ spec:
           image: hashicorp/vault:latest
           ports:
             - containerPort: 8200
-          volumeMounts:
-            - name: vault-storage
-              mountPath: /vault/data
           env:
             - name: VAULT_ADDR
               value: http://localhost:8200
@@ -43,6 +40,9 @@ spec:
               port: 8200
             initialDelaySeconds: 10
             periodSeconds: 10
+          volumeMounts:
+            - name: vault-storage
+              mountPath: /vault/data
       volumes:
         - name: vault-storage
           emptyDir: {}
