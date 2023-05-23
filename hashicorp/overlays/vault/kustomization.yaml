@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patches:
+- path: deploy.yaml
+- path: ing.yaml
+- path: cm.yaml
+
+images:
+- name: hashicorp/vault
+  newTag: 1.13
+
+resources:
+- ../../base
+
+namespace: vault
