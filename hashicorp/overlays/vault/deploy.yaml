@@ -27,8 +27,8 @@ spec:
           command:
             - vault
             - server
+            - -config=vault/config/vault.hcl
             - init
-            - -config=/vault/config/vault.hcl
           readinessProbe:
             httpGet:
               path: /v1/sys/health
