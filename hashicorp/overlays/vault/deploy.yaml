@@ -25,6 +25,7 @@ spec:
             - name: VAULT_LOCAL_CONFIG
               value: '/vault/config/vault.hcl'
           command:
+            - ls /vault/config/
             - vault
             - server
             - -config=/vault/config/vault.hcl
