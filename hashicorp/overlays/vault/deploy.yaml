@@ -27,7 +27,6 @@ spec:
                 configMapKeyRef:
                   key: vault.hcl
                   name: vault-config
-              #value: /vault/config/vault.hcl
           command:
             - vault
             - server
