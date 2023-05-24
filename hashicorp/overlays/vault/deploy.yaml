@@ -25,11 +25,9 @@ spec:
             - name: VAULT_LOCAL_CONFIG
               value: '/vol/vault/config/vault.hcl'
           command:
-            - ls
-            - /vol/vault/
-            #- vault
-            #- server
-            #- -config=/vol/vault/config/vault.hcl
+            - vault
+            - server
+            - -config=/vol/vault/config/vault.hcl
           readinessProbe:
             httpGet:
               path: /v1/sys/health
