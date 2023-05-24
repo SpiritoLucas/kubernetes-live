@@ -26,7 +26,7 @@ spec:
               value: '/vol/vault/config/vault.hcl'
           command:
             - ls
-            - /vol/vault/config/
+            - /vol/vault/
             #- vault
             #- server
             #- -config=/vol/vault/config/vault.hcl
