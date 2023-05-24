@@ -45,7 +45,7 @@ spec:
             initialDelaySeconds: 100000
             periodSeconds: 10
           volumeMounts:
-          - mountPath: /vault
+          - mountPath: /vault/config/vault/.hcl
             name: config
       volumes:
         - name: config
