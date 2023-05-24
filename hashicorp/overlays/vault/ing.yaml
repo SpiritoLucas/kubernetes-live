@@ -23,7 +23,7 @@ spec:
     - host: vault.k3s
       http:
         paths:
-          - pathType: Prefix
+          - pathType: ImplementationSpecific
             path: /
             backend:
               service:

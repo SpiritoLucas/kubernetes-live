@@ -33,13 +33,13 @@ spec:
             httpGet:
               path: /v1/sys/health
               port: 8200
-            initialDelaySeconds: 50000
+            initialDelaySeconds: 50
             periodSeconds: 5
           livenessProbe:
             httpGet:
               path: /v1/sys/health
               port: 8200
-            initialDelaySeconds: 100000
+            initialDelaySeconds: 10
             periodSeconds: 10
           volumeMounts:
           - mountPath: /vol/
