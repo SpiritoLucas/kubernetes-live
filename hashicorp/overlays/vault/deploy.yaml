@@ -51,4 +51,4 @@ spec:
             name:  vault-config
             items: 
               - key: vault.hcl
-                path: vault/config/
+                path: vault/config/vault.hcl
