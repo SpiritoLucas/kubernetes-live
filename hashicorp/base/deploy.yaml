@@ -33,13 +33,15 @@ spec:
             - -config=/vol/vault/config/vault.hcl
           readinessProbe:
             httpGet:
-              path: /v1/sys/health
+              #path: /v1/sys/health
+              path: /
               port: 8200
             initialDelaySeconds: 5
             periodSeconds: 5
           livenessProbe:
             httpGet:
-              path: /v1/sys/health
+              #path: /v1/sys/health
+              path: /
               port: 8200
             initialDelaySeconds: 10
             periodSeconds: 10
