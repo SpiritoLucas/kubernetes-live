@@ -27,9 +27,8 @@ spec:
           command:
             - ls
             - /vault/config/
-            - &\&
-            - cat
-            - /vault/config/vault.hcl
+            #- cat
+            #- /vault/config/vault.hcl
             #- vault
             #- server
             #- -config=vault/config/vault.hcl
