@@ -16,7 +16,7 @@ spec:
         - name: vault
           image: hashicorp/vault:latest
           ports:
-            - containerPort: 8201
+            - containerPort: 8200
               name: http
           env:
             - name: VAULT_ADDR
