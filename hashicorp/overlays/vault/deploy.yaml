@@ -17,6 +17,7 @@ spec:
           image: hashicorp/vault:latest
           ports:
             - containerPort: 8200
+              name: http
           env:
             - name: VAULT_ADDR
               value: http://localhost:8200
