@@ -23,9 +23,9 @@ spec:
             - name: VAULT_API_ADDR
               value: http://localhost:8200
             - name: VAULT_LOCAL_CONFIG
-              value: '/vault/config/vault.hcl'
+              value: '/vol/vault/config/vault.hcl'
           command:
-            #- -config=/vol/vault/config/vault.hcl
+            - -config=/vol/vault/config/vault.hcl
           readinessProbe:
             httpGet:
               path: /v1/sys/health
