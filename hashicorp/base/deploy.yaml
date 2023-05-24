@@ -19,7 +19,7 @@ spec:
             - containerPort: 8200
           volumeMounts:
             - name: vault-storage
-              mountPath: /vault/data
+              mountPath: /vol/vault/data
           env:
             - name: VAULT_ADDR
               value: http://localhost:8200
@@ -30,7 +30,7 @@ spec:
           command:
             - vault
             - server
-            - -config=/vault/config/vault.hcl
+            - -config=/vol/vault/config/vault.hcl
           readinessProbe:
             httpGet:
               path: /v1/sys/health
