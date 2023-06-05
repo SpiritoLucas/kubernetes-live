@@ -12,5 +12,6 @@ resources:
 - ../../base
 - hpa.yaml
 - ingress.yaml
+- jobs.yaml
 
 namespace: default
