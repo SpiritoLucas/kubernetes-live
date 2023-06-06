@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/autopilot-annotation: "true"
     argocd.argoproj.io/depends-on: |
       [
-        {"name": "broidery-frontend-k3s", "namespace": "default"}
+        {"name": "broidery-frontend", "namespace": "default"}
       ]
 
 images:
