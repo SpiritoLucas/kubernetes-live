@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: upgrade-sql-schema-1
+  name: upgrade-sql-schema-2
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded 
@@ -18,7 +18,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: anda-ahi-chango
+  name: anda-ahi-chango-2
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded 
