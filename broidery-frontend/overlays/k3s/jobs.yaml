@@ -29,5 +29,5 @@ spec:
       containers:
         - name: upgrade-sql-schema
           image: alpine/curl:latest
-          command: ["curl", "http://broidery-frontend.default:81"]
+          command: ["curl", "http://broidery-frontend.default:80"]
       restartPolicy: Never
