@@ -32,7 +32,7 @@ spec:
           # If kubectl apply or edit happens, auto-revert those changes
           selfHeal: true
           # Allows deleting all application resources during automatic syncing ( false by default ).
-          allowEmpty: false
+          allowEmpty: true
         syncOptions:
         - CreateNamespace=true
         - PruneLast=true
