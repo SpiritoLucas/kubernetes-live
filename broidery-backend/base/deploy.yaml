@@ -43,5 +43,3 @@ spec:
           requests:
             cpu: 200m
             memory: 200Mi
-      imagePullSecrets:
-      - name: gitlabdocker
