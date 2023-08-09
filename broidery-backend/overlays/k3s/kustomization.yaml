@@ -11,5 +11,8 @@ images:
 resources:
 - ../../base
 - sealed-secret.yaml
+- mapping.yaml
+- resolver.yaml
+- rollout.yaml
 
 namespace: default

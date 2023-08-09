@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: broidery-backend
+spec:
+  selector:
+    matchLabels:
+      app: broidery-backend
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+  strategy:
+    canary:
+      stableService: broidery-backend
+      canaryService: broidery-backend-canary
+      trafficRouting:
+        ambassador:
+          mappings:
+            - broidery-backend
+      steps:
+      - setWeight: 30
+      - pause: {}
+      - setWeight: 60
+      - pause: {}
+      - setWeight: 100
+      - pause: {}     
