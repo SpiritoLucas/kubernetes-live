@@ -59,7 +59,7 @@ spec:
       canaryService: broidery-backend-canary
       trafficRouting:
         nginx: 
-          stableIngress: broidery-backend-stable
+          stableIngress: broidery-backend
       steps:
       - setWeight: 30
       - pause: {}
