@@ -17,14 +17,14 @@ spec:
   - host: broidery-backend.k3s
     http:
       paths:
-        - path: /api/add-product
+        - path: /unstable/
           pathType: Prefix
           backend:
             service:
               name: broidery-backend-canary
               port:
                 name: http
-        - path: /
+        - path: /stable/
           pathType: Prefix
           backend:
             service:
