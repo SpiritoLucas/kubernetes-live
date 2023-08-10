@@ -60,7 +60,7 @@ spec:
       trafficRouting:
         ambassador:
           mappings:
-            - broidery-backend
+            - broidery-backend-mapping
       steps:
       - setWeight: 30
       - pause: {}

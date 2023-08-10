@@ -2,7 +2,7 @@
 apiVersion: getambassador.io/v2
 kind:  Mapping
 metadata:
-  name:  broidery-backend
+  name:  broidery-backend-mapping
 spec:
   prefix: /demo/
   service: broidery-backend
@@ -11,7 +11,7 @@ spec:
 apiVersion: getambassador.io/v2
 kind:  Mapping
 metadata:
-  name:  broidery-backend-stable
+  name:  broidery-backend
 spec:
   prefix: /stable/
   service: broidery-backend
