@@ -14,7 +14,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: broidery-backend.k3s
+  - host: broidery-backend.k3s.argoproj.io
     http:
       paths:
         - path: /
@@ -22,6 +22,25 @@ spec:
           backend:
             service:
               name: broidery-backend
+              port:
+                name: http
+  - host: broidery-backend-canary.k3s.argoproj.io
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: broidery-backend-canary
+              port:
+                name: http
+  - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: broidery-backend-root
               port:
                 name: http
   tls:

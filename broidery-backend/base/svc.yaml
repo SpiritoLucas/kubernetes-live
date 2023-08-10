@@ -25,3 +25,17 @@ spec:
     app: broidery-backend
   sessionAffinity: None
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broidery-backend-root
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: broidery-backend
+  sessionAffinity: None
+  type: ClusterIP
