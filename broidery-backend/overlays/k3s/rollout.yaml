@@ -58,11 +58,8 @@ spec:
       stableService: broidery-backend
       canaryService: broidery-backend-canary
       trafficRouting:
-        ambassador:
-          mappings:
-            - broidery-backend-mapping
-            - broidery-backend-stable
-            - broidery-backend-canary
+        nginx: 
+          stableIngress: broidery-backend-stable
       steps:
       - setWeight: 30
       - pause: {}
