@@ -22,20 +22,20 @@ spec:
   - host: broidery-backend.k3s
     http:
       paths:
-          - path: /unstable/
-            pathType: Prefix
-            backend:
-              service:
-                name: broidery-backend-canary
-                port:
-                  name: http
-          - path: /stable/
-            pathType: Prefix
-            backend:
-              service:
-                name: broidery-backend
-                port:
-                  name: http
+        - path: /unstable/
+          pathType: Prefix
+          backend:
+            service:
+              name: broidery-backend-canary
+              port:
+                name: http
+        - path: /stable/
+          pathType: Prefix
+          backend:
+            service:
+              name: broidery-backend
+              port:
+                name: http
   tls:
     - hosts:
         - broidery-backend.k3s
