@@ -3,7 +3,7 @@ kind: Mapping
 metadata:
   name: broidery-backend-mapping
 spec:
-  prefix: /demo/
+  prefix: /
   resolver: endpoint
   service: broidery-backend
 ---
@@ -21,6 +21,6 @@ kind: Mapping
 metadata:
   name: broidery-backend-stable
 spec:
-  prefix: /stable/
+  prefix: /
   resolver: endpoint
   service: broidery-backend
