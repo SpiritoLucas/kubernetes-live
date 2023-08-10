@@ -1,27 +1,26 @@
----
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  broidery-backend-mapping
+  name: broidery-backend
 spec:
   prefix: /demo/
-  service: broidery-backend
   resolver: endpoint
+  service: broidery-backend
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  broidery-backend
-spec:
-  prefix: /stable/
-  service: broidery-backend
-  resolver: endpoint
----
-apiVersion: getambassador.io/v2
-kind:  Mapping
-metadata:
-  name:  broidery-backend-canary
+  name: broidery-backend-canary
 spec:
   prefix: /unstable/
+  resolver: endpoint
   service: broidery-backend-canary
-  resolver: endpoint  
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: broidery-backend-stable
+spec:
+  prefix: /stable/
+  resolver: endpoint
+  service: broidery-backend

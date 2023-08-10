@@ -1,42 +1,38 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: broidery-backend
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-#    nginx.ingress.kubernetes.io/rewrite-target: /
-    #kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
-    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
-    cert-manager.io/issuer-kind: "ClusterIssuer"
+    cert-manager.io/issuer: cluster-issuer-selfsigned
+    cert-manager.io/issuer-kind: ClusterIssuer
     metallb.uniberse.tf/address-pool: default
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: broidery-backend
 spec:
-  ingressClassName: nginx
-  #defaultBackend:
-  #  service:
-  #    name: broidery-backend
-  #    port:
-  #      name: http
+  defaultBackend:
+    service:
+      name: broidery-backend
+      port:
+        number: 5000
+  rules:
+    - host: broidery-backend.k3s
+      http:
+        paths:
+          - path: /unstable/
+            pathType: Prefix
+            backend:
+              service:
+                name: broidery-backend-canary
+                port:
+                  number: 5000
+          - path: /stable/
+            pathType: Prefix
+            backend:
+              service:
+                name: broidery-backend
+                port:
+                  number: 5000
   tls:
     - hosts:
         - broidery-backend.k3s
       secretName: broidery-backend.k3s.cloud-tls
-  rules:
-  - host: broidery-backend.k3s
-    http:
-      paths:
-      - path: /unstable/
-        pathType: Prefix
-        backend:
-          service:
-            name: broidery-backend-canary
-            port: 
-              name: http
-      - path: /stable/
-        pathType: Prefix
-        backend:
-          service:
-            name: broidery-backend
-            port: 
-              name: http
