@@ -15,7 +15,8 @@ spec:
         app: broidery-backend
     spec:
       containers:
-      - image: spirito/broidery-be:latest
+      - name: broidery-backend
+        image: spirito/broidery-be:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 4
@@ -52,7 +53,6 @@ spec:
               secretKeyRef:
                 name: default-connection
                 key: DEFAULT_CONNECTION
-        name: broidery-backend
   strategy:
     canary:
       stableService: broidery-backend
