@@ -5,7 +5,7 @@ metadata:
   name: broidery-backend
 spec:
   revisionHistoryLimit: 1
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: broidery-backend
