@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Rollout
+metadata:
+  name: broidery-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broidery-backend
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+      containers:
+      - image: spirito/broidery-be:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /health-check
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: broidery-backend
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /health-check
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi

@@ -12,6 +12,17 @@ spec:
       labels:
         app: broidery-backend
     spec:
+      containers:
+      - image: spirito/broidery-be:latest
+        env:
+          - name: CORS_URL
+            value: 'https://broidery.k3s'
+          - name: DEFAULT_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: default-connection
+                key: DEFAULT_CONNECTION
+        name: broidery-backend
   strategy:
     canary:
       stableService: broidery-backend
