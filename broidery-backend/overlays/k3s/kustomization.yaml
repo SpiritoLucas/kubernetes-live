@@ -14,5 +14,6 @@ resources:
 - sealed-secret.yaml
 - mapping.yaml
 - resolver.yaml
+- host.yaml
 
 namespace: default
