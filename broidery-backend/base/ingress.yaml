@@ -9,11 +9,11 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
   name: broidery-backend
 spec:
-  defaultBackend:
-    service:
-      name: broidery-backend
-      port:
-        number: 5000
+  #defaultBackend:
+  #  service:
+  #    name: broidery-backend
+  #    port:
+  #      number: 5000
   rules:
     - host: broidery-backend.k3s
       http:
