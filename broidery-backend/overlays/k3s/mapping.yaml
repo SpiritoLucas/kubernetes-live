@@ -2,10 +2,10 @@
 apiVersion: getambassador.io/v2
 kind:  Mapping
 metadata:
-  name:  summer-k8s-mapping
+  name:  broidery-backend
 spec:
   prefix: /demo/
-  service: summer-k8s-service-stable
+  service: broidery-backend
   resolver: endpoint
 ---
 apiVersion: getambassador.io/v2
