@@ -13,11 +13,11 @@ metadata:
     metallb.uniberse.tf/address-pool: default
 spec:
   ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: broidery-backend
-      port:
-        name: http
+  #defaultBackend:
+  #  service:
+  #    name: broidery-backend
+  #    port:
+  #      name: http
   rules:
   - host: broidery-backend.k3s
     http:
