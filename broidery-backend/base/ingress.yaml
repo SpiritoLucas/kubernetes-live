@@ -16,6 +16,7 @@ spec:
   rules:
   - host: broidery-backend.k3s
     http:
+      paths:
         - path: /
           pathType: Prefix
           backend:
