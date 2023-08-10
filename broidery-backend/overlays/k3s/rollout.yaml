@@ -61,6 +61,8 @@ spec:
         ambassador:
           mappings:
             - broidery-backend-mapping
+            - broidery-backend-stable
+            - broidery-backend-canary
       steps:
       - setWeight: 30
       - pause: {}
