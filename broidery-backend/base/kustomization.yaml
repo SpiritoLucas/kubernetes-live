@@ -5,5 +5,5 @@ resources:
 #- deploy.yaml
 #- hpa.yaml
 - svc.yaml
-- ingress.yaml
+#- ingress.yaml
 - rollout.yaml

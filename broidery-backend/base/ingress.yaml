@@ -12,7 +12,7 @@ metadata:
     cert-manager.io/issuer-kind: "ClusterIssuer"
     metallb.uniberse.tf/address-pool: default
 spec:
-  ingressClassName: nginx
+  ingressClassName: ambassador
   rules:
   - host: broidery-backend.k3s
     http:
