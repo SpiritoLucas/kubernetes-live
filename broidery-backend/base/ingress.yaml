@@ -17,7 +17,7 @@ spec:
   - host: broidery-backend.k3s
     http:
       paths:
-        - path: /
+        - path: /api/add-product
           pathType: Prefix
           backend:
             service:
