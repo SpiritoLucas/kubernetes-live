@@ -12,7 +12,7 @@ kind: Mapping
 metadata:
   name: broidery-backend-canary
 spec:
-  prefix: /unstable/
+  prefix: /
   resolver: endpoint
   service: broidery-backend-canary
 ---
