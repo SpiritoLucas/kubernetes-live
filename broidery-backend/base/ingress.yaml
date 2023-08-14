@@ -24,16 +24,6 @@ spec:
               name: broidery-backend
               port:
                 name: http
-  - host: broidery-backend-canary.k3s
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: broidery-backend-canary
-              port:
-                name: http
   tls:
     - hosts:
         - broidery-backend.k3s
