@@ -25,13 +25,13 @@ spec:
       trafficRouting:
         nginx: 
           stableIngress: broidery-frontend
-          additionalIngressAnnotations:   
-            canary-by-header: X-Canary
-            canary-by-header-value: wepa
-      steps:
-      - setWeight: 30
-      - pause: {}
-      - setWeight: 60
-      - pause: {}
-      - setWeight: 100
-      - pause: {}     
+          # additionalIngressAnnotations:   
+          #   canary-by-header: X-Canary
+          #   canary-by-header-value: wepa
+      # steps:
+      # - setWeight: 30
+      # - pause: {}
+      # - setWeight: 60
+      # - pause: {}
+      # - setWeight: 100
+      # - pause: {}     
