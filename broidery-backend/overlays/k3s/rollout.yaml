@@ -65,7 +65,7 @@ spec:
             configurationSnippet: |
               location / {
                   deny all;
-                  allow 192.168.0.195;
+                  allow 192.168.0.135;
               }
       steps:
       - setWeight: 30
