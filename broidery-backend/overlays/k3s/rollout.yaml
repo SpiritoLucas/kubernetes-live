@@ -60,6 +60,8 @@ spec:
       trafficRouting:
         nginx: 
           stableIngress: broidery-backend
+          additionalIngressAnnotations:   # optional
+            canary-by-header: X-Canary
       steps:
       - setWeight: 30
       - pause: {}
