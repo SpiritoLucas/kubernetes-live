@@ -62,6 +62,7 @@ spec:
           stableIngress: broidery-backend
           additionalIngressAnnotations:   
             canary-by-header: X-Canary
+            canary-by-header-value: wepa
       steps:
       - setWeight: 30
       - pause: {}
