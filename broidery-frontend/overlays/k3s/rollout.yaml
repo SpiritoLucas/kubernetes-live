@@ -21,7 +21,7 @@ spec:
   strategy:
     blueGreen: 
       activeService: broidery-frontend
-      previewService: broidery-frontend-canary
+      previewService: broidery-frontend-blue-green
       trafficRouting:
         nginx: 
           stableIngress: broidery-frontend
