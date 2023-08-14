@@ -20,7 +20,7 @@ images:
 
 resources:
 - ../../base
-- hpa.yaml
+#- hpa.yaml
 - ingress.yaml
 #- jobs.yaml
 

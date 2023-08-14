@@ -9,6 +9,10 @@ spec:
   selector:
     matchLabels:
       app: broidery-frontend
+  strategy:
+    blueGreen: 
+      activeService: broidery-frontend
+      previewService: broidery-frontend-blue-green
   template:
     metadata:
       labels:
@@ -18,10 +22,33 @@ spec:
       - name: broidery-frontend
         image: spirito/broidery-fe:latest
         imagePullPolicy: IfNotPresent
-  strategy:
-    blueGreen: 
-      activeService: broidery-frontend
-      previewService: broidery-frontend-blue-green
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
       #trafficRouting:
       #  nginx: 
       #    stableIngress: broidery-frontend
