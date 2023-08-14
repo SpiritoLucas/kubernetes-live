@@ -62,11 +62,11 @@ spec:
           additionalIngressAnnotations:   
             canary-by-header: X-Canary
             canary-by-header-value: wepa
-          configurationSnippet: |
-            location / {
-                deny all;
-                allow 192.168.0.195;
-            }
+            configurationSnippet: |
+              location / {
+                  deny all;
+                  allow 192.168.0.195;
+              }
       steps:
       - setWeight: 30
       - pause: {}
