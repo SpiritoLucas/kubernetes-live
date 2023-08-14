@@ -13,6 +13,7 @@ spec:
     blueGreen: 
       activeService: broidery-frontend
       previewService: broidery-frontend-blue-green
+      autoPromotionEnabled: false
   template:
     metadata:
       labels:
