@@ -4,8 +4,9 @@ metadata:
   name: broidery-frontend-hpa
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
+    #apiVersion: apps/v1
     #kind: Deployment
+    apiVersion: argoproj.io/v1alpha1
     kind: Rollout
     name: broidery-frontend
   minReplicas: 2
