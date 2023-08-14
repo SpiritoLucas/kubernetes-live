@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: broidery-backend
+  name: broidery-frontend
 spec:
   revisionHistoryLimit: 1
   replicas: 2
