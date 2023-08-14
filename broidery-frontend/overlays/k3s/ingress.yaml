@@ -11,11 +11,6 @@ metadata:
     cert-manager.io/issuer-kind: "ClusterIssuer"
     metallb.uniberse.tf/address-pool: default
 spec:
-  defaultBackend:
-    service:
-      name: broidery-frontend
-      port:
-        name: http
   ingressClassName: nginx
   tls:
     - hosts:
