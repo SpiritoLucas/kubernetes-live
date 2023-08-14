@@ -1,4 +1,3 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
@@ -63,10 +62,15 @@ spec:
           additionalIngressAnnotations:   
             canary-by-header: X-Canary
             canary-by-header-value: wepa
+          configurationSnippet: |
+            location / {
+                deny all;
+                allow 192.168.0.195;
+            }
       steps:
       - setWeight: 30
       - pause: {}
       - setWeight: 60
       - pause: {}
       - setWeight: 100
-      - pause: {}     
+      - pause: {}
