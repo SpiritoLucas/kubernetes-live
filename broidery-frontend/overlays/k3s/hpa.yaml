@@ -5,7 +5,8 @@ metadata:
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
-    kind: Deployment
+    #kind: Deployment
+    kind: Rollout
     name: broidery-frontend
   minReplicas: 2
   maxReplicas: 10
