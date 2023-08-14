@@ -64,8 +64,8 @@ spec:
             canary-by-header-value: wepa
             configurationSnippet: |
               location / {
-                  deny all;
                   allow 192.168.0.135;
+                  deny all;
               }
       steps:
       - setWeight: 30
