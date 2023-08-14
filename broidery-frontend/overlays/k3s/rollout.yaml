@@ -20,8 +20,8 @@ spec:
         imagePullPolicy: IfNotPresent
   strategy:
     blueGreen: 
-      stableService: broidery-frontend
-      canaryService: broidery-frontend-canary
+      activeService: broidery-frontend
+      previewService: broidery-frontend-canary
       trafficRouting:
         nginx: 
           stableIngress: broidery-frontend
