@@ -9,7 +9,8 @@ metadata:
       ]
 
 patches:
-- path: deploy.yaml
+- path: rollout.yaml
+#- path: deploy.yaml
 
 images:
 - name: spirito/broidery-fe

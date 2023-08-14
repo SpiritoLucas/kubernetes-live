@@ -12,3 +12,18 @@ spec:
     app: broidery-frontend
   sessionAffinity: None
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broidery-frontend-canary
+spec:
+  ports:
+  - port: 80
+    name: http
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: broidery-frontend
+  sessionAffinity: None
+  type: ClusterIP
