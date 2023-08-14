@@ -22,9 +22,9 @@ spec:
     blueGreen: 
       activeService: broidery-frontend
       previewService: broidery-frontend-blue-green
-      trafficRouting:
-        nginx: 
-          stableIngress: broidery-frontend
+      #trafficRouting:
+      #  nginx: 
+      #    stableIngress: broidery-frontend
           # additionalIngressAnnotations:   
           #   canary-by-header: X-Canary
           #   canary-by-header-value: wepa
