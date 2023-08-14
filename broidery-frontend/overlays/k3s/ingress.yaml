@@ -27,3 +27,10 @@ spec:
             name: broidery-frontend
             port: 
               name: http
+      - path: /catalogue
+        pathType: Prefix
+        backend:
+          service:
+            name: broidery-frontend
+            port: 
+              name: http
