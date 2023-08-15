@@ -8,6 +8,7 @@ metadata:
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
     cert-manager.io/issuer-kind: "ClusterIssuer"
     metallb.uniberse.tf/address-pool: default
+    nginx.ingress.kubernetes.io/canary-by-cookie: never
 spec:
   ingressClassName: nginx
   rules:
