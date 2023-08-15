@@ -25,6 +25,7 @@ spec:
     encoding: PKCS8
     rotationPolicy: Always
   dnsNames:
+  - "broidery.k3s"
   - "broidery-backend.k3s"
   issuerRef:
     name: cluster-issuer-selfsigned
