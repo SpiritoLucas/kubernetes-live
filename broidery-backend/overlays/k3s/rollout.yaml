@@ -46,7 +46,7 @@ spec:
             memory: 200Mi
         env:
           - name: CORS_URL
-            value: 'https://broidery.k3s/*'
+            value: 'https://broidery.k3s/'
           - name: DEFAULT_CONNECTION
             valueFrom:
               secretKeyRef:
