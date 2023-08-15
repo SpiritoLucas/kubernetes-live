@@ -24,4 +24,5 @@ spec:
   tls:
     - hosts:
         - broidery-backend.k3s
-      secretName: broidery-backend.k3s.cloud-tls
+      secretName: broidery.k3s.cloud-tls
+      #secretName: broidery-backend.k3s.cloud-tls

@@ -26,6 +26,7 @@ spec:
     rotationPolicy: Always
   dnsNames:
   - "broidery.k3s"
+  - "broidery-backend.k3s"
   #- "*.k3s"
   #- "stremio.k3s"
   #- "argocd.k3s"
