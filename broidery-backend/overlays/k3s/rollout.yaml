@@ -61,8 +61,8 @@ spec:
           stableIngress: broidery-backend
           additionalIngressAnnotations:   
             nginx.ingress.kubernetes.io/canary-by-header: X-Canary
-            nginx.ingress.kubernetes.io/canary-by-header-value: wepa
-            nginx.ingress.kubernetes.io/canary-by-cookie: foo
+            nginx.ingress.kubernetes.io/canary-by-header-value: canary
+            nginx.ingress.kubernetes.io/canary-by-cookie: canary-cookie
             #configurationSnippet: |
             #  location / {
             #      allow 192.168.0.135;
