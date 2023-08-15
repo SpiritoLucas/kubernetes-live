@@ -4,9 +4,6 @@ metadata:
   name: broidery-backend
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-#    nginx.ingress.kubernetes.io/rewrite-target: /
-    #kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
     cert-manager.io/issuer-kind: "ClusterIssuer"
@@ -27,4 +24,4 @@ spec:
   tls:
     - hosts:
         - broidery-backend.k3s
-      secretName: wildcard.k3s.cloud-tls
+      secretName: broidery-backend.k3s.cloud-tls
