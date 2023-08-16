@@ -3,5 +3,3 @@ kind: Kustomization
 
 resources:
 - prometheus-operator.yaml
-
-namespace: monitoring
