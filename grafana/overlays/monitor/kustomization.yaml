@@ -12,3 +12,4 @@ resources:
 - grafana-service.yaml
 - grafana-serviceAccount.yaml
 - grafana-serviceMonitor.yaml
+- ingress.yaml
