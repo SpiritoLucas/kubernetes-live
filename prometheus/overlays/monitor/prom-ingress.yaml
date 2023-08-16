@@ -20,7 +20,7 @@ spec:
             service:
               name: prometheus-k8s
               port:
-                name: http
+                name: web
   tls:
     - hosts:
         - prometheus.k3s
