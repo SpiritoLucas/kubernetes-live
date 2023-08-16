@@ -18,11 +18,10 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: prometheus-operator
+              name: prometheus-svc
               port:
                 name: http
   tls:
     - hosts:
         - prometheus.k3s
       secretName: prometheus.k3s.cloud-tls
-      #secretName: broidery.k3s.cloud-tls
