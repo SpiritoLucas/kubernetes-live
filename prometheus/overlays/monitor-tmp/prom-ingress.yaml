@@ -14,8 +14,8 @@ spec:
   - host: prometheus.k3s
     http:
       paths:
-        - path: /
-          pathType: Prefix
+        - path: /.*
+          pathType: ImplementationSpecific
           backend:
             service:
               name: prometheus-k8s
