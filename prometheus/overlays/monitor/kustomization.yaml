@@ -9,7 +9,6 @@ resources:
 - kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml
 - kubernetesControlPlane-serviceMonitorKubeScheduler.yaml
 - kubernetesControlPlane-serviceMonitorKubelet.yaml
-- prom-ingress.yaml
 - prometheus-clusterRole.yaml
 - prometheus-clusterRoleBinding.yaml
 - prometheus-networkPolicy.yaml
@@ -46,4 +45,4 @@ resources:
 - prometheusOperator-serviceAccount.yaml
 - prometheusOperator-serviceMonitor.yaml
 - prom-ingress.yaml
-- ../setup
+- ./setup
