@@ -12,3 +12,4 @@ resources:
 - metrics-server.deimos.cloud-tls.certificate.cert-manager.yaml
 - vault.deimos.cloud-tls.certificate.cert-manager.yaml
 - prometheus.cloud-tls.certificate.cert-manager.yaml
+- grafana.certificate.cert-manager.yaml
