@@ -20,7 +20,8 @@ spec:
             service:
               name: prometheus-k8s
               port:
-                name: web
+                number: 9090
+                #name: web
   tls:
     - hosts:
         - prometheus.k3s
