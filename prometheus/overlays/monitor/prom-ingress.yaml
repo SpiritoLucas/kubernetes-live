@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: prometheus.k3s
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: prometheus-operator
+              port:
+                name: http
+  tls:
+    - hosts:
+        - prometheus.k3s
+      secretName: prometheus.k3s.cloud-tls
+      #secretName: broidery.k3s.cloud-tls
