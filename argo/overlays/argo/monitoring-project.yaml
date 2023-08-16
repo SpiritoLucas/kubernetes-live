@@ -13,7 +13,7 @@ spec:
       schedule: '* * * * *'
       duration: 24h
       namespaces:
-        - monitoring.
+        - monitoring
       clusters:
         - in-cluster
   description: k3s Team
