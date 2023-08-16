@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -5266,7 +5266,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -12599,7 +12599,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -13284,7 +13284,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -14011,7 +14011,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -22323,7 +22323,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -31971,7 +31971,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -32102,7 +32102,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -33171,7 +33171,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -33886,7 +33886,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
