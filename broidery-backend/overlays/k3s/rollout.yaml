@@ -45,9 +45,9 @@ spec:
             cpu: 200m
             memory: 200Mi
         env:
-          - name: CORS_URL
+          - name: CORS_URL_1
             value: 'https://broidery.k3s'
-          - name: CORS_URL
+          - name: CORS_URL_2
             value: 'https://broidery-bg.k3s'
           - name: DEFAULT_CONNECTION
             valueFrom:
