@@ -12,7 +12,7 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: '**/overlays/monitor'
+      - path: '**/overlays/monitoring'
   template:
     metadata:
       name: '{{ path[0] }}-k3s'
