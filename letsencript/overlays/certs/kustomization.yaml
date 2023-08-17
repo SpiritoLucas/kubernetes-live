@@ -7,6 +7,7 @@ resources:
 - cluster-issuer-selfsigned.cluster-issuer.cert-manager.yaml
 - wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
 - broidery.deimos.cloud-tls.certificate.cert-manager.yaml
+- broidery-bg.cloud-tls.certificate.cert-manager.yaml
 - argocd.cloud-tls.certificate.cert-manager.yaml
 - broidery-backend.deimos.cloud-tls.certificate.cert-manager.yaml
 - metrics-server.deimos.cloud-tls.certificate.cert-manager.yaml
