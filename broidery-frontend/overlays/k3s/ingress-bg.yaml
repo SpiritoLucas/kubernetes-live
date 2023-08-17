@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: broidery-frontend
+  name: broidery-frontend-bg
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
@@ -14,10 +14,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - broidery.k3s
-      secretName: broidery.k3s.cloud-tls
+        - broidery-bg.k3s
+      secretName: broidery-bg.k3s.cloud-tls
   rules:
-  - host: broidery.k3s
+  - host: broidery-bg.k3s
     http:
       paths:
       - path: /
