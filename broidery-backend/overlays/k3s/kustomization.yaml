@@ -7,7 +7,7 @@ patches:
 
 images:
 - name: spirito/broidery-be
-  newTag: "1.1" 
+  newTag: "1.2" 
 
 resources:
 - ../../base
