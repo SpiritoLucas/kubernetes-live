@@ -4,4 +4,4 @@
   value: Rollout
 - op: replace
   path: /apiVersion
-  value: rollout/v1alpha1
+  value: argoproj.io/v1alpha1
