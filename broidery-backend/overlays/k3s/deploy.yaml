@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
       - image: spirito/broidery-be:latest
-        imagePullPolicy: Always
         env:
           - name: CORS_URL
             value: 'https://broidery.k3s'
