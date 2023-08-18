@@ -20,6 +20,7 @@ resources:
 - prometheus-roleConfig.yaml
 - prometheus-roleSpecificNamespaces.yaml
 - prometheus-service.yaml
+- prometheus-service-2.yaml
 - prometheus-serviceAccount.yaml
 - prometheus-serviceMonitor.yaml
 - prometheusAdapter-apiService.yaml
