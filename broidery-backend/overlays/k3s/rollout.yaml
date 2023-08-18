@@ -56,21 +56,27 @@ spec:
                 key: DEFAULT_CONNECTION
   strategy:
     canary:
-      stableService: broidery-backend
-      canaryService: broidery-backend-canary
-      trafficRouting:
-        nginx: 
-          stableIngress: broidery-backend
-          additionalIngressAnnotations:   
-            #nginx.ingress.kubernetes.io/canary-by-header: X-Canary
-            #nginx.ingress.kubernetes.io/canary-by-header-value: canary
-            nginx.ingress.kubernetes.io/canary-by-cookie: always
-            #nginx.ingress.kubernetes.io/canary-by-cookie: never
-            #configurationSnippet: |
-            #  location / {
-            #      allow 192.168.0.135;
-            #      deny all;
-            #  }
+      #stableService: broidery-backend
+      #canaryService: broidery-backend-canary
+      #trafficRouting:
+      #  nginx: 
+      #    stableIngress: broidery-backend
+      #    additionalIngressAnnotations:   
+      #      #nginx.ingress.kubernetes.io/canary-by-header: X-Canary
+      #      #nginx.ingress.kubernetes.io/canary-by-header-value: canary
+      #      nginx.ingress.kubernetes.io/canary-by-cookie: always
+      #      #nginx.ingress.kubernetes.io/canary-by-cookie: never
+      #      #configurationSnippet: |
+      #      #  location / {
+      #      #      allow 192.168.0.135;
+      #      #      deny all;
+      #      #  }
+      stableMetadata:
+        labels:
+          role: stable
+      canaryMetadata:
+        labels:
+          role: canary
       steps:
       - setWeight: 30
       - pause: {}
