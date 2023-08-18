@@ -1,8 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-patches:
-- path: rollout.yaml
+#- path: rollout.yaml
 #- path: deploy.yaml
 
 images:
@@ -14,3 +13,12 @@ resources:
 - sealed-secret.yaml
 
 namespace: default
+
+patches:
+- path: deploy.yaml
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: broidery-backend
+  path: trans.yaml
