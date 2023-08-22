@@ -14,7 +14,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://prometheus.example.com:9090
+        address: http://prometheus-k8s.monitoring:9090
         query: |
           sum(irate(
             nginx_http_requests_total{service=~"{{args.broidery-backend}}",status!~"5.*"}[5m]
