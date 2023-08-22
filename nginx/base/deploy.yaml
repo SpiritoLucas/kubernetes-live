@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9113"
+    prometheus.io/scheme: http
   labels:
     helm.sh/chart: ingress-nginx-4.0.1
     app.kubernetes.io/name: ingress-nginx
@@ -43,6 +47,7 @@ spec:
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
+            - --enable-prometheus-metrics
           securityContext:
             capabilities:
               drop:
@@ -92,6 +97,8 @@ spec:
             - name: webhook
               containerPort: 8443
               protocol: TCP
+            - name: prometheus
+              containerPort: 9113
           volumeMounts:
             - name: webhook-cert
               mountPath: /usr/local/certificates/
