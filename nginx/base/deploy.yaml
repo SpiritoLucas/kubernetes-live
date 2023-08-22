@@ -98,6 +98,7 @@ spec:
               protocol: TCP
             - name: prometheus
               containerPort: 9113
+              protocol: TCP
           volumeMounts:
             - name: webhook-cert
               mountPath: /usr/local/certificates/
