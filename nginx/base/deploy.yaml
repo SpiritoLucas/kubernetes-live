@@ -41,6 +41,7 @@ spec:
                   - /wait-shutdown
           args:
             - /nginx-ingress-controller
+            - -enable-prometheus-metrics
             - --election-id=ingress-controller-leader
             - --controller-class=k8s.io/ingress-nginx
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
