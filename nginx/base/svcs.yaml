@@ -48,6 +48,9 @@ spec:
       protocol: TCP
       targetPort: https
       appProtocol: https
+    - name: prometheus
+      port: 10254
+      targetPort: prometheus
   selector:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
