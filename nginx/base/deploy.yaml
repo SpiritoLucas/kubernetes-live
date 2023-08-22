@@ -21,10 +21,8 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/port: "9113"       
-        prometheus.io/scheme: http        
-        prometheus.io/path: /metrics       
         prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
       labels:
         app.kubernetes.io/name: ingress-nginx
         app.kubernetes.io/instance: ingress-nginx
@@ -98,8 +96,7 @@ spec:
               containerPort: 8443
               protocol: TCP
             - name: prometheus
-              containerPort: 9113
-              protocol: TCP
+              containerPort: 10254
           volumeMounts:
             - name: webhook-cert
               mountPath: /usr/local/certificates/
