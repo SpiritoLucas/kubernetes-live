@@ -3,8 +3,8 @@ kind: AnalysisTemplate
 metadata:
   name: success-rate
 spec:
-  args:
-  - name: broidery-backend
+  #args:
+  #- name: broidery-backend
   metrics:
   - name: success-rate
     interval: 5m
