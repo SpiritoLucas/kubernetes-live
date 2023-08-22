@@ -1,0 +1,7 @@
+# overlays/your-overlay/deployment-to-rollout-patch.yaml
+- op: replace
+  path: /kind
+  value: Rollout
+- op: replace
+  path: /apiVersion
+  value: argoproj.io/v1alpha1
