@@ -44,5 +44,7 @@ spec:
     runAsUser: 1000
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
-  serviceMonitorSelector: {}
+  serviceMonitorSelector: 
+    matchLabels: 
+      app.kubernetes.io/name: ingress-nginx
   version: 2.46.0
