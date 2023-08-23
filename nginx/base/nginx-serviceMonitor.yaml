@@ -6,7 +6,7 @@ metadata:
 spec:
   endpoints:
   - interval: 15s
-    port: http
+    port: prometheus
   selector:
     matchLabels:
       app.kubernetes.io/name: ingress-nginx
