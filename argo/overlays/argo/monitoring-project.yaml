@@ -14,6 +14,8 @@ spec:
       duration: 24h
       namespaces:
         - monitoring
+        - kube-system
+        - default
       clusters:
         - in-cluster
   description: k3s Team

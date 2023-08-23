@@ -22,8 +22,9 @@ spec:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
         path: '{{ path }}'
-      destination:
-        server: https://kubernetes.default.svc
+      #destination:
+      #  server: https://kubernetes.default.svc
+      #  namespace: monitoring
       syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)
