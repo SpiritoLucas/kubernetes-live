@@ -29,3 +29,6 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
