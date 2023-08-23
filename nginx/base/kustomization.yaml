@@ -13,6 +13,4 @@ resources:
 - roles.yaml
 - svc-accounts.yaml
 - svcs.yaml
-- nginx-serviceMonitor.yaml
-- nginx-cr-&-crb.yaml
 #- validatingwhconfig.yaml
