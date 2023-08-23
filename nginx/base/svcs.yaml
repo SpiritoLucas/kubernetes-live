@@ -52,6 +52,7 @@ spec:
       protocol: TCP
       port: 10254
       targetPort: prometheus
+      path: /metrics
   selector:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
