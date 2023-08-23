@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localstack
+  template:
+    metadata:
+      labels:
+        app: localstack
+    spec:
+      containers:
+      - image: localstack/localstack:latest
+        env:
+          - name: FIX_UNSUPPORTED_MEDIA
+            value: '1'
+        name: localstack
