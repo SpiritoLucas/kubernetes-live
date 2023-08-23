@@ -16,6 +16,7 @@ spec:
   - interval: 30s
     port: reloader-web
   - interval: 30s
+    path: /metrics
     port: prometheus
   selector:
     matchLabels:
