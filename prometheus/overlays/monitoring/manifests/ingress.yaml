@@ -27,4 +27,3 @@ spec:
                 name: grafana
                 port:
                   name: http
-                namespace: monitoring
