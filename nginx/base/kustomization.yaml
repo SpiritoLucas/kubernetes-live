@@ -14,5 +14,5 @@ resources:
 - svc-accounts.yaml
 - svcs.yaml
 - nginx-serviceMonitor.yaml
-- nginx-serviceAccount.yaml
+- nginx-cr-&-crb.yaml
 #- validatingwhconfig.yaml
