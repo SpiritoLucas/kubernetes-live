@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/component: controller
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
@@ -14,4 +15,5 @@ spec:
     matchLabels:
       app.kubernetes.io/name: ingress-nginx
       app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/component: controller
 
