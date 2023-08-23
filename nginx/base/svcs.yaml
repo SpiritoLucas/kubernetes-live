@@ -49,6 +49,7 @@ spec:
       targetPort: https
       appProtocol: https
     - name: prometheus
+      protocol: TCP
       port: 10254
       targetPort: prometheus
   selector:
