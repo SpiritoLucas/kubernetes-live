@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: monitor-appset
+  name: monitor-kube-system-appset
   namespace: argocd
 spec:
   syncPolicy:
