@@ -10,7 +10,7 @@ metadata:
 spec:
   endpoints:
   - interval: 15s
-    port: 10254
+    port: prometheus
   namespaceSelector:
     matchNames:
     - ingress-nginx
