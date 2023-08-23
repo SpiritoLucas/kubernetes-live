@@ -22,7 +22,11 @@ spec:
     - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
+    - namespace: default
+      server: https://kubernetes.default.svc
     - namespace: monitoring
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
