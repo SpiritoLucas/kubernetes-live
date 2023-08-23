@@ -15,7 +15,7 @@ spec:
       - path: '**/overlays/monitoring'
   template:
     metadata:
-      name: '{{ path[0] }}-k3s'
+      name: '{{ path[0] }}-monitor'
     spec:
       project: monitor
       source:
