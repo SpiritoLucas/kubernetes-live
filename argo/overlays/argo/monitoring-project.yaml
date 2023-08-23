@@ -14,8 +14,6 @@ spec:
       duration: 24h
       namespaces:
         - monitoring
-        - kube-system
-        - default
       clusters:
         - in-cluster
   description: k3s Team
@@ -25,10 +23,6 @@ spec:
   # Allow managing monitoring namespace
   destinations:
     - namespace: monitoring
-      server: https://kubernetes.default.svc
-    - namespace: kube-system
-      server: https://kubernetes.default.svc
-    - namespace: default
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
