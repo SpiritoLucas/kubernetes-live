@@ -15,7 +15,7 @@ spec:
     port: web
   - interval: 30s
     port: reloader-web
-  - Interval: 30s
+  - interval: 30s
     port: prometheus
   selector:
     matchLabels:
