@@ -9,11 +9,12 @@ metadata:
   namespace: ingress-nginx
 spec:
   endpoints:
-  - interval: 15s
-    port: prometheus
+    - interval: 15s
+      path: /metrics
+      port: prometheus
   namespaceSelector:
     matchNames:
-    - ingress-nginx
+      - ingress-nginx
   selector:
     matchLabels:
       app.kubernetes.io/component: controller
