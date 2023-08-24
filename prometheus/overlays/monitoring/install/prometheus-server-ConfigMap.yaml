@@ -580,7 +580,7 @@ data:
           - ingress-nginx
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
-        regex: prometheus  
+        regex: ingress-nginx-controller;prometheus  
         action: keep
       - source_labels: [__meta_kubernetes_service_name]
         target_label: job
