@@ -1,0 +1,138 @@
+---
+# Source: prometheus/templates/server-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: monitoring
+  labels:
+    thanos-store-api: "true"
+    component: "server"
+    app: prometheus
+
+  name: prometheus-server
+spec:
+  selector:
+    matchLabels:
+      component: "server"
+      app: prometheus
+
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: "server"
+        app: prometheus
+        thanos-store-api: "true"
+        cluster: prometheus-ha
+        app.kubernetes.io/component: prometheus-sidecar
+        app.kubernetes.io/instance: thanos-sidecar
+        app.kubernetes.io/name: thanos-sidecar
+        app.kubernetes.io/version: v0.26.0
+    spec:
+      serviceAccountName: prometheus-server
+      initContainers:
+        - name: "init-chown-data"
+          image: "busybox:latest"
+          imagePullPolicy: "IfNotPresent"
+          resources: {}
+
+          # 65534 is the nobody user that prometheus uses.
+          command: ["chown", "-R", "65534:65534", "/data"]
+          # && rm -rf /data/wal
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /data
+              subPath: ""
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-server
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: prometheus-server
+        - name: thanos-config
+          secret:
+            secretName: thanos-bucket
+      containers:
+        - name: thanos-sidecar
+          image: "thanosio/thanos:v0.26.0"
+          args:
+            - sidecar
+            - --log.level=debug
+            - --prometheus.url=http://localhost:9090
+            - --tsdb.path=/data
+            - --objstore.config-file=/etc/config/thanos-bucket.yaml
+          ports:
+            - name: http
+              containerPort: 10902
+            - name: grpc
+              containerPort: 10901
+          resources:
+            requests:
+              cpu: 0m
+              memory: 32Mi
+            limits:
+              memory: 256Mi
+          volumeMounts:
+            - name: thanos-config
+              mountPath: /etc/config
+            - name: storage-volume
+              mountPath: /data
+              subPath: ""
+
+        - name: prometheus-server-configmap-reload
+          image: "jimmidyson/configmap-reload:v0.6.1"
+          imagePullPolicy: "IfNotPresent"
+          args:
+            - --volume-dir=/etc/config
+            - --webhook-url=http://127.0.0.1:9090/-/reload
+          resources: {}
+
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+              readOnly: true
+
+        - name: prometheus-server
+          image: "prom/prometheus:v2.36.2"
+          imagePullPolicy: "IfNotPresent"
+          args:
+            - --storage.tsdb.retention=6h
+            - --config.file=/etc/config/prometheus.yml
+            - --storage.tsdb.path=/data
+            - --web.console.libraries=/etc/prometheus/console_libraries
+            - --web.console.templates=/etc/prometheus/consoles
+            - --web.enable-lifecycle
+            - --web.enable-admin-api
+            - --storage.tsdb.min-block-duration=2h
+            - --storage.tsdb.max-block-duration=2h
+            - --web.listen-address=:9090
+            - --web.external-url=https://prometheus.production.fravega.com
+            - --log.level=debug
+          ports:
+            - containerPort: 9090
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          resources:
+            limits:
+              cpu: 4
+              memory: 60Gi
+            requests:
+              cpu: 1.5
+              memory: 50Gi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: storage-volume
+              mountPath: /data
+              subPath: ""
+      tolerations:
+        - effect: NoSchedule
+          key: noderole
+          operator: Equal
+          value: ram-eater
+      terminationGracePeriodSeconds: 300

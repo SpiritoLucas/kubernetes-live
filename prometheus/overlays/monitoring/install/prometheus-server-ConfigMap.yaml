@@ -1,0 +1,869 @@
+---
+# Source: prometheus/templates/server-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: monitoring
+  labels:
+    component: "server"
+    app: prometheus
+
+  name: prometheus-server
+data:
+  alerts: |
+    groups:
+    - name: Nodes
+      rules:
+      - alert: NodeMemory Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the memory ram  is in the 80 percentage.'
+          summary: Instance {{ $labels.instance }} the memory > 80% percentage.
+        expr: (node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Cached_bytes - node_memory_Buffers_bytes ) / node_memory_MemTotal_bytes * 100 > 80
+        for: 30s
+        labels:
+          severity: warning
+
+      - alert: NodeCPUused Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the CPU is use in the 80 	percentage .'
+          summary: Instance {{ $labels.instance }} the CPU > 80% percentage
+        expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)  > 80
+        for: 30s
+        labels:
+          severity: warning
+
+      - alert: DiskWillFillIn4Hours Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the  Disk will fill in 4 hours .'
+          summary: Instance {{ $labels.instance }} the Disk will fill in 4 hours
+        expr: predict_linear(node_filesystem_free{job="node-exporter"}[1h], 4 * 3600) < 0
+        for: 5m
+        labels:
+          severity: warning
+
+      - alert: NodeLoad1 Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the  load of node is on 100 percentage in last 5 minute  .'
+          summary: Instance {{ $labels.instance }} the load of node is on 100 percentage in last 5 minute
+        expr: sum(node_load1) by (node) / count(node_cpu{mode="system"}) by (node) * 100 > 100
+        for: 1m
+        labels:
+          severity: warning
+
+      - alert: NodeLoad15 Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the  load of node is on 100 percentage in last 15 minute  .'
+          summary: Instance {{ $labels.instance }} the load of node is on 100 percentage in last 15 minute
+        expr: sum(node_load15) by (node) / count(node_cpu{mode="system"}) by (node) * 100 > 100
+        for: 2m
+        labels:
+          severity: critical
+
+      - alert: NodeHighMemory Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} the memory ram  is in the 90 percentage.'
+          summary: Instance {{ $labels.instance }} the memory ram  is in the 90 percentage.
+        expr: (node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Cached_bytes - node_memory_Buffers_bytes ) / node_memory_MemTotal_bytes * 100 > 90
+        for: 1m
+        labels:
+          severity: critical
+
+      - alert: NodeisDown Production
+        annotations:
+          description: '{{ $labels.instance }} of job {{ $labels.job }} is down!.'
+          summary: Instance {{ $labels.instance }} is down, this is critial!.
+        expr: up{component="node-exporter"} == 0
+        for: 30s
+        labels:
+          severity: warning
+
+      - alert: free space < to 10% Production
+        annotations:
+          description: ' {{ $labels.pod }}  without free space in the pvc  {{ $labels.instance }} '
+          summary: The {{ $labels.pod }} is without free space in the pvc, this is critial!.
+        expr: ((kubelet_volume_stats_available_bytes * 100) / (kubelet_volume_stats_capacity_bytes ) ) < 10
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: free space < 20 % Production
+        annotations:
+          description: ' {{ $labels.pod }}  without free space in the pvc  {{ $labels.instance }} '
+          summary: The {{ $labels.pod }} is without free space in the pvc, this is critial!.
+        expr: ((kubelet_volume_stats_available_bytes * 100) / (kubelet_volume_stats_capacity_bytes ) ) < 20
+        for: 5m
+        labels:
+          severity: warning
+
+      - alert: free space < 30 % Production
+        annotations:
+          description: ' without free space of  disk in the  {{ $labels.instance }} '
+          summary: without free space of  disk in the  {{ $labels.instance }}.
+        expr:  ((node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes) < 30
+        for: 5m
+        labels:
+          severity: warning
+
+      - alert: Porcentage of free space < 10 percentage
+        annotations:
+          description: ' without free space of  disk in the  {{ $labels.instance }} '
+          summary: without free space of  disk in the  {{ $labels.instance }}.
+        expr:  ((node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes) < 10
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: Pod restart kube-system Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="kube-system"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart shared Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="shared"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart nlp Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="nlp"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart monitoring Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: (sum(increase(kube_pod_container_status_restarts_total{namespace="monitoring"}[10m])) by (container)) > 3
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart ingress-nginx Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="ingress-nginx"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart ingress-nginx-public Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="ingress-nginx-public"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart logs Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="logs"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart security Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="security"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart ambassador Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="ambassador"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: Pod restart bookstack Production
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="bookstack"} > 5
+        for: 30s
+        labels:
+          severity: critical
+
+      - alert: PodwithError bookstack Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="bookstack",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError ambassador Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="ambassador",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError monitoring Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="monitoring",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError security Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="security",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError logs Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="logs",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError ingress-nginx-public Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="ingress-nginx-public",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError ingress-nginx Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="ingress-nginx",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError nlp Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="nlp",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: PodwithError kube-system Production
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="kube-system",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: critical
+
+
+      - alert: ElasticSearchLogs Production
+        annotations:
+          description: ' El elasticsearch de logs esta RED '
+          summary: El elasticsearch de logs esta RED !.
+        expr: elasticsearch_cluster_health_status{cluster="453967355910:logs-prod",color="red"} > 0 OR absent (elasticsearch_cluster_health_status{cluster="453967355910:logs-prod"})
+        for: 1m
+        labels:
+          severity: critical
+
+      - alert: ElasticSearchLogs Production
+        annotations:
+          description: ' El elasticsearch de logs esta Yellow '
+          summary: El elasticsearch de logs esta yellow !.
+        expr: elasticsearch_cluster_health_status{cluster="453967355910:logs-prod",color="yellow"} > 0  OR absent (elasticsearch_cluster_health_status{cluster="453967355910:logs-prod"})
+        for: 1m
+        labels:
+          severity: warning
+
+    - name: Shopping
+      rules:
+      - alert: PodRestart ShoppingProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="shopping"} > 5
+        for: 5m
+        labels:
+          severity: shoppingcritical
+
+      - alert: PodwithError ShoppingProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="shopping",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: shoppingcritical
+
+    - name: Marketplace
+      rules:
+      - alert: PodRestart marketplaceProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="marketplace"} > 5
+        for: 5m
+        labels:
+          severity: marketplacecritical
+
+      - alert: PodwithError marketplaceProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="marketplace",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: marketplacecritical
+
+    - name: Pricing
+      rules:
+      - alert: PodRestart PricingProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="pricing"} > 5
+        for: 5m
+        labels:
+          severity: pricingcritical
+
+      - alert: PodwithError PricingProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="pricing",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: pricingcritical
+
+    - name: Postventa
+      rules:
+      - alert: PodRestart PostventaProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="postventa"} > 5
+        for: 5m
+        labels:
+          severity: postventacritical
+
+      - alert: PodwithError PostventaProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="postventa",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: postventacritical
+
+      - alert: KafkaTopic ec-orderfeed PostventaProd
+        annotations:
+          description: ' It is topic ec-orderfeed is bellow that 0'
+          summary: ' It is topic ec-orderfeed is bellow that 0'
+        expr: sum(delta(kafka_topic_partition_current_offset{topic=~"ec-orderfeed"}[5m])) < 1 and ON()  hour() > 3 < 23
+        for: 5m
+        labels:
+          severity: postventacritical
+
+      - alert: KafkaTopic oms-event PostventaProd
+        annotations:
+          description: ' It is topic oms-eventis bellow that 0'
+          summary: ' It is topic oms-event is bellow that 0'
+        expr: sum(delta(kafka_topic_partition_current_offset{topic=~"oms-event"}[5m])) < 1 and ON()  hour() > 10 < 5
+        for: 5m
+        labels:
+          severity: postventacritical
+
+
+      - alert: KafkaTopic ccm-notification-created-meli PostventaProd
+        annotations:
+          description: ' It is topic ccm-notification-created-meli bellow that 1'
+          summary: ' It is topic ccm-notification-created-meli is bellow that 1'
+        expr: sum(delta(kafka_topic_partition_current_offset{topic=~"ccm-notification-created-meli"}[5m])) < 1 and ON()  hour() > 10 < 5
+        for: 5m
+        labels:
+          severity: postventacritical
+
+
+    - name: AdnProduction
+      rules:
+      - alert: PodRestart AdnProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: rate(kube_pod_container_status_restarts_total{namespace="adn"}[1h]) * 3600 > 3
+        for: 5m
+        labels:
+          severity: adncritical
+
+      - alert: PodRestart AdnGachiProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: rate(kube_pod_container_status_restarts_total{namespace="adn-gachi"} [1h])* 3600 > 3
+        for: 5m
+        labels:
+          severity: adncritical
+
+      - alert: PodRestart AdnPachiProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: rate(kube_pod_container_status_restarts_total{namespace="adn-pachi"}[1h] )* 3600 > 3
+        for: 5m
+        labels:
+          severity: adncritical
+
+      - alert: PodwithError AdnPachiProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="adn-pachi",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: adncritical
+
+      - alert: PodwithError AdnGachiProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="adn-gachi",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: adncritical
+
+      - alert: PodwithError AdnProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="adn",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: adncritical
+
+    - name: ImpuestosProduction
+      rules:
+      - alert: PodRestart ImpuestosProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="impuestos"} > 5
+        for: 5m
+        labels:
+          severity: impuestoscritical
+
+      - alert: PodwithError ImpuestosProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="impuestos",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: impuestoscritical
+
+    - name: CcmProduction
+      rules:
+      - alert: PodRestart CcmProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="ccm"} > 5
+        for: 5m
+        labels:
+          severity: ccmcritical
+
+      - alert: PodwithError CcmProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="ccm",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: ccmcritical
+
+    - name: Logistics
+      rules:
+      - alert: PodRestart logisticsProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="logistics"} > 5
+        for: 5m
+        labels:
+          severity: logisticscritical
+
+      - alert: PodwithError logisticsProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="logistics",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: logisticscritical
+
+    - name: Ipos
+      rules:
+      - alert: PodRestart logisticsProd
+        annotations:
+          description: ' {{ $labels.pod }}  is restart! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is restart, this is critical!.
+        expr: kube_pod_container_status_restarts_total{namespace="ipos"} > 5
+        for: 5m
+        labels:
+          severity: iposcritical
+
+      - alert: PodwithError logisticsProd
+        annotations:
+          description: ' {{ $labels.pod }}  is with a type of ERROR! on {{ $labels.instance }} '
+          summary: Instance {{ $labels.pod }} is with a type of ERROR!.
+        expr: sum(rate(kube_pod_container_status_terminated_reason{namespace="ipos",reason!="Completed"}[5m])) == 1
+        for: 5m
+        labels:
+          severity: iposcritical
+
+
+    - name: ingress
+      rules:
+      - alert: ssl expire < 25 days
+        annotations:
+          description: 'Ingress {{ $labels.host }}  is ssl experies < 25 day'
+          summary: 'Ingress {{ $labels.host }}  is ssl experies < 25 day'
+        expr: avg(nginx_ingress_controller_ssl_expire_time_seconds{ingress=~".*"}) by (host) - time()  < 2160000
+        for: 30s
+        labels:
+          severity: critical
+
+  prometheus.yml: |
+    global:
+      evaluation_interval: 60s
+      scrape_interval: 60s
+      scrape_timeout: 30s
+      external_labels:
+        slave: production
+    rule_files:
+    - /etc/config/rules
+    - /etc/config/alerts
+    scrape_configs:
+
+    - job_name: prometheus-production
+      scrape_interval: 1m
+      static_configs:
+      - targets:
+        - localhost:9090
+
+    - job_name: blackbox_tcp
+      scrape_interval: 10s
+      metrics_path: /probe
+      params:
+        module: [tcp_connect]
+      static_configs:
+      - targets:
+        - ad-fravega.com:389
+        - 10.6.3.18:1433
+        - lira.adn-gachi:80
+        - lira.adn-pachi:80
+        - cajareportesui.adn:80
+
+      relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter-prometheus-blackbox-exporter:9115 # The blackbox exporter.
+
+    - job_name: fvg_vs_capa
+      scrape_interval: 10s
+      metrics_path: /probe
+      params:
+        module: [http_2xx]
+      static_configs:
+      - targets:
+        - https://internal-creditos-personales-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-limites-credito-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-clientes-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-limites-credito-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-carteras-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-rest-saps.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-tarjetas-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-rest-saps.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-planes-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-sellados-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-financiadores-api.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-server-autenticacion.stable.production.lorfin.com.ar/actuator/health
+        - https://internal-creditos-personales-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-carteras-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-clientes-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-rest-saps.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-tarjetas-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-rest-saps.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-planes-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-sellados-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-financiadores-api.nr.production.lorfin.com.ar/actuator/health
+        - https://internal-server-autenticacion.nr.production.lorfin.com.ar/actuator/health
+
+      relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter-prometheus-blackbox-exporter:9115 # The blackbox exporter.
+
+    - job_name: blackbox_icmp
+      metrics_path: /probe
+      params:
+        module: [icmp_test]
+      static_configs:
+        - targets:
+          - 52.54.255.116
+          - 52.204.112.22
+
+      relabel_configs:
+       - source_labels: [__address__]
+         target_label: __param_target
+       - source_labels: [__param_target]
+         target_label: instance
+       - target_label: __address__
+         replacement: blackbox-exporter-prometheus-blackbox-exporter:9115 # The blackbox exporter.
+
+    - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      job_name: kubernetes-apiservers-production
+      kubernetes_sd_configs:
+      - role: endpoints
+      relabel_configs:
+      - action: keep
+        regex: default;kubernetes;https
+        source_labels:
+        - __meta_kubernetes_namespace
+        - __meta_kubernetes_service_name
+        - __meta_kubernetes_endpoint_port_name
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+    - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      job_name: kubernetes-nodes-production
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - replacement: kubernetes.default.svc:443
+        target_label: __address__
+      - regex: (.+)
+        replacement: /api/v1/nodes/$1/proxy/metrics
+        source_labels:
+        - __meta_kubernetes_node_name
+        target_label: __metrics_path__
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+
+    - job_name: kubernetes-nodes-probes-production
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - replacement: kubernetes.default.svc:443
+        target_label: __address__
+      - regex: (.+)
+        replacement: /api/v1/nodes/$1/proxy/metrics/probes
+        source_labels:
+        - __meta_kubernetes_node_name
+        target_label: __metrics_path__
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+
+    - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      job_name: kubernetes-nodes-cadvisor-production
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - replacement: kubernetes.default.svc:443
+        target_label: __address__
+      - regex: (.+)
+        replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+        source_labels:
+        - __meta_kubernetes_node_name
+        target_label: __metrics_path__
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+    - job_name: kubernetes-service-endpoints-production
+      kubernetes_sd_configs:
+      - role: endpoints
+      relabel_configs:
+      - action: keep
+        regex: true
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_scrape
+      - action: replace
+        regex: (https?)
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_scheme
+        target_label: __scheme__
+      - action: replace
+        regex: (.+)
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_path
+        target_label: __metrics_path__
+      - action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        source_labels:
+        - __address__
+        - __meta_kubernetes_service_annotation_prometheus_io_port
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_namespace
+        target_label: kubernetes_namespace
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_service_name
+        target_label: kubernetes_name
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_pod_node_name
+        target_label: kubernetes_node
+    - honor_labels: true
+      job_name: prometheus-pushgateway-production
+      kubernetes_sd_configs:
+      - role: service
+      relabel_configs:
+      - action: keep
+        regex: pushgateway
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_probe
+    - job_name: kubernetes-services-production
+      kubernetes_sd_configs:
+      - role: service
+      metrics_path: /probe
+      params:
+        module:
+        - http_2xx
+      relabel_configs:
+      - action: keep
+        regex: true
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_probe
+      - source_labels:
+        - __address__
+        target_label: __param_target
+      - replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
+        target_label: __address__
+      - source_labels:
+        - __param_target
+        target_label: instance
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - source_labels:
+        - __meta_kubernetes_namespace
+        target_label: kubernetes_namespace
+      - source_labels:
+        - __meta_kubernetes_service_name
+        target_label: kubernetes_name
+
+    - job_name: msk-shared-production
+      static_configs:
+      - targets:
+        - b-4.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11001
+        - b-3.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11001
+        - b-2.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11001
+        - b-1.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11001
+        - b-4.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11002
+        - b-3.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11002
+        - b-2.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11002
+        - b-1.msk-shared-production.b63ani.c18.kafka.us-east-1.amazonaws.com:11002
+
+    - job_name: kubernetes-pods-production
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      - action: keep
+        regex: true
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scrape
+      - action: replace
+        regex: (.+)
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_path
+        target_label: __metrics_path__
+      - action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        source_labels:
+        - __address__
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_namespace
+        target_label: kubernetes_namespace
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_pod_name
+        target_label: kubernetes_pod_name
+
+    alerting:
+      alertmanagers:
+      - kubernetes_sd_configs:
+          - role: pod
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_namespace]
+          regex: monitoring
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_label_app]
+          regex: prometheus
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_label_component]
+          regex: alertmanager
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          regex:
+          action: drop
+  rules: |
+    {}

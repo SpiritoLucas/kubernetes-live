@@ -1,0 +1,18 @@
+---
+# Source: prometheus/templates/server-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: monitoring
+  labels:
+    component: "server"
+    app: prometheus
+
+  name: prometheus-server
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  resources:
+    requests:
+      storage: "500Gi"

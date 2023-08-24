@@ -1,0 +1,26 @@
+---
+# Source: prometheus/templates/server-ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    component: "server"
+    app: tanos-querier
+  name: thanos-querier
+spec:
+  rules:
+    - host: thanos-querier.production.fravega.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: thanos-querier
+              servicePort: 9090
+  tls:
+    - hosts:
+        - thanos-querier.production.fravega.com
+      secretName: production-fravega-com-tls

@@ -1,0 +1,22 @@
+---
+# Source: prometheus/templates/server-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: monitoring
+  labels:
+    component: "server"
+    app: prometheus
+
+  name: prometheus-server
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 9090
+      nodePort: 30900
+  selector:
+    component: "server"
+    app: prometheus
+  type: "NodePort"
