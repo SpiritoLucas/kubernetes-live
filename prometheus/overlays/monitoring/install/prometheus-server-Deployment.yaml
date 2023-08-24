@@ -107,7 +107,7 @@ spec:
             - --storage.tsdb.min-block-duration=2h
             - --storage.tsdb.max-block-duration=2h
             - --web.listen-address=:9090
-            - --web.external-url=https://prometheus.production.fravega.com
+            - --web.external-url=https://prometheus.k3s
             - --log.level=debug
           ports:
             - containerPort: 9090
@@ -117,19 +117,19 @@ spec:
               port: 9090
             initialDelaySeconds: 30
             timeoutSeconds: 30
-          resources:
-            limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 200m
-            memory: 200Mi
+          #resources:
+          #  limits:
+          #  cpu: 500m
+          #  memory: 500Mi
+          #requests:
+          #  cpu: 200m
+          #  memory: 200Mi
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
             - name: storage-volume
               mountPath: /data
-              subPath: ""
+              #subPath: ""
       tolerations:
         - effect: NoSchedule
           key: noderole
