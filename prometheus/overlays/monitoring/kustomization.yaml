@@ -6,7 +6,7 @@ resources:
   - install/monitoring-Namespace.yaml
   - install/alertmanager-ConfigMap.yaml
   - install/alertmanager-Deployment.yaml
-  - install/alertmanager-Ingress.yaml
+  #- install/alertmanager-Ingress.yaml
   - install/alertmanager-PVC.yaml
   - install/alertmanager-ServiceAccount.yaml
   - install/alertmanager-Service.yaml
@@ -22,7 +22,7 @@ resources:
   - install/prometheus-server-ClusterRoleBinding.yaml
   - install/prometheus-server-ConfigMap.yaml
   - install/prometheus-server-Deployment.yaml
-  - install/prometheus-server-Ingress.yaml
+  #- install/prometheus-server-Ingress.yaml
   - install/prometheus-server-PVC.yaml
   - install/prometheus-server-Service.yaml
   - install/prometheus-server-ServiceAccount.yaml
