@@ -54,31 +54,31 @@ spec:
           secret:
             secretName: thanos-bucket
       containers:
-        - name: thanos-sidecar
-          image: "thanosio/thanos:v0.26.0"
-          args:
-            - sidecar
-            - --log.level=debug
-            - --prometheus.url=http://localhost:9090
-            - --tsdb.path=/data
-            - --objstore.config-file=/etc/config/thanos-bucket.yaml
-          ports:
-            - name: http
-              containerPort: 10902
-            - name: grpc
-              containerPort: 10901
-          resources:
-            requests:
-              cpu: 0m
-              memory: 32Mi
-            limits:
-              memory: 256Mi
-          volumeMounts:
-            - name: thanos-config
-              mountPath: /etc/config
-            - name: storage-volume
-              mountPath: /data
-              subPath: ""
+        #- name: thanos-sidecar
+        #  image: "thanosio/thanos:v0.26.0"
+        #  args:
+        #    - sidecar
+        #    - --log.level=debug
+        #    - --prometheus.url=http://localhost:9090
+        #    - --tsdb.path=/data
+        #    - --objstore.config-file=/etc/config/thanos-bucket.yaml
+        #  ports:
+        #    - name: http
+        #      containerPort: 10902
+        #    - name: grpc
+        #      containerPort: 10901
+        #  resources:
+        #    requests:
+        #      cpu: 0m
+        #      memory: 32Mi
+        #    limits:
+        #      memory: 256Mi
+        #  volumeMounts:
+        #    - name: thanos-config
+        #      mountPath: /etc/config
+        #    - name: storage-volume
+        #      mountPath: /data
+        #      subPath: ""
 
         - name: prometheus-server-configmap-reload
           image: "jimmidyson/configmap-reload:v0.6.1"
