@@ -569,12 +569,21 @@ data:
     - /etc/config/rules
     - /etc/config/alerts
     scrape_configs:
+    
     - job_name: ingress-nginx
       scrape_interval: 15s
-      metrics_path: /metrics  
-      static_configs:
-      - targets:
-        - ingress-nginx-controller:10254  
+      metrics_path: /metrics
+      kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+          names:
+          - ingress-nginx  # Nombre del namespace donde se encuentra Ingress-Nginx
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_name]
+        target_label: job
+      - source_labels: [__meta_kubernetes_namespace]
+        target_label: kubernetes_namespace
+
 
     - job_name: prometheus-k3s
       scrape_interval: 1m
