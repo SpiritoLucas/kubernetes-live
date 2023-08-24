@@ -577,12 +577,14 @@ data:
       - role: endpoints
         namespaces:
           names:
-          - ingress-nginx  # Nombre del namespace donde se encuentra Ingress-Nginx
+          - ingress-nginx  
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_name]
         target_label: job
       - source_labels: [__meta_kubernetes_namespace]
         target_label: kubernetes_namespace
+      - target_label: __address__
+        replacement: ingress-nginx-controller:10254
 
 
     - job_name: prometheus-k3s
