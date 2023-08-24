@@ -6,7 +6,7 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - nodes/metrics
+  - /metrics
   - nodes
   - services
   - endpoints
