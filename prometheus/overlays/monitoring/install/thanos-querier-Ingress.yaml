@@ -1,6 +1,6 @@
 ---
 # Source: prometheus/templates/server-ingress.yaml
-apiVersion: extensions/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   namespace: monitoring
