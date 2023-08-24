@@ -5,25 +5,30 @@ kind: Ingress
 metadata:
   namespace: monitoring
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
   labels:
     component: "server"
     app: prometheus
 
   name: prometheus-server
 spec:
+  ingressClassName: nginx
   rules:
-    - host: prometheus.production.fravega.com
+    - host: prometheus.k3s
       http:
         paths:
           - path: /
             backend:
-              serviceName: prometheus-server
-              servicePort: 80
+              service: 
+                name: prometheus-server
+                port: 
+                  name: http
   tls:
     - hosts:
-        - prometheus.production.fravega.com
-      secretName: production-fravega-com-tls
+        - prometheus.k3s
+      secretName: prometheus.k3s.cloud-tls
