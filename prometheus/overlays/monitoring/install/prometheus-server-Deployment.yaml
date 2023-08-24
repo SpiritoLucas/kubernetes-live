@@ -120,10 +120,10 @@ spec:
           resources:
             limits:
               cpu: 4
-              memory: 60Gi
+              memory: 1Gi
             requests:
-              cpu: 1.5
-              memory: 50Gi
+              cpu: 1
+              memory: 1Gi
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
