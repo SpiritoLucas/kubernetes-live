@@ -25,7 +25,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: monitoring
-      syncPolicy:  {}
+      syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)
           prune: true
