@@ -38,6 +38,7 @@ spec:
         - CreateNamespace=true
         - PruneLast=true
         - serverSide=true
+        - strategy=replace
         retry:
           # number of failed sync attempt retries; unlimited number of attempts if less than 0
           limit: 5
