@@ -85,6 +85,7 @@ resources:
 - ./prometheusOperator-service.yaml
 - ./prometheusOperator-serviceAccount.yaml
 - ./prometheusOperator-serviceMonitor.yaml
+- ./prometheus-ingress.yaml
 - ./setup/0alertmanagerConfigCustomResourceDefinition.yaml
 - ./setup/0alertmanagerCustomResourceDefinition.yaml
 - ./setup/0podmonitorCustomResourceDefinition.yaml

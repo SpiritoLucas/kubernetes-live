@@ -3,10 +3,10 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 
 metadata:
-  name: broidery-backend.k3s.cloud-tls
+  name: prometheus.k3s.cloud-tls
   namespace: certificates
 spec:
-  secretName: broidery-backend.k3s.cloud-tls
+  secretName: prometheus.k3s.cloud-tls
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
@@ -25,8 +25,7 @@ spec:
     encoding: PKCS8
     rotationPolicy: Always
   dnsNames:
-  - "broidery.k3s"
-  - "broidery-backend.k3s"
+  - "prometheus.k3s"
   issuerRef:
     name: cluster-issuer-selfsigned
     kind: ClusterIssuer
