@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: prometheus-ingress
   annotations:
+    app.kubernetes.io/name: prometheus
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
