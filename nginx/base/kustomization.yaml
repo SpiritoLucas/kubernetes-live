@@ -15,4 +15,5 @@ resources:
 - svcs.yaml
 - nginx-serviceMonitor.yaml
 - nginx-cr-&-crb.yaml
+- svc-monitor.yaml
 #- validatingwhconfig.yaml
