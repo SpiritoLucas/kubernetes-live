@@ -5,7 +5,7 @@ metadata:
   name: prometheus-role
 rules:
   - apiGroups: [""]
-    resources: ["pods"]
+    resources: ["services", "endpoints", "pods"]
     verbs: ["get", "list"]
   - apiGroups: [""]
     resources: ["services"]
