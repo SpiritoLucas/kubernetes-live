@@ -36,18 +36,16 @@ spec:
     ports:
     - port: 9090
   - from:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: default
-    ports:
-    - port: 9090
-  - from:
     - podSelector:
         matchLabels:
           app.kubernetes.io/name: grafana
     ports:
     - port: 9090
       protocol: TCP
+  - to: 
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: default
   podSelector:
     matchLabels:
       app.kubernetes.io/component: prometheus
