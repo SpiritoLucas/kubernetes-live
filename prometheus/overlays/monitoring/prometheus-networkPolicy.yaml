@@ -32,7 +32,7 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: nginx-ingress
+          kubernetes.io/metadata.name: ingress-nginx
     ports:
     - port: 9090
   - from:
