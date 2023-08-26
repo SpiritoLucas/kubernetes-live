@@ -33,6 +33,9 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: ingress-nginx
+  - from:
+    - namespaceSelector:
+        matchLabels:
           kubernetes.io/metadata.name: argocd
     ports:
     - port: 9090
