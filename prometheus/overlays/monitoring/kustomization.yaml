@@ -27,6 +27,7 @@ resources:
 - ./grafana-service.yaml
 - ./grafana-serviceAccount.yaml
 - ./grafana-serviceMonitor.yaml
+- ./grafana-ingress.yaml
 - ./kubePrometheus-prometheusRule.yaml
 - ./kubeStateMetrics-clusterRole.yaml
 - ./kubeStateMetrics-clusterRoleBinding.yaml

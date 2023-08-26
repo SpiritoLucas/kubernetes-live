@@ -1,12 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prometheus-ingress
+  name: grafana
   annotations:
-    app.kubernetes.io/component: prometheus
-    app.kubernetes.io/instance: k8s
-    app.kubernetes.io/name: prometheus
-    app.kubernetes.io/part-of: kube-prometheus
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
     cert-manager.io/issuer: "cluster-issuer-selfsigned" 
@@ -16,17 +12,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: prometheus.k3s  
+  - host: grafana.k3s  
     http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: prometheus-k8s
+              name: grafana
               port:
-                name: web  
+                name: http  
   tls:
     - hosts:
-        - prometheus.k3s 
-      secretName: prometheus.k3s.cloud-tls  
+        - grafana.k3s 
+      secretName: grafana.k3s.cloud-tls  
