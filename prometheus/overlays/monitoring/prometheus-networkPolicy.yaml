@@ -38,7 +38,7 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: argocd
+          kubernetes.io/metadata.name: default
     ports:
     - port: 9090
   - from:
