@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: hey
+  name: checker
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded 
@@ -10,7 +10,28 @@ spec:
   template:
     spec:
       containers:
-        - name: upgrade-sql-schema
-          image: williamyeh/hey:latest
-          command: ["hey", "-n", "10000", "-c", "10", "http://broidery-backend.default:5000/health-check"]
+        - name: check-1
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-2
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-3
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-4
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-5
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-6
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-7
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
+        - name: check-8
+          image: alpine/curl:latest
+          command: ["curl", "https://broidery-backend.default:5000/health-check"]
       restartPolicy: Never
