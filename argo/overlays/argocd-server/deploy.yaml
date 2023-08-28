@@ -15,21 +15,22 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-server
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: argocd-server
-              topologyKey: kubernetes.io/hostname
-            weight: 100
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/part-of: argocd
-              topologyKey: kubernetes.io/hostname
-            weight: 5
+      #affinity:
+      #  podAntiAffinity:
+      #    preferredDuringSchedulingIgnoredDuringExecution:
+      #    - podAffinityTerm:
+      #        labelSelector:
+      #          matchLabels:
+      #            app.kubernetes.io/name: argocd-server
+      #        topologyKey: kubernetes.io/hostname
+      #      weight: 100
+      #    - podAffinityTerm:
+      #        labelSelector:
+      #          matchLabels:
+      #            app.kubernetes.io/part-of: argocd
+      #        topologyKey: kubernetes.io/hostname
+      #      weight: 5
+      replicas: 1
       containers:
       - args:
         - /usr/local/bin/argocd-server
