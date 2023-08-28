@@ -6,7 +6,7 @@ metadata:
   name: dashboard-metrics-scraper
   namespace: kubernetes-dashboard
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
