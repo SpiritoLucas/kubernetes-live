@@ -236,6 +236,9 @@ spec:
           periodSeconds: 30
           timeoutSeconds: 5
         name: argocd-server
+        command: 
+          - argocd-server
+          - --insecure
         ports:
         - containerPort: 8080
         - containerPort: 8083
