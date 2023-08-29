@@ -9,7 +9,7 @@ resources:
 - ../../base
 - sealed-secret.yaml
 - analysisTemplate.yaml
-#- job.yaml
+- job.yaml
 
 namespace: default
 
