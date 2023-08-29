@@ -18,9 +18,6 @@ spec:
       containers:
       - args:
         - /usr/local/bin/argocd-server
-        command:
-        - argocd-server
-        - --insecure
         env:
         - name: ARGOCD_SERVER_INSECURE
           valueFrom:
