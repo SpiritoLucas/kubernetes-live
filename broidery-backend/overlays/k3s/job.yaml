@@ -2,10 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: checker
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded 
-    argocd.argoproj.io/sync-wave: "1"
+  #annotations:
+  #  argocd.argoproj.io/hook: PostSync
+  #  argocd.argoproj.io/hook-delete-policy: HookSucceeded 
+  #  argocd.argoproj.io/sync-wave: "1"
 spec:
   template:
     spec:
