@@ -11,27 +11,6 @@ spec:
     spec:
       containers:
         - name: check-1
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-2
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-3
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-4
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-5
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-6
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-7
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
-        - name: check-8
-          image: alpine/curl:latest
-          command: ["curl", "-k", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
+          image: williamyeh/hey:latest
+          command: ["hey", "-n", "10000", "-c", "10", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
       restartPolicy: Never
