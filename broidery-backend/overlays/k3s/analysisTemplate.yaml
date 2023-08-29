@@ -17,6 +17,6 @@ spec:
       prometheus:
         address: http://prometheus-k8s.monitoring:9090
         query: |
-          sum(irate(nginx_ingress_controller_requests{ingress="broidery-backend",status=~"2.*"}[5m])) 
+          sum(irate(nginx_ingress_controller_requests{ingress="broidery-backend",status=~"2.*"}[15m])) 
         #/
           #sum(irate(nginx_ingress_controller_requests{ingress="broidery-backend"}[5m]))

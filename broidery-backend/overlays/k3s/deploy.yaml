@@ -39,7 +39,7 @@ spec:
           role: canary
       steps: 
       - setWeight: 30
-      - pause: { duration: 10s }
+      - pause: { duration: 3m }
       - setWeight: 60
       - pause: { duration: 3m }
       - setWeight: 100
