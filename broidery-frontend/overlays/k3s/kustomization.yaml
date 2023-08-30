@@ -14,7 +14,7 @@ patches:
 
 images:
 - name: spirito/broidery-fe
-  newTag: k3s #"1.0"
+  newTag: "1.0" #k3s 
 - name: alpine/curl
   newTag: latest
 
