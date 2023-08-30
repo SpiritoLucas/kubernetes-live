@@ -21,6 +21,9 @@ spec:
     spec:
       containers:
       - name: broidery-frontend
+        env:
+          - name: BROIDERY_BACKEND_URL
+            value: 'https://broidery-backend.k3s'
         image: spirito/broidery-fe:latest
         imagePullPolicy: IfNotPresent
         ports:

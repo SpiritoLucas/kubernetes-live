@@ -1,0 +1,178 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: broidery-backend-stable
+  namespace: default
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: broidery-backend
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+  namespace: default
+spec:
+  metrics:
+  - count: 5
+    failureLimit: 3
+    interval: 10s
+    name: success-rate
+    provider:
+      prometheus:
+        address: http://prometheus-k8s.monitoring:9090
+        query: "sum(irate(nginx_ingress_controller_requests{ingress=\"broidery-backend\",status=~\"2.*\"}[15m]))
+          \n"
+    successCondition: result[0] >= 0.95
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: broidery-backend
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: broidery-backend
+  strategy:
+    canary:
+      analysis:
+        startingStep: 2
+        templates:
+        - templateName: success-rate
+      canaryMetadata:
+        labels:
+          role: canary
+      stableMetadata:
+        labels:
+          role: stable
+      steps:
+      - setWeight: 30
+      - pause:
+          duration: 3m
+      - setWeight: 60
+      - pause:
+          duration: 3m
+      - setWeight: 100
+      - pause:
+          duration: 10s
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+      containers:
+      - env:
+        - name: CORS_URL_1
+          value: https://broidery.k3s
+        - name: CORS_URL_2
+          value: https://broidery-bg.k3s
+        - name: DEFAULT_CONNECTION
+          valueFrom:
+            secretKeyRef:
+              key: DEFAULT_CONNECTION
+              name: default-connection
+        image: spirito/broidery-be:1.4
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /health-check
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: broidery-backend
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /health-check
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: checker
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - command:
+        - -n
+        - "10000"
+        - -c
+        - "10"
+        - -H
+        - 'Host: broidery-backend.k3s'
+        - https://192.168.64.26/health-check
+        image: ricoli/hey:latest
+        name: check-1
+      restartPolicy: Never
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: default-connection
+  namespace: default
+spec:
+  encryptedData:
+    DEFAULT_CONNECTION: AgCXIjL6Ex5cs0WUVFTjdmLwSATKoGhLTbMrhLVnnEKxiDkpQxcsyKfILbXAjGmqNMqhz+2twiSVkNzpI9cfoEX7M4xYTAJSG7aZt3UBloVpzi7a6hjV7mTx33fsG0fUUrY3WTa+FkGMfJv+5nC3zbgUC+USTf1EOhPbxSzisCANbrDplNWgMF/VYGdtk3eoa2Bod8v1bxgzyN1+99f0pu5E/RTrECBxEymDZhnaxKF8Qvx9PXl9zQpfCXeCLbQJIbk0KFP3m5qQhqsRhQNCtrMLI8Djow7G4yQpTQ4z0fRWyMe7L+6wjEWObCns4TkaZRjfM4VukerBze5RN3XtKlCB3Fln7CNuAT15ILfHqLPxs06zKhpnGT6wHXCOZ8+6PgXmG8YrPDXxR8nQ9mzNhj4E5EKHKI8KKmPVuk0ij1ZXxKtZkQuxU9/MEV1yVNwkTyFib6Qb9R5CFAsZAgydoDKFVEb+cITFPzzuY6yY/EqhhHPknURXMkZbPMWrB8TgoMnqt4aFzlmwyyNVt/X6gVJW02tSlBOMdIZexsc+vFlhzCulb6S2qXgeLMeW0usSJPQFeXUOp1w8N385N/cpQT4Eyolr66tC3myIs6N0RDnDoDpuM9YZFubmyOg9sLfQGFt1NDR5gOxha1x2V74Ipw3PI1yBz9ekPx+YKjFASN6ciAdxcORptGos0IIgY0cJTKbOm40zw6IzElsj/PpV5Du01NDbKue1auhSoo3oDHlnHlZCHTeSneQUzcqXel9NdYdzfFFOojj/dUUdT6mPERptBUA6QS7zu6ImhcYbUM2nzpCaH6eHC2yWev7EEB1PTjayh9bOGk/0Cwshtolr0qwZfzuLmgoEW/JTiw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: default-connection
+      namespace: default
+    type: Opaque
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: cluster-issuer-selfsigned
+    cert-manager.io/issuer-kind: ClusterIssuer
+    metallb.uniberse.tf/address-pool: default
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    prometheus.io/scrape: "true"
+  name: broidery-backend
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: broidery-backend.k3s
+    http:
+      paths:
+      - backend:
+          service:
+            name: broidery-backend
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - broidery-backend.k3s
+    secretName: broidery-backend.k3s.cloud-tls
