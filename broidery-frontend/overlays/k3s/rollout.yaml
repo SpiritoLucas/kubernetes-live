@@ -50,6 +50,15 @@ spec:
           requests:
             cpu: 200m
             memory: 200Mi
+          volumeMounts:
+          - name: broidery-frontend-config
+            mountPath: /usr/share/nginx/html/src/assets/app.config.json
+            subPath: app.config.json
+            readOnly: true
+      volumes: 
+      - name: broidery-frontend-config
+        configMap:
+          name: broidery-frontend-config
       #trafficRouting:
       #  nginx: 
       #    stableIngress: broidery-frontend
