@@ -14,7 +14,7 @@ patches:
 
 images:
 - name: spirito/broidery-fe
-  newTag: "1.5" #"1.6" 
+  newTag: "1.6" #"1.5"
 - name: alpine/curl
   newTag: latest
 
