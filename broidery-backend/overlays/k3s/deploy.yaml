@@ -24,6 +24,10 @@ spec:
               secretKeyRef:
                 name: default-connection
                 key: DEFAULT_CONNECTION
+          - name: MI_VARIABLE_DE_ENTORNO
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['role']
         name: broidery-backend
   strategy: 
     canary:
