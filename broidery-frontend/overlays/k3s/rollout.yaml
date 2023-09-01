@@ -11,8 +11,8 @@ spec:
       app: broidery-frontend
   strategy:
     blueGreen: 
-      activeService: broidery-frontend
-      previewService: broidery-frontend-blue-green
+      activeService: broidery-frontend-blue
+      previewService: broidery-frontend-green
       autoPromotionEnabled: false
       activeMetadata: 
         labels:
