@@ -1,0 +1,180 @@
+apiVersion: v1
+data:
+  app.config.json: |
+    {
+      "BroideryBackendUrl": "https://backend.broiderysa.com"
+    }
+kind: ConfigMap
+metadata:
+  name: broidery-frontend-config-blue
+  namespace: default
+---
+apiVersion: v1
+data:
+  app.config.json: |
+    {
+      "BroideryBackendUrl": "https://backend-broidery.k3s"
+    }
+kind: ConfigMap
+metadata:
+  name: broidery-frontend-config-green
+  namespace: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broidery-frontend-blue
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: broidery-frontend
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broidery-frontend-green
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: broidery-frontend
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: broidery-frontend
+  namespace: default
+spec:
+  replicas: 2
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: broidery-frontend
+  strategy:
+    blueGreen:
+      activeMetadata:
+        labels:
+          role: blue
+      activeService: broidery-frontend-blue
+      autoPromotionEnabled: false
+      previewMetadata:
+        labels:
+          role: green
+      previewService: broidery-frontend-green
+  template:
+    metadata:
+      labels:
+        app: broidery-frontend
+    spec:
+      containers:
+      - image: spirito/broidery-fe:1.6
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: broidery-frontend
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+          volumeMounts:
+          - mountPath: /usr/share/nginx/html/src/assets/app.config.json
+            name: broidery-frontend-config
+            readOnly: true
+            subPath: app.config.json
+      volumes:
+      - configMap:
+          name: broidery-frontend-config-{{ if eq .Labels.role "green" }}green{{ else
+            }}blue{{ end }}
+        name: broidery-frontend-config
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: cluster-issuer-selfsigned
+    cert-manager.io/issuer-kind: ClusterIssuer
+    metallb.uniberse.tf/address-pool: default
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: broidery-frontend
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: broidery.k3s
+    http:
+      paths:
+      - backend:
+          service:
+            name: broidery-frontend-blue
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - broidery.k3s
+    secretName: broidery.k3s.cloud-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: cluster-issuer-selfsigned
+    cert-manager.io/issuer-kind: ClusterIssuer
+    metallb.uniberse.tf/address-pool: default
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: broidery-frontend-bg
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: broidery-bg.k3s
+    http:
+      paths:
+      - backend:
+          service:
+            name: broidery-frontend-green
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - broidery-bg.k3s
+    secretName: broidery-bg.k3s.cloud-tls

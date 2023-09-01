@@ -58,7 +58,7 @@ spec:
             memory: 200Mi
           volumeMounts:
           - name: broidery-frontend-config
-            mountPath: /usr/share/nginx/html/src/assets/app.config.json
+            mountPath: /usr/share/nginx/html/assets/app.config.json
             subPath: app.config.json
             readOnly: true
       volumes: 
