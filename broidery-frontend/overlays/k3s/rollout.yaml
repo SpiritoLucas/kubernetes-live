@@ -59,7 +59,7 @@ spec:
           volumeMounts:
           - name: broidery-frontend-config
             mountPath: /usr/share/nginx/html/assets/app.config.json
-            subPath: app.config.json
+            #subPath: app.config.json
             readOnly: true
       volumes: 
       - name: broidery-frontend-config
