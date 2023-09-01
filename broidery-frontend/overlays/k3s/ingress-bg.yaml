@@ -24,7 +24,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: broidery-frontend-blue-green
+            name: broidery-frontend-green
             port: 
               name: http
 
