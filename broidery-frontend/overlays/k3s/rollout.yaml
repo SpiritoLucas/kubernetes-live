@@ -64,7 +64,7 @@ spec:
       volumes: 
       - name: broidery-frontend-config
         configMap:
-          name: broidery-frontend-config-{{ if eq .Labels.role "green" }}green{{ else }}blue{{ end }}
+          name: broidery-frontend-config-{{ .Labels.role }}
       #trafficRouting:
       #  nginx: 
       #    stableIngress: broidery-frontend
