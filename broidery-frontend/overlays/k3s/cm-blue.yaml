@@ -5,5 +5,5 @@ metadata:
 data:
   app.config.json: |
     {
-      "BroideryBackendUrl": "https://backend.broiderysa.com"
+      "BroideryBackendUrl": "https://backend-broidery.k3s"
     }
