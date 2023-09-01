@@ -14,6 +14,12 @@ spec:
       activeService: broidery-frontend
       previewService: broidery-frontend-blue-green
       autoPromotionEnabled: false
+      activeMetadata: 
+        labels:
+          role: blue
+      previewMetadata: 
+        labels:
+          role: green
   template:
     metadata:
       labels:
@@ -58,7 +64,7 @@ spec:
       volumes: 
       - name: broidery-frontend-config
         configMap:
-          name: broidery-frontend-config
+          name: broidery-frontend-config-{{ if eq .Labels.role "green" }}green{{ else }}blue{{ end }}
       #trafficRouting:
       #  nginx: 
       #    stableIngress: broidery-frontend

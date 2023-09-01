@@ -14,7 +14,7 @@ patches:
 
 images:
 - name: spirito/broidery-fe
-  newTag: "1.5" #"1.6"
+  newTag: "1.6" #"1.5"
 - name: alpine/curl
   newTag: latest
 
@@ -23,7 +23,8 @@ resources:
 #- hpa.yaml
 - ingress.yaml
 - ingress-bg.yaml
-- cm.yaml
+- cm-blue.yaml
+- cm-green.yaml
 #- jobs.yaml
 
 namespace: default

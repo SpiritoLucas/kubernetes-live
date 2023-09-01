@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: broidery-frontend-config
+  name: broidery-frontend-config-green
 data:
   app.config.json: |
     {
