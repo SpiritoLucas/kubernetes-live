@@ -14,12 +14,12 @@
 - op: add
   path: /spec/strategy/canary/stableMetadata
   value: 
-    - labels:
+    labels:
         role: stable
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
-    - labels:
+    labels:
         role: canary
 - op: add
   path: /spec/strategy/canary/steps
