@@ -23,12 +23,13 @@
 - op: add
   path: /spec/strategy/blueGreen/activeMetadata
   value: 
-    - labels:
+      labels:
         role: blue
 - op: add
-  path: /spec/strategy/blueGreen/previewMetadata
+  path: /spec/strategy/blueGreen/previewMetadata 
   value: 
-    - labels:
+      labels:
         role: green
-
-
+#- op: add
+#  path: /spec/strategy/blueGreen/previewMetadata/labels[0]
+#  value: {role: green}
