@@ -30,12 +30,6 @@
   value: 
       labels:
         role: green
-- op: replace
-  path: /spec/strategy/blueGreen/previewMetadata/labels
-  type: array
-- op: add
-  path: /spec/strategy/blueGreen/previewMetadata/0
-  value: {role: green}
 #- op: add
 #  path: /spec/strategy/blueGreen/previewMetadata/labels[0]
 #  value: {role: green}
