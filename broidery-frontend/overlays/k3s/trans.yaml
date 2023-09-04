@@ -1,0 +1,34 @@
+# overlays/your-overlay/deployment-to-rollout-patch.yaml
+- op: replace
+  path: /kind
+  value: Rollout
+- op: replace
+  path: /apiVersion
+  value: argoproj.io/v1alpha1
+- op: add
+  path: /spec/strategy
+  value: {}
+- op: add
+  path: /spec/strategy/blueGreen
+  value: {}
+- op: add
+  path: /spec/strategy/blueGreen/activeService
+  value: broidery-frontend-blue
+- op: add
+  path: /spec/strategy/blueGreen/previewService
+  value: broidery-frontend-green
+- op: add
+  path: /spec/strategy/blueGreen/autoPromotionEnabled
+  value: false
+- op: add
+  path: /spec/strategy/blueGreen/activeMetadata
+  value: 
+    - labels:
+        role: blue
+- op: add
+  path: /spec/strategy/blueGreen/previewMetadata
+  value: 
+    - labels:
+        role: green
+
+

@@ -9,8 +9,13 @@ metadata:
       ]
 
 patches:
-- path: rollout.yaml
-#- path: deploy.yaml
+- path: deploy.yaml
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: broidery-frontend
+  path: trans.yaml
 
 images:
 - name: spirito/broidery-fe
