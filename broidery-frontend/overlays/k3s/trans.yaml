@@ -1,4 +1,4 @@
-# overlays/your-overlay/deployment-to-rollout-patch.yaml
+
 - op: replace
   path: /kind
   value: Rollout
@@ -30,6 +30,3 @@
   value: 
       labels:
         role: green
-#- op: add
-#  path: /spec/strategy/blueGreen/previewMetadata/labels[0]
-#  value: {role: green}

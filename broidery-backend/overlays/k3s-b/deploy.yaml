@@ -25,19 +25,3 @@ spec:
                 name: default-connection
                 key: DEFAULT_CONNECTION
         name: broidery-backend
-  strategy: 
-    canary:
-      stableMetadata: 
-        labels:
-          role: stable
-      canaryMetadata: 
-        labels:
-          role: canary
-          canary-by-header: X-Canary
-      steps: 
-      - setWeight: 30
-      - pause: {}
-      - setWeight: 60
-      - pause: {}
-      - setWeight: 100
-      - pause: {}
