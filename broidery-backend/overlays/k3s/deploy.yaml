@@ -29,23 +29,4 @@ spec:
               fieldRef:
                 fieldPath: metadata.labels['role']
         name: broidery-backend
-  strategy: 
-    canary:
-      analysis:
-        templates:
-        - templateName: success-rate
-        startingStep: 2 # delay starting analysis run until setWeight: 40%
-      stableMetadata: 
-        labels:
-          role: stable
-      canaryMetadata: 
-        labels:
-          role: canary
-      steps: 
-      - setWeight: 30
-      - pause: { duration: 3m }
-      - setWeight: 60
-      - pause: { duration: 3m }
-      - setWeight: 100
-      - pause: { duration: 10s }
 

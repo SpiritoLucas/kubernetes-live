@@ -5,3 +5,33 @@
 - op: replace
   path: /apiVersion
   value: argoproj.io/v1alpha1
+- op: add
+  path: /spec/strategy
+  value: {}
+- op: add
+  path: /spec/strategy/canary
+  value: {}
+- op: add
+  path: /spec/strategy/canary/stableMetadata
+  value: 
+    - labels:
+        role: stable
+- op: add
+  path: /spec/strategy/canary/canaryMetadata
+  value: 
+    - labels:
+        role: canary
+- op: add
+  path: /spec/strategy/canary/steps
+  value:
+    - setWeight: 30
+    - pause:
+        duration: 3m
+    - setWeight: 60
+    - pause:
+        duration: 3m
+    - setWeight: 100
+    - pause:
+        duration: 10s
+
+
