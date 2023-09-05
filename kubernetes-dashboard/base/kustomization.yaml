@@ -13,4 +13,6 @@ resources:
 - serviceAccount.yaml
 - svcs.yaml
 
-
+images:
+  - name: kubernetesui/dashboard
+    newTag: v2.6.0
