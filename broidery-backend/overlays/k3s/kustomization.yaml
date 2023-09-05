@@ -8,8 +8,8 @@ images:
 resources:
 - ../../base
 - sealed-secret.yaml
-- analysisTemplate.yaml
-- job.yaml
+#- analysisTemplate.yaml
+#- job.yaml
 
 namespace: default
 
@@ -20,4 +20,4 @@ patches:
     version: v1
     kind: Deployment
     name: broidery-backend
-  path: trans.yaml
+  path: canary-patch.yaml
