@@ -15,4 +15,4 @@ resources:
 
 images:
   - name: kubernetesui/dashboard
-    newTag: v2.6.0
+    newTag: v2.7.0
