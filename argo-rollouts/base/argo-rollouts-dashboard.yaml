@@ -102,7 +102,7 @@ metadata:
   name: argo-rollouts-dashboard
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: argo-rollouts-dashboard
 subjects:
 - kind: ServiceAccount
