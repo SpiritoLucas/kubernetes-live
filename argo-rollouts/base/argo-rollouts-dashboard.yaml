@@ -107,4 +107,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-rollouts-dashboard
-  namespace: argo-rollouts-dashboard
+  namespace: argo-rollouts
