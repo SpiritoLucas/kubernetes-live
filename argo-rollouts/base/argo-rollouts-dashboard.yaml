@@ -23,6 +23,7 @@ spec:
         ports:
         - containerPort: 3100
           protocol: TCP
+          name: http
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

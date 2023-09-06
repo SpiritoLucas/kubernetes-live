@@ -9,6 +9,8 @@ metadata:
 spec:
   ports:
   - port: 3100
+    name: http
+    targetPort: http
   selector:
     app.kubernetes.io/name: argo-rollouts-dashboard
   sessionAffinity: None
