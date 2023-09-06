@@ -45,5 +45,8 @@
         match:
             # headerName The name of the header to apply the match rules to.
           - headerName: "version"
+            headerValue:
+                # Exact will only match if the header value is exactly the same
+                exact: "2"
 
 
