@@ -19,7 +19,7 @@ spec:
       serviceAccountName: argo-rollouts-dashboard
       containers:
         - name: argo-rollouts-dashboard
-          image: quay.io/argoproj/kubectl-argo-rollouts
+          image: quay.io/argoproj/kubectl-argo-rollouts:v1.2.0
           ports:
             - containerPort: 3100
               protocol: TCP
