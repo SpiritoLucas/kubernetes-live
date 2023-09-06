@@ -27,4 +27,50 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
+      serviceAccount: argo-rollouts-dashboard
+      serviceAccountName: argo-rollouts-dashboard
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/component: argo-rollouts-dashboard
+    app.kubernetes.io/name: argo-rollouts-dashboard
+    app.kubernetes.io/part-of: argo-rollouts
+  name: argo-rollouts-dashboard
+  namespace: argo-rollouts
+secrets:
+- name: argo-rollouts-dashboard-token-5tdkf
+apiVersion: v1
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/component: rollouts-controller
+    app.kubernetes.io/name: argo-rollouts
+    app.kubernetes.io/part-of: argo-rollouts
+  name: argo-rollouts
+  namespace: argo-rollouts
+secrets:
+- name: argo-rollouts-token-vjv2k
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/component: argo-rollouts-dashboard
+    app.kubernetes.io/name: argo-rollouts-dashboard
+    app.kubernetes.io/part-of: argo-rollouts
+  name: argo-rollouts-dashboard
+  namespace: argo-rollouts
+secrets:
+- name: argo-rollouts-dashboard-token-5tdkf
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: argo-rollouts
+secrets:
+- name: default-token-qlgrp
 
