@@ -4,3 +4,6 @@ kind: Kustomization
 
 resources:
 - install.yaml
+- argo-rollouts-dashboard-svc.yaml
+- argo-rollouts-dashboard.yaml
+- ingress.yaml
