@@ -33,20 +33,6 @@
     - setWeight: 100
     - pause:
         duration: 10s
-  # Sets header based route with specified header values
-    # Setting header based route will send all 100 traffic to the canary for the requests 
-    # O with a specified header, in this case request header "version":"2"
-    # (supported only with trafficRouting, for Istio only at the moment)
-    - setHeaderRoute:
-        # Name of the route that will be created by argo rollouts this must also be configured
-        # in spec.strategy.canary.trafficRouting.managedRoutes
-        name: "header-route-1"
-        # The matching rules for the header route, if this is missing it acts as a removal of the route.
-        match:
-            # headerName The name of the header to apply the match rules to.
-          - headerName: "version"
-            headerValue:
-                # Exact will only match if the header value is exactly the same
-                exact: "2"
+
 
 
