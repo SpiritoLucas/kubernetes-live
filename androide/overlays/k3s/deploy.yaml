@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: android
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: android
+  template:
+    metadata:
+      labels:
+        app: android
+    spec:
+      containers:
+      - image: budtmo/docker-android:emulator_11.0
+        env:
+          - name: EMULATOR_DEVICE
+            value: 'Samsung Galaxy S10'
+          - name: WEB_VNC
+            value: 'true'
+        name: android
+
