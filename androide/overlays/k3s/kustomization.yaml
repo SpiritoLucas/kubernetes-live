@@ -6,7 +6,7 @@ images:
   newTag: emulator_11.0
 
 resources:
-- deployment.yaml
+- deploy.yaml
 #- ../../base
 
 namespace: default
