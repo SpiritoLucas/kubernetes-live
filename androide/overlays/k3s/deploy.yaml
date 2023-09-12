@@ -20,4 +20,5 @@ spec:
           - name: WEB_VNC
             value: 'true'
         name: android
-
+        securityContext:
+          privileged: true
