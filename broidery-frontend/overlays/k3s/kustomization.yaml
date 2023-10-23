@@ -15,7 +15,7 @@ patches:
     version: v1
     kind: Deployment
     name: broidery-frontend
-  path: trans.yaml
+  path: blue-green-patch.yaml
 
 images:
 - name: spirito/broidery-fe
