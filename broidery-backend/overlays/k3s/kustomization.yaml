@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: "1.6" 
+  newTag: "1.4" 
 
 resources:
 - ../../base
