@@ -21,3 +21,4 @@ patches:
     kind: Deployment
     name: broidery-backend
   path: canary-patch.yaml
+- path: hpa.yaml
