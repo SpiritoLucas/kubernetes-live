@@ -8,6 +8,7 @@ images:
 resources:
 - ../../base
 - sealed-secret.yaml
+- hpa.yaml
 #- analysisTemplate.yaml
 #- job.yaml
 
@@ -21,4 +22,3 @@ patches:
     kind: Deployment
     name: broidery-backend
   path: canary-patch.yaml
-- path: hpa.yaml
