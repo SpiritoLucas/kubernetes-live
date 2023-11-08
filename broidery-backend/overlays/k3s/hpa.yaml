@@ -8,5 +8,5 @@ spec:
     kind: Rollout
     name: broidery-backend
   minReplicas: 2
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 80
