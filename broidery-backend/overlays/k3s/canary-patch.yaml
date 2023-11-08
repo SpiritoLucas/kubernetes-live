@@ -23,9 +23,7 @@
 - op: add
   path: /spec/strategy/canary/steps
   value:
-    - setWeight: 5
-    - pause: {}
-    - setWeight: 10
+    - setWeight: 30
     - pause: {}
     - setWeight: 60
     - pause:
