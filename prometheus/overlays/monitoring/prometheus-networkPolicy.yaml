@@ -48,6 +48,7 @@ spec:
           kubernetes.io/metadata.name: argo-rollouts
     ports:
     - port: 8090
+      protocol: TCP
   - to: 
     - namespaceSelector:
         matchLabels:
