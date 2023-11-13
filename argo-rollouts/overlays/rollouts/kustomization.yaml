@@ -5,5 +5,7 @@ kind: Kustomization
 resources:
 - ../../base/
 - svc-monitor.yaml
+- role-binding.yaml
+- role.yaml
 
 namespace: argo-rollouts
