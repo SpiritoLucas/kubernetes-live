@@ -15121,6 +15121,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: argo-rollouts
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8090"
     spec:
       containers:
       - image: quay.io/argoproj/argo-rollouts:v1.5.1
