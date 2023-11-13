@@ -4,6 +4,6 @@ kind: Kustomization
 
 resources:
 - ../../base/
--svc-monitor.yaml
+- svc-monitor.yaml
 
 namespace: argo-rollouts
