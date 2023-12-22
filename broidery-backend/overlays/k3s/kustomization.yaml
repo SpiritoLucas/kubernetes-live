@@ -8,7 +8,7 @@ images:
 resources:
 - ../../base
 - sealed-secret.yaml
-- hpa.yaml
+#- hpa.yaml
 #- analysisTemplate.yaml
 #- job.yaml
 
