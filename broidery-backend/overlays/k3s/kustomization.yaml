@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: "1.5" 
+  newTag: "1.4" 
 
 resources:
 - ../../base
@@ -22,3 +22,7 @@ patches:
     kind: Deployment
     name: broidery-backend
   path: canary-patch.yaml
+
+
+transformers:
+- custom-labels.yaml
