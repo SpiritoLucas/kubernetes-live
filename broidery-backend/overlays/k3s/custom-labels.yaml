@@ -9,7 +9,7 @@ labels:
 fieldSpecs:
 - path: metadata/labels
   create: true
-  kind: Rollout
+  kind: Deployment
 - path: spec/template/metadata/labels
   create: true
-  kind: Rollout
+  kind: Deployment
