@@ -17,7 +17,7 @@
         role: stable
         tags.datadoghq.com/env: development
         tags.datadoghq.com/service: broidery-backend
-        tags.datadoghq.com/version: "{{spec.template.metadata.labels.image-version}}"
+        tags.datadoghq.com/version: "{{template "imageVersion" .}}"
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
@@ -25,7 +25,7 @@
         role: canary
         tags.datadoghq.com/env: development
         tags.datadoghq.com/service: broidery-backend
-        tags.datadoghq.com/version: "{{spec.template.metadata.labels.image-version}}"
+        tags.datadoghq.com/version: "{{template "imageVersion" .}}"
 - op: add
   path: /spec/strategy/canary/steps
   value:
