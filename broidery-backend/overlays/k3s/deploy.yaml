@@ -28,9 +28,5 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.labels['role']
-          - name: APP_VERSION
-            valueFrom:
-              fieldRef:
-                fieldPath: 'spec.template.spec.containers[?(@.name=="broidery-backend")].image'
         name: broidery-backend
 
