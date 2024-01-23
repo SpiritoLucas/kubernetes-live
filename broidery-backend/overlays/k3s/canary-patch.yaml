@@ -18,7 +18,7 @@
         tags.datadoghq.com/env: development
         tags.datadoghq.com/service: broidery-backend
 - op: add
-  path: /spec/strategy/canary/stableMetadata/labels/tags.datadoghq.com/version
+  path: /spec/strategy/canary/stableMetadata/labels/
   valueFrom:
     fieldRef:
       fieldPath: '{{ spec.template.spec.container[0].image }}'
