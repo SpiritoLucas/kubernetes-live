@@ -17,7 +17,7 @@
         role: stable
         tags.datadoghq.com/env: development
         tags.datadoghq.com/service: broidery-backend
-        tags.datadoghq.com/version: {spec.template.containers[0].image}
+        tags.datadoghq.com/version: {{spec.template.containers[0].image}}
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
