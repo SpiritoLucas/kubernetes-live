@@ -23,9 +23,6 @@
   value: 
     labels:
         role: canary
-        tags.datadoghq.com/env: development
-        tags.datadoghq.com/service: broidery-backend
-        tags.datadoghq.com/version: "1.5"
 - op: add
   path: /spec/strategy/canary/steps
   value:
@@ -37,4 +34,12 @@
     - setWeight: 100
     - pause:
         duration: 10s
+- op: add
+  path: /spec/template/metadata
+  value: 
+    labels:
+      app: broidery-backend
+      tags.datadoghq.com/env: development
+      tags.datadoghq.com/service: broidery-backend
+      tags.datadoghq.com/version: "1.5"
 
