@@ -6,6 +6,4 @@ resources:
 - webhook
 - prometheus
 
-configurations:
-- kustomizeconfig.yaml
 
