@@ -15,17 +15,13 @@
   value: 
     labels:
         role: stable
-- op: add
-  path: /spec/strategy/canary/stableMetadata/labels/tags.datadoghq.com~1version
-  value: .spec.containers[0].image
+        tags.datadoghq.com/1version: "1.5"
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
     labels:
         role: canary
-- op: add
-  path: /spec/strategy/canary/canaryMetadata/labels/tags.datadoghq.com~1version
-  value: .spec.containers[0].image
+        tags.datadoghq.com/1version: "1.5"
 - op: add
   path: /spec/strategy/canary/steps
   value:
