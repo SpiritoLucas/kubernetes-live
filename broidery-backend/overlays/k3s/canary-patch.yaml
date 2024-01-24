@@ -15,7 +15,7 @@
   value: 
     labels:
         role: stable
-        tags.datadoghq.com/1version: "1.4"
+        tags.datadoghq.com/1version: "1.5"
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
