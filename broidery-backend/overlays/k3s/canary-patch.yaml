@@ -17,7 +17,7 @@
         role: stable
 - op: replace
   path: /spec/strategy/canary/stableMetadata/labels/tags.datadoghq.com~1version
-  value: '{{.spec.replicas}}'
+  value: '{{.spec.containers[0].image}}'
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
@@ -25,7 +25,7 @@
         role: canary
 - op: replace
   path: /spec/strategy/canary/canaryMetadata/labels/tags.datadoghq.com~1version
-  value: '{{.spec.replicas}}'
+  value: '{{.spec.containers[0].image}}'
 - op: add
   path: /spec/strategy/canary/steps
   value:
