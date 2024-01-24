@@ -15,7 +15,7 @@
   value: 
     labels:
         role: stable
-- op: replace
+- op: add
   path: /spec/strategy/canary/stableMetadata/labels/tags.datadoghq.com~1version
   value: '{{.spec.containers[0].image}}'
 - op: add
@@ -23,7 +23,7 @@
   value: 
     labels:
         role: canary
-- op: replace
+- op: add
   path: /spec/strategy/canary/canaryMetadata/labels/tags.datadoghq.com~1version
   value: '{{.spec.containers[0].image}}'
 - op: add
