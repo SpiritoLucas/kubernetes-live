@@ -20,7 +20,7 @@
         tags.datadoghq.com/version: {}
 - op: replace
   path: /spec/strategy/canary/stableMetadata/labels/tags.datadoghq.com~1version
-  value: '{{ .spec.template.spec.containers[0].image }}'
+  value: {{ .spec.template.spec.containers[0].image }}
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
@@ -31,7 +31,7 @@
         tags.datadoghq.com/version: {}
 - op: replace
   path: /spec/strategy/canary/canaryMetadata/labels/tags.datadoghq.com~1version
-  value: '{{ .spec.template.spec.containers[0].image }}'
+  value: {{ .spec.template.spec.containers[0].image }}
 - op: add
   path: /spec/strategy/canary/steps
   value:
