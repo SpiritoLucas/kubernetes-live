@@ -25,6 +25,12 @@ spec:
           kubernetes.io/metadata.name: ingress-nginx
     ports:
     - port: 3000
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring-system
+    ports:
+    - port: 443
   podSelector:
     matchLabels:
       app.kubernetes.io/component: grafana
