@@ -25,4 +25,5 @@ resources:
 - ../rbac
 - ../manager
 - ../prometheus
+- ../webhook
 
