@@ -11,7 +11,7 @@ spec:
     path: .
     helm:
       releaseName: victoria-metrics
-      argocdReleaseOverride: victoria-metrics
+      #argocdReleaseOverride: victoria-metrics
       values: |
         victoria-metrics-operator:
           enabled: true
