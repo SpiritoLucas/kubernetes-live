@@ -10,9 +10,9 @@ metadata:
   namespace: monitoring
 stringData:
   grafana.ini: |
+    [plugins]
+    allow_loading_unsigned_plugins = victoriametrics-datasource
     [date_formats]
     default_timezone = UTC
 
-    [plugins]
-    allow_loading_unsigned_plugins = victoriametrics-datasource
 type: Opaque
