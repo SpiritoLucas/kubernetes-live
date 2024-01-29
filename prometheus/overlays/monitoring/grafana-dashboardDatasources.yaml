@@ -21,6 +21,15 @@ stringData:
                 "type": "prometheus",
                 "url": "http://prometheus-k8s.monitoring.svc:9090",
                 "version": 1
+            },
+            {
+                "access": "proxy",
+                "editable": true,
+                "name": "victoria-metrics",
+                "orgId": 2,
+                "type": "victoria-metrics",
+                "url": "https://vm-operator-webhook-service.monitoring-system.svc:443",
+                "version": 1
             }
         ]
     }
