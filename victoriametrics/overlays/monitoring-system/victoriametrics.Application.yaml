@@ -20,16 +20,16 @@ spec:
           enabled: true
         prometheus-node-exporter:
           enabled: false
-        grafana:
-          enabled: true
-          sidecar:
-          ingress:
-            ingressClassName: nginx
-            hosts:
-              - grafana.k3s
-            tls:
-              - secretName: cluster-dns
-                hosts:
-                  - grafana.k3s
+        #grafana:
+        #  enabled: true
+        #  sidecar:
+        #  ingress:
+        #    ingressClassName: nginx
+        #    hosts:
+        #      - grafana.k3s
+        #    tls:
+        #      - secretName: cluster-dns
+        #        hosts:
+        #          - grafana.k3s
   destination:
     namespace: victoria-metrics
