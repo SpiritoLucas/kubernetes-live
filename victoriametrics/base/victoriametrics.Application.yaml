@@ -1,0 +1,109 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoria-metrics-stack
+  namespace: argocd
+spec:
+  project: observability
+  source:
+    repoURL: git@gitlab.com:fravega-it/infrastructure/kubernetes/applications-repository/victoria-metrics-k8s-stack.git
+    path: .
+    helm:
+      releaseName: victoria-metrics
+      argocdReleaseOverride: victoria-metrics
+      values: |
+        victoria-metrics-operator:
+          enabled: true
+          operator:
+            disable_prometheus_converter: false
+        serviceAccount:
+          create: true
+        defaultRules:
+          create: true
+          rules:
+            etcd: true
+            general: true
+            k8s: true
+            kubeApiserver: true
+            kubeApiserverAvailability: true
+            kubeApiserverBurnrate: true
+            kubeApiserverHistogram: true
+            kubeApiserverSlos: true
+            kubelet: true
+            kubePrometheusGeneral: true
+            kubePrometheusNodeRecording: true
+            kubernetesApps: true
+            kubernetesResources: true
+            kubernetesStorage: true
+            kubernetesSystem: true
+            kubeScheduler: true
+            kubeStateMetrics: true
+            network: true
+            node: true
+            vmagent: true
+            vmsingle: true
+            vmcluster: true
+            vmhealth: true
+            alertmanager: true
+
+          runbookUrl: https://runbooks.prometheus-operator.dev/runbooks
+
+        vmsingle:
+          enabled: false
+          spec:
+            retentionPeriod: "7"
+            storage:
+              resources:
+                requests:
+                  storage: 20Gi
+
+        vmalert:
+          enabled: true
+
+        vmagent:
+          enabled: true
+
+
+        prometheus-node-exporter:
+          enabled: true
+
+        kube-state-metrics:
+          enabled: true
+
+        kubelet:
+          enabled: true
+          cadvisor: true
+          probes: true
+
+        kubeApiServer:
+          enabled: true
+
+        kubeControllerManager:
+          enabled: true
+
+        coreDns:
+          enabled: true
+
+        kubeEtcd:
+          enabled: true
+
+        kubeScheduler:
+          enabled: true
+
+        kubeProxy:
+          enabled: true
+
+        crds:
+          enabled: true
+
+        grafana:
+          enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: victoria-metrics
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - PruneLast=false
+      - ServerSideApply=true
