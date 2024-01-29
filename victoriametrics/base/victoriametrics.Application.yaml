@@ -5,9 +5,9 @@ metadata:
   name: victoria-metrics-stack
   namespace: argocd
 spec:
-  project: observability
+  project: monitoring-system
   source:
-    repoURL: git@gitlab.com:fravega-it/infrastructure/kubernetes/applications-repository/victoria-metrics-k8s-stack.git
+    repoURL: https://github.com/SpiritoLucas/victoria-metrics.git
     path: .
     helm:
       releaseName: victoria-metrics
