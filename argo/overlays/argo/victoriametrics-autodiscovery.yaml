@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: monitoring-system-appset
+  name: victoria-metrics-appset
   namespace: argocd
 spec:
   syncPolicy:
@@ -15,9 +15,9 @@ spec:
       - path: 'victoriametrics/overlays/monitoring-system'
   template:
     metadata:
-      name: '{{ path[0] }}-monitoring-system'
+      name: '{{ path[0] }}'
     spec:
-      project: monitoring-system
+      project: victoria-metrics
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
