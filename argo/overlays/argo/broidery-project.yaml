@@ -4,7 +4,7 @@ metadata:
   name: broidery
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "3"
     notifications.argoproj.io/subscribe.discord_k3s_success: ""
     notifications.argoproj.io/subscribe.discord_k3s_error: ""
 spec:
