@@ -4,7 +4,7 @@ metadata:
   name: kubernetes-dashboard
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "2"
     notifications.argoproj.io/subscribe.discord_k3s_success: ""
     notifications.argoproj.io/subscribe.discord_k3s_error: ""
 spec:
