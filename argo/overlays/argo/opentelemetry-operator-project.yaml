@@ -23,7 +23,7 @@ spec:
     - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
-    - namespace: vault
+    - namespace: opentelemetry-operator-system
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
