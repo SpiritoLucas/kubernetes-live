@@ -20,5 +20,6 @@ resources:
 - opentelemetry-operator-validating-webhook-configuration.yaml
 - opentelemetry-operator-webhook-service.yaml
 - opentelemetrycollectors.opentelemetry.io.yaml
+- deployment.yaml
 
 namespace: opentelemetry-operator-system
