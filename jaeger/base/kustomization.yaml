@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- jaeger-operator-metrics-reader.yaml
+- jaeger-operator-metrics.yaml
+- jaeger-operator-mutating-webhook-configuration.yaml
+- jaeger-operator-proxy-rolebinding.yaml
+- jaeger-operator-selfsigned-issuer.yaml
+- jaeger-operator-serving-cert.yaml
+- jaeger-operator-validating-webhook-configuration.yaml
+- jaeger-operator-webhook-service.yaml
+- jaeger-operator.yaml
+- jaegers.jaegertracing.io.yaml
+- leader-election-role.yaml
+- leader-election-rolebinding.yaml
+- manager-role.yaml
+- manager-rolebinding.yaml
+- prometheus.yaml
+- proxy-role.yaml
