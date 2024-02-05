@@ -18,3 +18,4 @@ resources:
 - manager-rolebinding.yaml
 - prometheus.yaml
 - proxy-role.yaml
+- svc-account.yaml
