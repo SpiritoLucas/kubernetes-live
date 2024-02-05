@@ -30,6 +30,7 @@ resources:
 - ingress-bg.yaml
 - cm-blue.yaml
 - cm-green.yaml
+- collector.yaml
 #- jobs.yaml
 
 namespace: default
