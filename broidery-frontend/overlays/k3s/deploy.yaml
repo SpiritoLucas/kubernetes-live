@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: broidery-frontend
+  annotations:
+    sidecar.opentelemetry.io/inject: "true"
 spec:
   replicas: 2
   selector:
