@@ -53,8 +53,8 @@ spec:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
               readOnly: false
-        volumes:
-          - name: mysql-persistent-storage
-            persistentVolumeClaim:
-              claimName: task-pv-claim
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
 
