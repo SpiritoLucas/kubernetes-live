@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
         - name: check-1
-          image: ricoli/hey:latest
+          image: 
           command: ["-n", "10000", "-c", "10", "-H", "Host: broidery-backend.k3s", "https://192.168.64.26/health-check"]
       restartPolicy: Never

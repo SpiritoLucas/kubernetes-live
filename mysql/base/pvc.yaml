@@ -3,10 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: task-pv-claim
 spec:
-  storageClassName: manual
   accessModes:
-    #- ReadWriteOnce
-    - ReadWriteMany
+    - ReadWriteOnce
+    #- ReadWriteMany
   resources:
     requests:
       storage: 1Gi
