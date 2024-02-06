@@ -15,13 +15,13 @@
   value: 
     labels:
         role: stable
-        tags.datadoghq.com/1version: "1.5"
+        tags.datadoghq.com/version: "1.4"
 - op: add
   path: /spec/strategy/canary/canaryMetadata
   value: 
     labels:
         role: canary
-        tags.datadoghq.com/1version: "1.5"
+        tags.datadoghq.com/version: "sarasa"
 - op: add
   path: /spec/strategy/canary/steps
   value:
@@ -33,5 +33,15 @@
     - setWeight: 100
     - pause:
         duration: 10s
-
-
+- op: replace
+  path: /spec/strategy/canary/canaryMetadata
+  value: 
+    labels:
+        role: canary
+        tags.datadoghq.com/version: "1.5"
+- op: replace
+  path: /spec/strategy/canary/stableMetadata
+  value: 
+    labels:
+        role: stable
+        tags.datadoghq.com/version: "1.5"
