@@ -12,10 +12,10 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: '**/overlays/jaeger'
+      - path: '**/overlays/tempo'
   template:
     metadata:
-      name: '{{ path[0] }}-jaeger'
+      name: '{{ path[0] }}-tempo'
     spec:
       project: tempo
       source:
