@@ -17,14 +17,14 @@ spec:
     metadata:
       name: '{{ path[0] }}-jaeger'
     spec:
-      project: jaeger
+      project: tempo
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
         path: '{{ path }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: observability
+        namespace: tempo-operator-system
       syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)

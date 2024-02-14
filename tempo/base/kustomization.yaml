@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: tempo-operator-system
+resources:
+- Certificate-tempo-operator-serving-cert.yaml
+- ClusterRole-tempo-operator-manager-role.yaml
+- ClusterRole-tempo-operator-metrics-reader.yaml
+- ClusterRole-tempo-operator-proxy-role.yaml
+- ClusterRoleBinding-tempo-operator-manager-rolebinding.yaml
+- ClusterRoleBinding-tempo-operator-proxy-rolebinding.yaml
+- ConfigMap-tempo-operator-manager-config.yaml
+- CustomResourceDefinition-tempomonolithics.tempo.grafana.com.yaml
+- CustomResourceDefinition-tempostacks.tempo.grafana.com.yaml
+- Deployment-tempo-operator-controller.yaml
+- Issuer-tempo-operator-selfsigned-issuer.yaml
+- MutatingWebhookConfiguration-tempo-operator-mutating-webhook-configuration.yaml
+- Namespace-tempo-operator-system.yaml
+- Role-tempo-operator-leader-election-role.yaml
+- RoleBinding-tempo-operator-leader-election-rolebinding.yaml
+- Service-tempo-operator-controller-manager-metrics-service.yaml
+- Service-tempo-operator-webhook-service.yaml
+- ServiceAccount-tempo-operator-controller-manager.yaml
+- ValidatingWebhookConfiguration-tempo-operator-validating-webhook-configuration.yaml
+

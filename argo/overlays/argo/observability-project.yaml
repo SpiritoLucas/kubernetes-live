@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: jaeger
+  name: tempo
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
@@ -13,7 +13,7 @@ spec:
       schedule: '* * * * *'
       duration: 24h
       namespaces:
-        - observability
+        - tempo-operator-system
       clusters:
         - in-cluster
   description: k3s Team
@@ -22,7 +22,7 @@ spec:
     - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
-    - namespace: observability
+    - namespace: tempo-operator-system
       server: https://kubernetes.default.svc
     - namespace: "*"
       server: https://kubernetes.default.svc
