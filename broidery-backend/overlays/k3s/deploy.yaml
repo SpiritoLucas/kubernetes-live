@@ -25,7 +25,7 @@ spec:
                 name: default-connection
                 key: DEFAULT_CONNECTION
           - name: COLECTOR
-            value: "??"
+            value: "http://simplest-collector.opentelemetry-operator-system:4317"
           - name: MI_VARIABLE_DE_ENTORNO
             valueFrom:
               fieldRef:
