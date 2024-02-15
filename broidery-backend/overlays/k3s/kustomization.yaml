@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: 6.0-open 
+  newTag: otel-imp
 
 resources:
 - ../../base
