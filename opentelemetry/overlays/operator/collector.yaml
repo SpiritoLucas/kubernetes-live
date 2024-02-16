@@ -13,9 +13,12 @@ spec:
             endpoint: 0.0.0.0:4318
     processors:
 
-    exporters:
+    #exporters:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
-      debug:
+    #  debug:
+    exporters:
+      tempo:
+        endpoint: "https://tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
 
     service:
       pipelines:
