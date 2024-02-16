@@ -18,7 +18,8 @@ spec:
     #  debug:
     exporters:
       otlp:
-        endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
+        #endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
+        endpoint: "tempo-operator-webhook-service.tempo-operator-system:443"
         tls:
           insecure: true
     service:
