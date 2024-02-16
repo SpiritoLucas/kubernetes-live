@@ -18,7 +18,8 @@ spec:
     #  debug:
     exporters:
       otlp:
-        endpoint: "https://tempo-operator-controller-manager-metrics-service.tempo-operator-system.svc:8443/api/v2/spans"
+        endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system.svc:8443"
+        protocol: grpc
     service:
       pipelines:
         traces:
