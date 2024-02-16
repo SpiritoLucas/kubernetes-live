@@ -19,6 +19,8 @@ spec:
     exporters:
       otlp:
         endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
+        tls:
+          insecure: true
     service:
       pipelines:
         traces:
