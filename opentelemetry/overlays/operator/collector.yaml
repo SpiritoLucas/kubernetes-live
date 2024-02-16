@@ -19,7 +19,7 @@ spec:
     exporters:
       zipkin:
         endpoint: "https://tempo-operator-webhook-service.tempo-operator-system.svc/api/v2/spans"
-
+        insecure: true
     service:
       pipelines:
         traces:
