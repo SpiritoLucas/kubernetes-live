@@ -25,4 +25,4 @@ spec:
         traces:
           receivers: [otlp]
           processors: []
-          exporters: [debug]
+          exporters: [zipkin]
