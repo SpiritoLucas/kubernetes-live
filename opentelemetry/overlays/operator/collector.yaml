@@ -18,7 +18,7 @@ spec:
     #  debug:
     exporters:
       otlp:
-        endpoint: "tempo-operator-controller-794f5f55cc-w25x6:8443"
+        endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
     service:
       pipelines:
         traces:
