@@ -17,11 +17,11 @@ spec:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
     #  debug:
     exporters:
-      zipkin:
+      tempo:
         endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: []
-          exporters: [zipkin]
+          exporters: [tempo]
