@@ -19,7 +19,6 @@ spec:
     exporters:
       otlp:
         endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system.svc:8443"
-        protocol: grpc
     service:
       pipelines:
         traces:
