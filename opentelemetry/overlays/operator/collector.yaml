@@ -18,7 +18,7 @@ spec:
     #  debug:
     exporters:
       zipkin:
-        endpoint: "https://tempo-operator-webhook-service.tempo-operator-system/api/v2/spans"
+        endpoint: "https://tempo-operator-webhook-service.tempo-operator-system.svc/api/v2/spans"
 
     service:
       pipelines:
