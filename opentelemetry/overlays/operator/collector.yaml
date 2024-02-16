@@ -17,6 +17,8 @@ spec:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
     #  debug:
     exporters:
+      logging:
+        loglevel: info
       otlp:
         #endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
         endpoint: "https://tempo-operator-webhook-service.tempo-operator-system/api/v1/trace"
