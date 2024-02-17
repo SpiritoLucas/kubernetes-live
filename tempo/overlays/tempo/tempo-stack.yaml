@@ -6,7 +6,7 @@ spec:
   storage:
     secret:
       name: my-storage-secret
-      type: local
+      type: s3
   storageSize: 1Gi
   resources:
     total:
