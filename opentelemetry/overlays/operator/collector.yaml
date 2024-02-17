@@ -21,7 +21,7 @@ spec:
         loglevel: info
       otlp:
         #endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
-        endpoint: "https://tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443/api/v1/trace"
+        endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
         tls:
           insecure: true
     service:
@@ -29,4 +29,4 @@ spec:
         traces:
           receivers: [otlp]
           processors: []
-          exporters: [otlp]
+          exporters: [logging, otlp]
