@@ -3,6 +3,10 @@ kind: Kustomization
 
 resources:
 - ../../base
+- tempo-stack.yaml
+
+patches:
+- path: ConfigMap-tempo-operator-manager-config.yaml
 
 namespace: tempo-operator-system
 
