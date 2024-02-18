@@ -13,7 +13,7 @@ spec:
   jaegerui:
     enabled: true
     ingress:
-      enabled: true
+      enabled: false
     resources:
       limits:
         cpu: 500m
