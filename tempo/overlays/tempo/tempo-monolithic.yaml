@@ -10,6 +10,9 @@ spec:
     limits:
       cpu: 500m
       memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 200Mi
   jaegerui:
     enabled: true
     ingress:
@@ -18,3 +21,6 @@ spec:
       limits:
         cpu: 500m
         memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
