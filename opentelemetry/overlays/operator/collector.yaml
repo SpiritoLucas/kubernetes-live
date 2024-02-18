@@ -21,7 +21,7 @@ spec:
         loglevel: info
       otlp:
         #endpoint: "tempo-operator-controller-manager-metrics-service.tempo-operator-system:8443"
-        endpoint: "tempo-sample.tempo-operator-system:4317"
+        endpoint: "http://tempo-sample.tempo-operator-system:4317"
         tls:
           insecure: true
     service:
