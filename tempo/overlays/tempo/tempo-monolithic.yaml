@@ -8,13 +8,13 @@ spec:
       backend: memory
   resources:
     limits:
-      cpu: "2"
-      memory: "2Gi"
+      cpu: 500m
+      memory: 500Mi
   jaegerui:
     enabled: true
     ingress:
       enabled: true
     resources:
       limits:
-        cpu: "2"
-        memory: "2Gi"
+        cpu: 500m
+        memory: 500Mi
