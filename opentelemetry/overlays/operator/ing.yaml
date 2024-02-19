@@ -20,12 +20,12 @@ spec:
   - host: simplest-collector.k3s
     http:
       paths:
-      - path: /v1/traces
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: simplest-collector
             port: 
-              name: otlp-grpc
+              name: otlp-http
 
 
