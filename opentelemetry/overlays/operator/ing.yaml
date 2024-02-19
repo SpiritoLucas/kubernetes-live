@@ -20,7 +20,7 @@ spec:
   - host: simplest-collector.k3s
     http:
       paths:
-      - path: /
+      - path: /vi/traces
         pathType: Prefix
         backend:
           service:
