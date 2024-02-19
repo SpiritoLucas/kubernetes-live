@@ -16,3 +16,4 @@ resources:
 - grafana.certificate.cert-manager.yaml
 - argo-rollouts.cloud-tls.certificate.cert-manager.yaml
 - jaeger.certificate.cert-manager.yaml
+- simplest-collector.cloud-tls.certificate.cert-manager.yaml
