@@ -13,10 +13,9 @@ spec:
             endpoint: 0.0.0.0:4318
             cors:
               allowed_origins:
-                - https://broidery.k3s.com
-                - https://broidery-bg.k3s.com
+                - "*"
               allowed_headers:
-                - broidery.k3s
+                - "*"
               max_age: 7200
     processors:
 
