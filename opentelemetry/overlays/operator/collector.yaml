@@ -15,8 +15,6 @@ spec:
               allowed_origins:
                 - https://broidery.k3s.com
                 - https://broidery-bg.k3s.com
-              allowed_headers:
-                - *
               max_age: 7200
     processors:
 
