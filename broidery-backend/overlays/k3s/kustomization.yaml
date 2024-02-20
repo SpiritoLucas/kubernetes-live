@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: fix-otel-imp
+  newTag: fix-ef
 
 resources:
 - ../../base
