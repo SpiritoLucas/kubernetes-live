@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
 - sf.yaml
 - svc.yaml
-- pvc.yaml
-- pv.yaml
+#- pvc.yaml
+#- pv.yaml
 - cm.yaml
