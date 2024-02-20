@@ -19,7 +19,7 @@ patches:
 
 images:
 - name: spirito/broidery-fe
-  newTag: recontra-fix-opentelemetry-instrumentation #"1.6"
+  newTag: fix-path #"1.6"
 - name: alpine/curl
   newTag: latest
 
