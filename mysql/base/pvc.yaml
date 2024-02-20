@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteOnce
     #- ReadWriteMany
-  storageClassName: local-path
+  storageClassName: manual
   resources:
     requests:
       storage: 1Gi
