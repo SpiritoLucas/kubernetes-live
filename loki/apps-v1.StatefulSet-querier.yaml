@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: querier
+  labels:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: querier
+spec:
+  podManagementPolicy: Parallel
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/component: querier
+  serviceName: querier
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: loki
+        app.kubernetes.io/component: querier
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: loki
+                app.kubernetes.io/component: querier
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: querier
+        args:
+        - -boltdb.shipper.cache-location=/data/boltdb-cache
+        - -config.expand-env
+        - -config.file=/etc/loki/config/config.yaml
+        - -target=querier
+        envFrom:
+        - configMapRef:
+            name: loki-env-vars
+            optional: true
+        - secretRef:
+            name: loki-env-vars
+            optional: true
+        image: grafana/loki
+        ports:
+        - containerPort: 3100
+          name: http-metrics
+        - containerPort: 9095
+          name: grpc
+        - containerPort: 7946
+          name: memberlist
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3100
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 2
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ALL]
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /data
+          name: querier-data
+        - mountPath: /etc/loki/config
+          name: loki
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      serviceAccountName: loki
+      volumes:
+      - configMap:
+          name: loki
+        name: loki
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: querier-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi

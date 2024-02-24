@@ -1,0 +1,20 @@
+# When running queriers with index-gateway, they no longer need their own storage
+- op: remove
+  path: /spec/template/spec/containers/0/volumeMounts/0
+- op: remove
+  path: /spec/volumeClaimTemplates
+
+# Now that we don't need storage, there's no need for this to be a StatefulSet
+# -> swap kind for a Deployment
+- op: replace
+  path: /kind
+  value: Deployment
+- op: remove
+  path: /spec/podManagementPolicy
+- op: add
+  path: /spec/minReadySeconds
+  value: 10
+- op: remove
+  path: /spec/serviceName
+- op: remove
+  path: /spec/updateStrategy

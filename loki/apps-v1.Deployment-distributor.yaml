@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distributor
+  labels:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: distributor
+spec:
+  minReadySeconds: 10
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/component: distributor
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: loki
+        app.kubernetes.io/component: distributor
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: loki
+                app.kubernetes.io/component: distributor
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: distributor
+        args:
+        - -config.expand-env
+        - -config.file=/etc/loki/config/config.yaml
+        - -target=distributor
+        envFrom:
+        - configMapRef:
+            name: loki-env-vars
+            optional: true
+        - secretRef:
+            name: loki-env-vars
+            optional: true
+        image: grafana/loki
+        ports:
+        - containerPort: 3100
+          name: http-metrics
+        - containerPort: 9095
+          name: grpc
+        - containerPort: 7946
+          name: memberlist
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3100
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 500Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ALL]
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /etc/loki/config
+          name: loki
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      volumes:
+      - configMap:
+          name: loki
+        name: loki

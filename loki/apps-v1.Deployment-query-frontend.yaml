@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-frontend
+  labels:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: query-frontend
+spec:
+  minReadySeconds: 10
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/component: query-frontend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: loki
+        app.kubernetes.io/component: query-frontend
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: loki
+                app.kubernetes.io/component: query-frontend
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: query-frontend
+        args:
+        - -config.expand-env
+        - -config.file=/etc/loki/config/config.yaml
+        - -log.level=debug
+        - -target=query-frontend
+        envFrom:
+        - configMapRef:
+            name: loki-env-vars
+            optional: true
+        - secretRef:
+            name: loki-env-vars
+            optional: true
+        image: grafana/loki
+        ports:
+        - containerPort: 3100
+          name: http-metrics
+        - containerPort: 9095
+          name: grpc
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3100
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 6Gi
+          requests:
+            cpu: 2
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ALL]
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /etc/loki/config
+          name: loki
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      volumes:
+      - configMap:
+          name: loki
+        name: loki
