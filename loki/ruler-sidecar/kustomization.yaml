@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+  - rbac.yaml
+patches:
+  - path: ruler.patch.yaml
+images:
+  - name: kiwigrid/k8s-sidecar
+    newTag: 1.15.9
+    digest: sha256:6dd29c5cbb5d5273b9be5a2dbd2b72f7a7e0ac663ebf74f8d14106a2b8bc12f9

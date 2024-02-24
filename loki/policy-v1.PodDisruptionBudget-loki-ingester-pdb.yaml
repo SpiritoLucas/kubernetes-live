@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: loki-ingester-pdb
+  labels:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: ingester
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/component: ingester

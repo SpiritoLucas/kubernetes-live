@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: querier
+  labels:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: querier
+spec:
+  ports:
+  - name: querier-http-metrics
+    port: 3100
+    targetPort: 3100
+  - name: querier-grpc
+    port: 9095
+    targetPort: 9095
+  - name: querier-memberlist
+    port: 7946
+    targetPort: 7946
+  selector:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/component: querier

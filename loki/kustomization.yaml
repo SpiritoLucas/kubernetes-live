@@ -1,0 +1,55 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - apps-v1.Deployment-distributor.yaml
+  - apps-v1.Deployment-query-frontend.yaml
+  - apps-v1.Deployment-query-scheduler.yaml
+  - apps-v1.StatefulSet-compactor.yaml
+  - apps-v1.StatefulSet-ingester.yaml
+  - apps-v1.StatefulSet-memcached-frontend.yaml
+  - apps-v1.StatefulSet-memcached-index-queries.yaml
+  - apps-v1.StatefulSet-memcached.yaml
+  - apps-v1.StatefulSet-querier.yaml
+  - apps-v1.StatefulSet-ruler.yaml
+  - policy-v1.PodDisruptionBudget-loki-ingester-pdb.yaml
+  - v1.ServiceAccount-loki.yaml
+  - v1.Service-compactor.yaml
+  - v1.Service-distributor.yaml
+  - v1.Service-ingester.yaml
+  - v1.Service-memcached-frontend.yaml
+  - v1.Service-memcached-index-queries.yaml
+  - v1.Service-memcached.yaml
+  - v1.Service-querier.yaml
+  - v1.Service-query-frontend.yaml
+  - v1.Service-query-scheduler-discovery.yaml
+  - v1.Service-ruler.yaml
+  - servicemonitor.yaml
+  - alerting-rules.yaml
+  - recording-rules.yaml
+components:
+  - ./index-gateway
+  - ./ruler-sidecar
+configMapGenerator:
+  - name: loki
+    options:
+      labels:
+        app.kubernetes.io/name: loki
+    files:
+      - files/config.yaml
+  - name: loki-operational-dashboard
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+    files:
+      - files/loki-operational-dashboard.json
+images:
+  - name: grafana/loki
+    newTag: 2.8.4
+    digest: sha256:621788d5469cc822977a5ace9c91f8ba1ad0fadd7b4cfdab26af9e64c2025ce2
+  - name: memcached
+    newTag: 1.6.20-alpine
+    digest: sha256:d3c874bf086273517be596ea99d16a01112211b65d4f403369696f7f372fa35a
+  - name: prom/memcached-exporter
+    newTag: v0.9.0
+    digest: sha256:bed44ac76ba3b62dc5c5ae342da85be4af83609b509a16f0b53630cd69bdb368
