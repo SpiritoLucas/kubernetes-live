@@ -5,7 +5,7 @@ metadata:
   annotations:
     sidecar.opentelemetry.io/inject: "true"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: broidery-frontend
