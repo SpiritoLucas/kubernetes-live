@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: fix-ef
+  newTag: loki-tester
 
 resources:
 - ../../base
