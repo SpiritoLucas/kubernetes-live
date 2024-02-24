@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources.yaml
+configMapGenerator:
+  - name: loki-canary-dashboard
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+    files:
+      - files/dashboard.json
+images:
+  - name: grafana/loki-canary
+    newTag: 2.8.4
+    digest: sha256:6a75ff46cf84ef70076d9f7d4dcad02d61ba934f018bb3479f018d02386ffafb
