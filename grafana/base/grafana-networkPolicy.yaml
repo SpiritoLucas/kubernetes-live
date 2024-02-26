@@ -31,6 +31,12 @@ spec:
           kubernetes.io/metadata.name: victoria-metrics
     ports:
     - port: 3000
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: logs
+    ports:
+    - port: 3000
   podSelector:
     matchLabels:
       app.kubernetes.io/component: grafana
