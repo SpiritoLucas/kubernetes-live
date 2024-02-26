@@ -44,7 +44,7 @@ spec:
         resources:
           requests:
             cpu: 200m
-            memory: 2Gi
+            memory: 500Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -75,4 +75,4 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 10Gi
+          storage: 1Gi
