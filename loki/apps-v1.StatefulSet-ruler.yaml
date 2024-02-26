@@ -51,8 +51,8 @@ spec:
           name: memberlist
         resources:
           requests:
-            cpu: 200m
-            memory: 300Mi
+            cpu: 100m
+            memory: 200Mi
           limits:
             memory: 600Mi
         readinessProbe:
