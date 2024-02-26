@@ -1,18 +1,32 @@
-# Loki
+# Grafana Community Kubernetes Helm Charts
 
-[Loki](https://github.com/grafana/loki/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/grafana)](https://artifacthub.io/packages/search?repo=grafana)
 
-This setup uses the new boltdb-shipper shipped with Loki 2.0.0.
+The code is provided as-is with no warranties.
 
+## Usage
 
-## Components:
+[Helm](https://helm.sh) must be installed to use the charts.
+Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-  - compactor: (optional) BoltDB Shipper specific service [docs](https://github.com/grafana/loki/blob/master/docs/sources/operations/storage/boltdb-shipper.md#compactor)
-  - distributor: validates incoming logs and sends to ingester
-  - index-gateway: synchronizes the BoltDB index from the Object Storage in order to serve index queries to the Queriers and Rulers over gRPC
-  - ingester: writes logs to backing store
-  - query-frontend: (optional) [info](https://github.com/grafana/loki/blob/master/docs/sources/architecture/_index.md#query-frontend)
-  - querier: performs the queries
-  - ruler: alerting [info](https://grafana.com/docs/loki/latest/rules/)
-    This application includes a sidecar that picks up rules from kubernetes `ConfigMap` with the label `loki_rule` set.
-  - table-manager: (not used)
+Once Helm is set up properly, add the repo as follows:
+
+```console
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+You can then run `helm search repo grafana` to see the charts.
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+Chart documentation is available in [grafana directory](https://github.com/grafana/helm-charts/blob/main/charts/grafana/README.md).
+
+## Contributing
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+We'd love to have you contribute! Please refer to our [contribution guidelines](https://github.com/grafana/helm-charts/blob/main/CONTRIBUTING.md) for details.
+
+## License
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+[Apache 2.0 License](https://github.com/grafana/helm-charts/blob/main/LICENSE).
