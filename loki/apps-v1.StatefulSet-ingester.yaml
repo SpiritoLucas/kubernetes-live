@@ -59,10 +59,10 @@ spec:
           timeoutSeconds: 1
         resources:
           limits:
-            memory: 10Gi
+            memory: 2Gi
           requests:
             cpu: 200m
-            memory: 5Gi
+            memory: 1Gi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -96,7 +96,7 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 10Gi
+          storage: 1Gi
   - metadata:
       name: ingester-wal
     spec:
@@ -104,4 +104,4 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 150Gi
+          storage: 1Gi
