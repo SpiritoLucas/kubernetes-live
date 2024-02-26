@@ -57,7 +57,7 @@ spec:
           timeoutSeconds: 1
         resources:
           requests:
-            cpu: 2
+            cpu: 500m
             memory: 2Gi
         securityContext:
           allowPrivilegeEscalation: false
