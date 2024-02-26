@@ -39,10 +39,10 @@ spec:
           name: client
         resources:
           limits:
-            memory: 6Gi
+            memory: 1Gi
           requests:
             cpu: 500m
-            memory: 5016Mi
+            memory: 500Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
