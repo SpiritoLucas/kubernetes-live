@@ -13,8 +13,8 @@ spec:
       revision: HEAD
       directories:
       - path: 'loki'
-      - path: 'loki-canary'
       - path: 'promtail'
+      #- path: 'loki-canary'
   template:
     metadata:
       name: '{{ path[0] }}-logs'
