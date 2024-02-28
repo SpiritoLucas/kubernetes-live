@@ -49,10 +49,10 @@ spec:
     ports:
     - port: 8090
       protocol: TCP
-  - to: 
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: default
+  #- to: 
+  #  - namespaceSelector:
+  #      matchLabels:
+  #        kubernetes.io/metadata.name: default
   podSelector:
     matchLabels:
       app.kubernetes.io/component: prometheus
