@@ -10,13 +10,16 @@ metadata:
   name: prometheus-k8s
 rules:
 - apiGroups:
-  - ""
+  - "*"
+  #- ""
   resources:
   - '*'
   #- nodes/metrics
   verbs:
-  - get
+  - '*'
+  #- get
 - nonResourceURLs:
   - /metrics
   verbs:
-  - get
+  - '*'
+  #- get
