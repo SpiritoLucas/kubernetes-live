@@ -12,7 +12,8 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - nodes/metrics
+  - '*'
+  #- nodes/metrics
   verbs:
   - get
 - nonResourceURLs:
