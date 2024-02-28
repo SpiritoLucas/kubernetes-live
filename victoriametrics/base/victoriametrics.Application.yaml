@@ -10,7 +10,7 @@ spec:
     repoURL: https://github.com/SpiritoLucas/victoria-metrics.git
     path: .
     helm:
-      releaseName: victoria-metrics
+      releaseName: vm
       #argocdReleaseOverride: victoria-metrics
       values: |
         victoria-metrics-operator:
