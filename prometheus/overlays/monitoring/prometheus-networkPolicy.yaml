@@ -49,6 +49,13 @@ spec:
     ports:
     - port: 8090
       protocol: TCP
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tempo-operator-system
+    ports:
+    - port: 8443
+      protocol: TCP
   #- to: 
   #  - namespaceSelector:
   #      matchLabels:
