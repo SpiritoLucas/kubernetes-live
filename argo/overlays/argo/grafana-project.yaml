@@ -13,7 +13,7 @@ spec:
       schedule: '* * * * *'
       duration: 24h
       namespaces:
-        - monitoring
+        - logs
       clusters:
         - in-cluster
   description: k3s Team
@@ -22,7 +22,7 @@ spec:
     - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
-    - namespace: monitoring
+    - namespace: logs
       server: https://kubernetes.default.svc
     - namespace: "*"
       server: https://kubernetes.default.svc
