@@ -5,7 +5,7 @@ metadata:
   name: loki
   namespace: argocd
 spec:
-  project: observability 
+  project: logs 
   #source:
   #  helm:
   #    values: |
