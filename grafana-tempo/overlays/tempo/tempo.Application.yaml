@@ -1,0 +1,46 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tempo
+  namespace: argocd
+spec:
+  project: observability 
+  source:
+    helm:
+      values: |
+        traces:
+          otlp:
+            http:
+              # -- Enable Tempo to ingest Open Telemetry HTTP traces
+              enabled: true
+            grpc:
+              # -- Enable Tempo to ingest Open Telemetry GRPC traces
+              enabled: true
+        #gateway:
+        #  # -- Specifies whether the gateway should be enabled
+        #  enabled: true
+        #  ingress:
+        #    # -- Specifies whether an ingress for the gateway should be created
+        #    enabled: true
+        #    ingressClassName: kong
+        #    annotations:
+        #      external-dns.alpha.kubernetes.io/hostname: grafana-tempo.eks-management-01.prd.shd-ops-management.ct.fravega.com
+        #      konghq.com/https-redirect-status-code: "308"
+        #      konghq.com/protocols: https
+        #    labels: 
+        #      app.kubernetes.io/component: gateway
+        #      app.kubernetes.io/instance: tempo
+        #      app.kubernetes.io/managed-by: Helm
+        #      app.kubernetes.io/name: tempo
+        #      app.kubernetes.io/version: 2.3.1
+        #      helm.sh/chart: tempo-distributed-1.8.5
+        #    hosts:
+        #      - host: grafana-tempo.eks-management-01.prd.shd-ops-management.ct.fravega.com
+        #        paths:
+        #          - path: /
+        #            pathType: Prefix
+        #    tls: 
+        #      - secretName: cluster-dns
+        #        hosts:
+        #          - grafana-tempo.eks-management-01.prd.shd-ops-management.ct.fravega.com
