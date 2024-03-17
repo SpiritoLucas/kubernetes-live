@@ -4,7 +4,7 @@ metadata:
   name: victoria-metrics-stack 
   namespace: argocd
 spec:
-  project: observability
+  project: victoria-metrics
   source:
     repoURL: https://github.com/VictoriaMetrics/helm-charts.git
     path: charts/victoria-metrics-k8s-stack
@@ -21,7 +21,7 @@ spec:
 
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: observability
+    namespace: victoria-metrics
   syncPolicy:
     automated:
       prune: true
