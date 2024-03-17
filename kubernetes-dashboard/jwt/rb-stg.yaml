@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jwt-refresher.jwt-app-secret.update-stg
+  namespace: security
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jwt-app-secret.update-stg
+subjects:
+- kind: ServiceAccount
+  name: jwt-refresher-stg

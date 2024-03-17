@@ -12,8 +12,8 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: 'loki'
-      - path: 'promtail'
+      - path: 'loki/overlays/loki'
+      - path: 'promtail/overlays/promtail'
       #- path: 'loki-canary'
   template:
     metadata:
