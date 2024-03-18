@@ -5,7 +5,6 @@ kind: Kustomization
 resources:
 
   - ../../base/Tempo
-  - ingress.yaml
 
 patches:
   - path: tempo.Application.yaml

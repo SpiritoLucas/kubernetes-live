@@ -6,7 +6,7 @@ metadata:
 spec:
   project: observability
   source:
-    repoURL: git@gitlab.com:fravega-it/infrastructure/kubernetes/applications-repository/grafana-tempo.git
+    repoURL: https://github.com/SpiritoLucas/tempo.git
     path: .  
   destination:
     server: https://kubernetes.default.svc

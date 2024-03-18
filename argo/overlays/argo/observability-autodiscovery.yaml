@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: grafana-appset
+  name: observability-appset
   namespace: argocd
 spec:
   syncPolicy:
@@ -12,19 +12,22 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
+      - path: 'loki/overlays/loki'
+      - path: 'promtail/overlays/promtail'
+      - path: 'grafana-tempo/overlays/tempo'
       - path: '**/overlays/grafana'
   template:
     metadata:
       name: '{{ path[0] }}'
     spec:
-      project: monitor
+      project: observability
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
         path: '{{ path }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: logs
+        namespace: observability
       syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)
