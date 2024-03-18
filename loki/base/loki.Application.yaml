@@ -4,13 +4,13 @@ metadata:
   name: loki
   namespace: argocd
 spec:
-  project: logs
+  project: observability
   source:
     repoURL: https://github.com/SpiritoLucas/loki.git
     path: .  
   destination:
     server: https://kubernetes.default.svc
-    namespace: logs
+    namespace: observability
   syncPolicy:
     automated: {}
     syncOptions:

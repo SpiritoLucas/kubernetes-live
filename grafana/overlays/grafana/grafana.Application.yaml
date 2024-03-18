@@ -4,13 +4,13 @@ metadata:
   name: central-grafana
   namespace: argocd
 spec:
-  project: grafana
+  project: observability
   source:
     repoURL: https://github.com/SpiritoLucas/grafana.git
     path: .  
   destination:
     server: https://kubernetes.default.svc
-    namespace: logs
+    namespace: observability
   syncPolicy:
     automated: {}
     syncOptions:

@@ -5,7 +5,7 @@ metadata:
   name: promtail
   namespace: argocd
 spec:
-  project: logs 
+  project: observability 
   source:
     helm:
       values: |
@@ -31,5 +31,5 @@ spec:
           # Must be reference in `config.file` to configure `clients`
           # @default -- See `values.yaml`
           clients:
-            - url: http://loki-loki-distributed-distributor.logs:3100/loki/api/v1/push
+            - url: http://loki-loki-distributed-distributor.observability:3100/loki/api/v1/push
         
