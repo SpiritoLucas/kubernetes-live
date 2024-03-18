@@ -18,8 +18,8 @@ spec:
         - in-cluster
   description: k3s Team
   # Allow manifests to deploy from any Git repos
-  sourceRepos:
-    - 'https://github.com/SpiritoLucas/**'
+  #sourceRepos:
+  #  - 'https://github.com/SpiritoLucas/**'
   # Allow managing monitoring namespace
   destinations:
     - namespace: victoria-metrics
