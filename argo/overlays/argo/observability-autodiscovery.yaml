@@ -12,10 +12,10 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: 'loki-distributed/overlays/loki'
-      - path: 'promtail/overlays/promtail'
-      - path: 'grafana-tempo/overlays/tempo'
-      - path: '**/overlays/grafana'
+      #- path: 'loki-distributed/overlays/loki'
+      #- path: 'promtail/overlays/promtail'
+      #- path: 'grafana-tempo/overlays/tempo'
+      #- path: '**/overlays/grafana'
   template:
     metadata:
       name: '{{ path[0] }}'
