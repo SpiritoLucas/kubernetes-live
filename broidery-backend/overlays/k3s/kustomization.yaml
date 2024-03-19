@@ -16,12 +16,12 @@ namespace: default
 
 patches:
 - path: deploy.yaml
-- target:
-    group: apps
-    version: v1
-    kind: Deployment
-    name: broidery-backend
-  path: canary-patch.yaml
+#- target:
+#    group: apps
+#    version: v1
+#    kind: Deployment
+#    name: broidery-backend
+#  path: canary-patch.yaml
 
 #transformers:
 #- custom-labels.yaml
