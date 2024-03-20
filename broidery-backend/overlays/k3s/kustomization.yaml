@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: loki-tester
+  newTag: otel-vars   
 
 resources:
 - ../../base
