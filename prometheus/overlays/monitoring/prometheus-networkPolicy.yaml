@@ -56,6 +56,13 @@ spec:
     ports:
     - port: 8443
       protocol: TCP
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: grafana
+    ports:
+    - port: 3000
+      protocol: TCP
   #- to: 
   #  - namespaceSelector:
   #      matchLabels:
