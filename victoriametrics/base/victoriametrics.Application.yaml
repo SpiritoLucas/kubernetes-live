@@ -18,6 +18,32 @@ spec:
           enabled: false
         vmagent:
           enabled: false
+        vmsingle:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+              nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+              cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+              cert-manager.io/issuer-kind: "ClusterIssuer"
+              metallb.uniberse.tf/address-pool: default
+            labels: 
+              app.kubernetes.io/component: monitoring
+              app.kubernetes.io/instance: vm-victoria-metrics-k8s-stack
+              app.kubernetes.io/managed-by: Helm
+              app.kubernetes.io/name: vmsingle
+              app.kubernetes.io/version: v1.96.0
+              helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+              managed-by: vm-operator
+            pathType: Prefix
+
+            hosts:
+              - victoria-metrics.k3s
+            tls: 
+              - secretName: victoria-metrics.k3s.cloud-tls
+                hosts:
+                  - victoria-metrics.k3s
 
   destination:
     server: 'https://kubernetes.default.svc'
