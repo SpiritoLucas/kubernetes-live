@@ -18,13 +18,13 @@ spec:
               #allowed_headers:
               #  - "*"
               max_age: 7200
-      prometheus:
-        config:
-          scrape_configs:
-            - job_name: otel-collector
-              scrape_interval: 5s
-              static_configs:
-                - targets: [http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write]
+      #prometheus:
+      #  config:
+      #    scrape_configs:
+      #      - job_name: otel-collector
+      #        scrape_interval: 5s
+      #        static_configs:
+      #          - targets: [http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write]
     processors:
       batch:
 
@@ -45,7 +45,7 @@ spec:
           processors: [batch]
           exporters: [logging, otlp]
         metrics:
-          receivers: [prometheus,otlp]
+          receivers: [otlp]
           processors: [batch]
           exporters: [otlp]
         logs:
