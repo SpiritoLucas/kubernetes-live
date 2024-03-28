@@ -10,7 +10,7 @@ spec:
     path: .  
   destination:
     server: https://kubernetes.default.svc
-    namespace: observability
+    namespace: grafana
   syncPolicy:
     automated: {}
     syncOptions:
