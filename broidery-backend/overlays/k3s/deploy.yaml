@@ -23,6 +23,14 @@ spec:
             value: 'https://broidery.k3s'
           - name: CORS_URL_2
             value: 'https://broidery-bg.k3s'
+          - name: OTEL_DOTNET_AUTO_LOGS_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_LOGS_INCLUDE_FORMATTED_MESSAGE
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_TRACES_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_METRICS_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
           - name: DEFAULT_CONNECTION
             valueFrom:
               secretKeyRef:
