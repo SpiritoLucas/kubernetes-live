@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: spirito/broidery-be
-  newTag: otel-with-metrics  
+  newTag: otel-logs
 
 resources:
 - ../../base
