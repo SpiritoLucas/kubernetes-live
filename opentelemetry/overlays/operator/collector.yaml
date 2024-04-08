@@ -38,17 +38,25 @@ spec:
         endpoint: "http://tempo-distributor.observability:4317" 
         tls:
           insecure: true
+      prometheusremotewrite:
+        endpoint: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write
+        resource_to_telemetry_conversion:
+          enabled: true
+        remote_write_queue:
+          enabled: true
+          queue_size: 5000
+          num_consumers: 15
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [batch]
-          exporters: [logging, otlp]
+          exporters: [otlp]
         metrics:
           receivers: [otlp]
           processors: [batch]
-          exporters: [otlp]
+          exporters: [otlp,prometheusremotewrite]
         logs:
           receivers: [otlp]
           processors: [batch]
-          exporters: [logging, otlp]
+          exporters: [otlp]
