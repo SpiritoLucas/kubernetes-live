@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-server
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: kube-state-metrics
+    k8s-app: metrics-server
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: prometheus-op
+        app.kubernetes.io/name: kube-state-metrics
