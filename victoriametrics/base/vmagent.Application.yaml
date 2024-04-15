@@ -65,6 +65,7 @@ spec:
             - job_name: "kubernetes-apiservers"
               kubernetes_sd_configs:
                 - role: endpoints
+                  ipv6: true  
               scheme: https
               tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
