@@ -16,7 +16,7 @@ spec:
       values: |
         
         remoteWriteUrls:
-          - http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write
+          - http://vmsingle-vm-victoria-metrics-k8s-stack.victoria-metrics.svc.cluster.local:8429/api/v1/write
 
         config:
           global:
