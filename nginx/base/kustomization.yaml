@@ -13,7 +13,7 @@ resources:
 - roles.yaml
 - svc-accounts.yaml
 - svcs.yaml
-- svc-monitor.yaml
+#- svc-monitor.yaml
 - role.yaml
 - role-binding.yaml
 #- validatingwhconfig.yaml
