@@ -16,7 +16,7 @@ spec:
       - envFrom:
           - configMapRef:
               name: exporter-cm
-        image: spirito/exporter:latest
+        image: spirito/last-applied-config-exporter:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 4
