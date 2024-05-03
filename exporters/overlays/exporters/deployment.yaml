@@ -17,7 +17,7 @@ spec:
           - configMapRef:
               name: exporter-cm
         image: spirito/last-applied-config-exporter:latest
-        imagePullPolicy: Allways
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 4
           httpGet:
