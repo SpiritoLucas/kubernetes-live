@@ -14,7 +14,7 @@ data:
   OTEL_METRIC_EXPORT_TIMEOUT: "10000"
   OTEL_TRACES_EXPORTER: otlp
   OTEL_METRICS_EXPORTER: otlp
-  SERVER_PORT: 8000
+  SERVER_PORT: '8000'
   SEMANTIC_REGEX: r'^([0-9]+\.){1,2}[0-9]+$'
   LAST_CONFIG_REGEX: r'^.otel-logs.*'
   PROMQL_QUERY: 'avg by (image, namespace, pod) (kube_pod_container_info{image=~".*:[0-9]+(.[0-9]+){1,2}""})'
