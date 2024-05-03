@@ -13,11 +13,16 @@ spec:
       releaseName: vm
       valueFiles:
         - values.yaml
+      #TODO validar linea 18
       values: |
+        argocdReleaseOverride: victoria-metrics-stack 
         grafana:
           enabled: false
         vmagent:
-          enabled: false
+          enabled: true 
+          spec:
+            extraArgs:
+              promscrape.dropOriginalLabels: "false"
         vmsingle:
           ingress:
             enabled: true
