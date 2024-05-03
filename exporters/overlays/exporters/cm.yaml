@@ -16,6 +16,6 @@ data:
   OTEL_METRICS_EXPORTER: otlp
   SERVER_PORT: '8000'
   SEMANTIC_REGEX: r'^([0-9]+\.){1,2}[0-9]+$'
-  LAST_CONFIG_REGEX: r'^.otel-logs.*'
+  LAST_CONFIG_REGEX: r'^.1.1.1.*'
   PROMQL_QUERY: 'avg by (image, namespace, pod) (kube_pod_container_info{image=~".*:[0-9]+(.[0-9]+){1,2}""})'
   VICKY_METRICS_INTERNAL_URL: http://vmsingle-vm-victoria-metrics-k8s-stack.victoria-metrics:8429/prometheus
