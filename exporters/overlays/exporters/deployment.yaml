@@ -21,7 +21,7 @@ spec:
         livenessProbe:
           failureThreshold: 4
           httpGet:
-            path: /metrics
+            path: /
             port: http
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -34,7 +34,7 @@ spec:
         readinessProbe:
           failureThreshold: 4
           httpGet:
-            path: /metrics
+            path: /
             port: http
           initialDelaySeconds: 5
           periodSeconds: 20
