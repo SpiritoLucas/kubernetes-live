@@ -26,7 +26,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
-        name: broidery-backend
+        name: exporter
         ports:
         - containerPort: 8000
           name: http
