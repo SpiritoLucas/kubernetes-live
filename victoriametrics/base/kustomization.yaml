@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
 - victoriametrics.Application.yaml
 - victoriametrics.Namespace.yaml
-- vmagent.Application.yaml
