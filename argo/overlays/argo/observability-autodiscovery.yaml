@@ -15,6 +15,7 @@ spec:
       - path: 'loki-distributed/overlays/loki'
       - path: 'promtail/overlays/promtail'
       - path: 'grafana-tempo/overlays/tempo'
+      - path: 'exporters/overlays/exporters'
   template:
     metadata:
       name: '{{ path[0] }}'
