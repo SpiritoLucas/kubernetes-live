@@ -17,3 +17,4 @@ resources:
 - argo-rollouts.cloud-tls.certificate.cert-manager.yaml
 - victoria-metrics.certificate.cert-manager.yaml
 - simplest-collector.cloud-tls.certificate.cert-manager.yaml
+- goldilocks.cloud-tls.certificate.cert-manager.yaml
