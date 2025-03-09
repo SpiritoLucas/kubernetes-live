@@ -16,5 +16,6 @@ resources:
 - manifests/dashboard/clusterrole.yaml
 - manifests/dashboard/clusterrolebinding.yaml
 - manifests/dashboard/deployment.yaml
+- manifests/dashboard/ingress.yaml
 - manifests/dashboard/service.yaml
 - manifests/dashboard/serviceaccount.yaml
