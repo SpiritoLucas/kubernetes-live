@@ -14,6 +14,7 @@ spec:
       duration: 24h
       namespaces:
         - goldilocks
+        - kube-system
       clusters:
         - in-cluster
   description: k3s Team
@@ -23,6 +24,8 @@ spec:
   # Allow managing monitoring namespace
   destinations:
     - namespace: goldilocks
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
