@@ -19,4 +19,6 @@ resources:
 - manifests/dashboard/ingress.yaml
 - manifests/dashboard/service.yaml
 - manifests/dashboard/serviceaccount.yaml
-- manifests/vpa/kustomization.yaml
+#VPA
+- https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml
+- https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-rbac.yaml
