@@ -19,3 +19,4 @@ resources:
 - manifests/dashboard/ingress.yaml
 - manifests/dashboard/service.yaml
 - manifests/dashboard/serviceaccount.yaml
+- vpa/kustomization.yaml
