@@ -6,9 +6,9 @@ metadata:
 spec:
   project: victoria-metrics
   source:
-    repoURL: https://github.com/VictoriaMetrics/helm-charts.git
-    path: charts/victoria-metrics-k8s-stack
-    targetRevision: victoria-metrics-k8s-stack-0.19.2 #master
+    repoURL: https://github.com/SpiritoLucas/victoria-metrics.git
+    path: .
+    targetRevision: HEAD
     helm:
       releaseName: vm
       valueFiles:
