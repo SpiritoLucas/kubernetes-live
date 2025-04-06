@@ -22,6 +22,3 @@ resources:
 #VPA
 - https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml
 - https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-rbac.yaml
-- https://raw.githubusercontent.com/kubernetes/autoscaler/releases/download/vertical-pod-autoscaler-0.14.0/vpa-updater.yaml
-- https://raw.githubusercontent.com/kubernetes/autoscaler/releases/download/vertical-pod-autoscaler-0.14.0/vpa-admission-controller.yaml
-- https://raw.githubusercontent.com/kubernetes/autoscaler/releases/download/vertical-pod-autoscaler-0.14.0/vpa-recommender.yaml
