@@ -6,7 +6,7 @@ metadata:
   name: goldilocks.k3s.cloud-tls
   namespace: certificates
 spec:
-  secretName: argocd.k3s.cloud-tls
+  secretName: goldilocks.k3s.cloud-tls
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
