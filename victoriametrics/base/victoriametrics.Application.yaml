@@ -4,7 +4,7 @@ metadata:
   name: victoria-metrics-stack 
   namespace: argocd
 spec:
-  project: victoria-metrics
+  project: observability
   source:
     repoURL: https://github.com/VictoriaMetrics/helm-charts.git
     path: charts/victoria-metrics-k8s-stack
@@ -19,21 +19,10 @@ spec:
           enabled: false
         vmagent:
           enabled: true 
-        vmsingle:
-          annotations: {}
-          enabled: true
           spec:
-            port: "8429"
-            # -- Data retention period. Possible units character: h(ours), d(ays), w(eeks), y(ears), if no unit character specified - month. The minimum retention period is 24h. See these [docs](https://docs.victoriametrics.com/single-server-victoriametrics/#retention)
-            retentionPeriod: "15d"
-            replicaCount: 1
-            extraArgs: {}
-            storage:
-              accessModes:
-                - ReadWriteOnce
-              resources:  
-                requests:
-                  storage: 200Gi
+            extraArgs:
+              promscrape.dropOriginalLabels: "false"
+        vmsingle:
           ingress:
             enabled: true
             ingressClassName: nginx
@@ -67,5 +56,14 @@ spec:
     automated:
       prune: true
       selfHeal: true
+      allowEmpty: false
     syncOptions:
+    - CreateNamespace=true
+    - PruneLast=true
     - ServerSideApply=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
