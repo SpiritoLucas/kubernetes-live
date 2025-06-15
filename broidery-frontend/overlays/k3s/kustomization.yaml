@@ -10,12 +10,12 @@ metadata:
 
 patches:
 - path: deploy.yaml
-- target:
-    group: apps
-    version: v1
-    kind: Deployment
-    name: broidery-frontend
-  path: blue-green-patch.yaml
+#- target:
+#    group: apps
+#    version: v1
+#    kind: Deployment
+#    name: broidery-frontend
+#  path: blue-green-patch.yaml
 
 images:
 - name: spirito/broidery-fe

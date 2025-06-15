@@ -1,0 +1,51 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMPodScrape
+metadata:
+  name: kubernetes-pods
+  namespace: observability
+  labels:
+    name: kubernetes-pods
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  podMetricsEndpoints:
+    - scheme: http
+      relabelConfigs:
+        - sourceLabels:
+            [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: "true"
+        - sourceLabels:
+            [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          targetLabel: __metrics_path__
+          regex: (.+)
+        - sourceLabels:
+            [
+                __address__,
+                __meta_kubernetes_pod_annotation_prometheus_io_port,
+            ]
+          action: replace
+          targetLabel: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+        - separator: ;
+          regex: __meta_kubernetes_pod_label_(.+)
+          replacement: $1
+          action: labelmap
+        - sourceLabels:
+            [__meta_kubernetes_namespace]
+          action: replace
+          targetLabel: kubernetes_namespace
+          regex: (.*)
+        - sourceLabels:
+            [__meta_kubernetes_pod_name]
+          action: replace
+          targetLabel: kubernetes_pod_name
+          regex: (.*)
+  selector:
+    matchExpressions:
+      - key: linkerd.io/proxy-deployment
+        operator: DoesNotExist
+  namespaceSelector:
+    any: true

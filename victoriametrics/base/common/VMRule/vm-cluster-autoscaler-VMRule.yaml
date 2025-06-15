@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: autoscaler-rules
+  namespace: observability
+spec:
+  groups:
+    - name: cluster-autoscaler
+      interval: 1m
+      rules:
+        - alert: ClusterAutoscalerManyRestarts
+          expr: sum by (cluster, pod, instance) (kube_pod_container_status_restarts_total{pod=~"cluster-autoscaler.*"}[15m]) > 3
+          for: 2m
+          labels:
+            severity: critical
+            team: team-sre
+          annotations:
+            summary: "cluster-autoscaler en {{ $labels.instance }} en {{ $labels.cluster}} ha reiniciado >3 veces"
+            description: >-
+              El pod {{ $labels.pod }} del cluster-autoscaler ha tenido más de 3 reinicios
+              en los últimos 15 minutos. Puede estar en CrashLoopBackOff. :contentReference[oaicite:2]{index=2}
