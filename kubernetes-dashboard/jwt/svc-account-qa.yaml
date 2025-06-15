@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: jwt-refresher-qa
-  namespace: security
-secrets:
-- name: jwt-refresher-qa-token-lkp6m

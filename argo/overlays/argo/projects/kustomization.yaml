@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- argo-rollouts-project.yaml
+- argocd-project.yaml
+- broidery-project.yaml
+- certs-project.yaml
+- discord-bot-project.yaml
+- goldilocks-project.yaml
+- grafana-project.yaml
+- immich-project.yaml
+- kubernetes-dashboard-project.yaml
+- kubesystem-project.yaml
+- letsencrypt-project.yaml
+- metallb-project.yaml
+- metrics-server-project.yaml
+- nginx-project.yaml
+- observability-project.yaml
+- opentelemetry-operator-project.yaml
+- stremio-project.yaml
+- vault-project.yaml
+- victoriametrics-project.yaml

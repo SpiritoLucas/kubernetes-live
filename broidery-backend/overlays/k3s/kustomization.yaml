@@ -11,18 +11,18 @@ resources:
 - sealed-secret.yaml
 #- job.yaml
 #- hpa.yaml
-#- analysisTemplate.yaml
+- analysisTemplate.yaml
 
 namespace: default
 
 patches:
 - path: deploy.yaml
-#- target:
-#    group: apps
-#    version: v1
-#    kind: Deployment
-#    name: broidery-backend
-#  path: canary-patch.yaml
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: broidery-backend
+  path: canary-patch.yaml
 
 #transformers:
 #- custom-labels.yaml

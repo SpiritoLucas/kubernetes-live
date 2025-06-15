@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: jwt-refresher-stg
-  namespace: security
-secrets:
-- name: jwt-refresher-stg-token-vncsc
