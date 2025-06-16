@@ -15,7 +15,7 @@ spec:
       - path: 'longhorn/overlays/longhorn'
   template:
     metadata:
-      name: '{{ path[0] }}-k3s'
+      name: '{{ path[0] }}'
     spec:
       project: longhorn
       source:
