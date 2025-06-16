@@ -37,7 +37,7 @@ spec:
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME
-              value: immich-postgresql
+              value: postgres.imich.svc.cluster.local
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
