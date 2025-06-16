@@ -19,7 +19,7 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: longhorn-server
+              name: longhorn-ui
               port:
                 name: http
   tls:
