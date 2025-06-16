@@ -17,7 +17,5 @@ resources:
 - nginx-autodiscovery.yaml
 - observability-autodiscovery.yaml
 - opentelemetry-operator-autodiscovery.yaml
-- stremio-autodiscovery.yaml
-- vault-autodiscovery.yaml
 - victoriametrics-autodiscovery.yaml
 

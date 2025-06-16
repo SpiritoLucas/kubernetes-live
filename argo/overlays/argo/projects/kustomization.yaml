@@ -17,6 +17,4 @@ resources:
 - nginx-project.yaml
 - observability-project.yaml
 - opentelemetry-operator-project.yaml
-- stremio-project.yaml
-- vault-project.yaml
 - victoriametrics-project.yaml
