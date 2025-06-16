@@ -84,12 +84,3 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: immich-library-pvc
-  volumeClaimTemplates:
-    - metadata:
-        name: immich-library-pvc
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
-        resources:
-          requests:
-            storage: 10Gi
