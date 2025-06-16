@@ -61,17 +61,17 @@ spec:
             httpGet:
               path: /api/server/ping
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 3
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: /api/server/ping
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 3
           startupProbe:
             failureThreshold: 30
             httpGet:
