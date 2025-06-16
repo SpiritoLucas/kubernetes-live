@@ -1,0 +1,15 @@
+---
+# Source: longhorn/templates/default-resource.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: longhorn-default-resource
+  namespace: longhorn
+  labels:
+    app.kubernetes.io/name: longhorn
+    helm.sh/chart: longhorn-1.9.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/version: v1.9.0
+data:
+  default-resource.yaml: ""
