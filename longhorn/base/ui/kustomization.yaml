@@ -5,3 +5,4 @@ resources:
 - longhorn-frontend.Service.yaml
 - longhorn-ui-service-account.ServiceAccount.yaml
 - longhorn-ui.Deployment.yaml
+- ingress.yaml
