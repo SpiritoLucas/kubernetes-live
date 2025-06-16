@@ -24,7 +24,8 @@ data:
     reclaimPolicy: "Delete"
     volumeBindingMode: Immediate
     parameters:
-      numberOfReplicas: "3"
+      numberOfReplicas: "2"
+      #numberOfReplicas: "3"
       staleReplicaTimeout: "30"
       fromBackup: ""
       fsType: "ext4"
