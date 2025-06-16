@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: discord-bot-appset
+  name: longhorn-appset
   namespace: argocd
 spec:
   syncPolicy:
@@ -12,19 +12,19 @@ spec:
       repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
       revision: HEAD
       directories:
-      - path: '**/overlays/discord-bot'
+      - path: 'longhorn/overlays/longhorn'
   template:
     metadata:
       name: '{{ path[0] }}-k3s'
     spec:
-      project: discord-bot
+      project: longhorn
       source:
         repoURL: https://github.com/SpiritoLucas/kubernetes-live.git
         targetRevision: HEAD
         path: '{{ path }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: discord-bot
+        namespace: longhorn
       syncPolicy:  
         automated:
           # Autodelete objects removed from YAMLs (deployments, services, ingress)
@@ -46,3 +46,4 @@ spec:
             factor: 2
             # the maximum amount of time allowed for the backoff strategy
             maxDuration: 3m
+

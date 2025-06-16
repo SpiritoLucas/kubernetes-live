@@ -13,6 +13,7 @@ resources:
 - kube-system-autodiscovery.yaml
 - kubernetes-dashboard-autodiscovery.yaml
 - letsencript-autodiscovery.yaml
+- longhorn-autodiscovery.yaml
 - metallb-autodiscovery.yaml
 - metric-server-autodiscovery.yaml
 - nginx-autodiscovery.yaml

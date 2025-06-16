@@ -13,6 +13,7 @@ resources:
 - kubernetes-dashboard-project.yaml
 - kubesystem-project.yaml
 - letsencrypt-project.yaml
+- longhorn-project.yaml
 - metallb-project.yaml
 - metrics-server-project.yaml
 - nginx-project.yaml
