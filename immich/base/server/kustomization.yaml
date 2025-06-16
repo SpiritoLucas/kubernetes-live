@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
 - immich-server.Deployment.yaml
+- immich-server.Pvc.yaml
 - immich-server.Service.yaml
 - ingress.yaml
