@@ -77,9 +77,16 @@ spec:
             httpGet:
               path: /api/server/ping
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 700Mi
+            requests:
+              cpu: 300m
+              memory: 400Mi
+
       volumes:
         - name: library
           persistentVolumeClaim:
