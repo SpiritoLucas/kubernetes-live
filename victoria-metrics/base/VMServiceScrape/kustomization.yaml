@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-controll.VMServiceScrape.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-etcd.VMServiceScrape.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-schedule.VMServiceScrape.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-state-me.VMServiceScrape.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-node-exporter.VMServiceScrape.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-operator.VMServiceScrape.yaml

@@ -1,20 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 resources:
 - cluster-role-grafana.yaml
 - cm-grafana-config-dashboards.yaml
 - cm-grafana-datasource.yaml
+- cm-grafana-overview.yaml
 - cm-grafana.yaml
 - crb-grafana.yaml
 - deploy-grafana.yaml
-#- grafana-dashboards.yaml
 - grafana-ingress.yaml
-- grafana.ServiceScrape.yaml
+- grafana-pvc.yaml
 - rb-grafana.yaml
 - role-grafana.yaml
 - sa-grafana.yaml
+#- svc-monitor.yaml
 - svc.yaml
-#Prueba sin grafana operator para montar dashboards dinamicamente
-- cm-grafana-overview.yaml
-- cm-dashboard-test.yaml

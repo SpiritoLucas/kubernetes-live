@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- victoria-metrics-stack-kube-state-metrics.ClusterRole.yaml
+- victoria-metrics-stack-kube-state-metrics.ClusterRoleBinding.yaml
+- victoria-metrics-stack-kube-state-metrics.Deployment.yaml
+- victoria-metrics-stack-kube-state-metrics.Service.yaml
+- victoria-metrics-stack-kube-state-metrics.ServiceAccount.yaml

@@ -4,35 +4,25 @@ metadata:
   labels:
     app.kubernetes.io/name: grafana
   name: grafana
-  namespace: observability
+  namespace: grafana
 spec:
-  replicas: 2
-  revisionHistoryLimit: 1
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app.kubernetes.io/name: grafana
+      app.kubernetes.io/name: grafana-central
   template:
     metadata:
       annotations:
+        checksum/config: 12b3a62791b424767ff2360c1833ea6fdc32791566d3ef7664efc25d7d49b687
+        checksum/dashboards-json-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/sc-dashboard-provider-config: 42a8dddc43bd94804a826935a7b35c5aea6e86ec9aebf24da36c9dc54123d08e
+        checksum/secret: f9a50eb0cd8c744ffed7fba36eba88eab1d9d10b69ee713d91875b0f951bf3f1
         kubectl.kubernetes.io/default-container: grafana
       labels:
         app.kubernetes.io/name: grafana
     spec:
       automountServiceAccountToken: true
-      #initContainers:
-      #  - name: install-unsigned-plugins
-      #    image: alpine:3.20
-      #    command:
-      #      - sh
-      #      - -c
-      #      - |
-      #        apk add --no-cache wget unzip
-      #        mkdir -p /plugins/valiton-mongodbatlas-datasource
-      #        wget -O /tmp/plugin.zip https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v3.0.1/valiton-mongodbatlas-datasource.zip
-      #        unzip /tmp/plugin.zip -d /plugins/valiton-mongodbatlas-datasource 
-      #    volumeMounts:
-      #      - name: grafana-plugins
-      #        mountPath: /plugins
       containers:
       - env:
         - name: METHOD
@@ -64,6 +54,12 @@ spec:
         image: quay.io/kiwigrid/k8s-sidecar:1.25.1
         imagePullPolicy: IfNotPresent
         name: grafana-sc-dashboard
+        resources:
+          limits:
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -103,6 +99,12 @@ spec:
         image: quay.io/kiwigrid/k8s-sidecar:1.25.1
         imagePullPolicy: IfNotPresent
         name: grafana-sc-datasources
+        resources:
+          limits:
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -130,56 +132,15 @@ spec:
             secretKeyRef:
               key: admin-password
               name: grafana
-        - name: GF_AUTH_AZUREAD_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: GF_AUTH_AZUREAD_CLIENT_ID
-              name: grafana-ad
-        - name: GF_AUTH_AZUREAD_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: GF_AUTH_AZUREAD_CLIENT_SECRET
-              name: grafana-ad
-        - name: GF_DATABASE_TYPE
-          value: postgres
-        - name: GF_DATABASE_HOST
-          value: 'grafana.cluster-cjq3ehr1de1b.us-east-1.rds.amazonaws.com:5432'
-        - name: GF_DATABASE_NAME
-          value: 'grafana'
-        - name: GF_DATABASE_USER
-          valueFrom:
-            secretKeyRef:
-              key: grafanadb-user
-              name: grafana
-        - name: GF_DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: grafanadb-password
-              name: grafana
-        - name: SMTP_USER
-          valueFrom:
-            secretKeyRef:
-              key: email-user
-              name: grafana
-        - name: SMTP_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: email-password
-              name: grafana
         - name: GF_PATHS_DATA
           value: /var/lib/grafana/
-        - name: GF_PATHS_LOGS
+        - name: GF_PATHS_observability
           value: /var/log/grafana
         - name: GF_PATHS_PLUGINS
           value: /var/lib/grafana/plugins
         - name: GF_PATHS_PROVISIONING
           value: /etc/grafana/provisioning
-        - name: POSTGRES_ADN_VTOL_ADAPTER
-          valueFrom:
-            secretKeyRef:
-              key: POSTGRES_ADN_VTOL_ADAPTER
-              name: datasource-creds
-        image: docker.io/grafana/grafana:11.4.0
+        image: docker.io/grafana/grafana:10.1.5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
@@ -192,6 +153,12 @@ spec:
           successThreshold: 1
           timeoutSeconds: 30
         name: grafana
+        resources:
+          limits:
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         ports:
         - containerPort: 3000
           name: grafana
@@ -211,22 +178,19 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        #securityContext: # TODO una vez liquidada la migracion cerrar permisos
-        #  allowPrivilegeEscalation: false
-        #  capabilities:
-        #    drop:
-        #    - ALL
-        #  seccompProfile:
-        #    type: RuntimeDefault
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /etc/grafana/grafana.ini
           name: config
           subPath: grafana.ini
-      #  - mountPath: /tmp/dashboards/cloud-ops-k8s-pods.json #TODO dashboards a bloquear por yaml
-      #    name: dashboards
-      #    subPath: cloud-ops-k8s-pods.json
-        #- mountPath: /var/lib/grafana #TODO storage por pvc
-        #  name: storage
+        - mountPath: /var/lib/grafana
+          name: storage
         - mountPath: /tmp/dashboards
           name: sc-dashboard-volume
           readOnly: false
@@ -236,36 +200,31 @@ spec:
         - mountPath: /etc/grafana/provisioning/datasources
           name: sc-datasources-volume
           readOnly: false
-        #- name: grafana-plugins
-        #  mountPath: /var/lib/grafana/plugins
-        #  readOnly: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       restartPolicy: Always
       schedulerName: default-scheduler
-      #securityContext: # TODO una vez liquidada la migracion cerrar permisos
-      #  fsGroup: 472
-      #  runAsGroup: 472
-      #  runAsNonRoot: true
-      #  runAsUser: 472
+      securityContext:
+        fsGroup: 472
+        runAsGroup: 472
+        runAsNonRoot: true
+        runAsUser: 472
       serviceAccount: sa-grafana
       serviceAccountName: sa-grafana
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: config
-        configMap:
+      - configMap:
+          defaultMode: 0600
           name: cm-grafana
-          #name: cm-grafana #TODO config durante la migracion
+        name: config
+      - name: storage
+        persistentVolumeClaim:
+          claimName: grafana-pvc
       - name: sc-dashboard-volume
-        emptyDir: {} # Define un volumen temporal para `/tmp/dashboards`
-      - name: sc-datasources-volume
-        configMap:
-          name: cm-grafana-datasource
-      - name: sc-dashboard-provider
-        configMap:
+      - configMap:
+          defaultMode: 0600
           name: cm-grafana-config-dashboards
-      #- name: grafana-plugins #Esto fue para plugins "unsigned"
-      #  emptyDir: {}
-      #- name: dashboards
-      #  configMap:
-      #    name: grafana-dashboards #TODO dashboards a bloquear por yaml
+        name: sc-dashboard-provider
+      - name: sc-datasources-volume
+        #persistentVolumeClaim:
+        #  claimName: grafana-pvc

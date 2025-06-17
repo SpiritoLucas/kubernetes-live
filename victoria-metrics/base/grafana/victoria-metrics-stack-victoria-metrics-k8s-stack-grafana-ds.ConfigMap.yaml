@@ -1,0 +1,17 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/grafana/datasource.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: victoria-metrics-stack-victoria-metrics-k8s-stack-grafana-ds
+  namespace: observability
+  labels:
+    grafana_datasource: "1"
+    app: victoria-metrics-k8s-stack-grafana
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+  datasource.yaml: "apiVersion: 1\ndatasources:\n- name: VictoriaMetrics\n  type: prometheus\n  url: http://vmsingle-victoria-metrics-stack-victoria-metrics-k8s-stack.observability.svc:8429/\n  access: proxy\n  isDefault: true\n  jsonData: \n    {}"

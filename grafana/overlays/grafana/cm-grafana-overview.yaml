@@ -28,4 +28,4 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: cm-grafana-overview
-  namespace: observability
+  namespace: grafana

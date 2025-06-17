@@ -19,4 +19,4 @@ metadata:
     app.kubernetes.io/name: grafana-central
     app.kubernetes.io/version: 10.1.5
   name: cm-grafana-config-dashboards
-  namespace: observability
+  namespace: grafana

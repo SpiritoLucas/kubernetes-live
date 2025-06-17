@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- victoria-metrics-stack-victoria-metrics-operator-cleanup-hook.ClusterRole.yaml
+- victoria-metrics-stack-victoria-metrics-operator-cleanup-hook.ClusterRoleBinding.yaml
+- victoria-metrics-stack-victoria-metrics-operator-cleanup-hook.Job.yaml
+- victoria-metrics-stack-victoria-metrics-operator-cleanup-hook.ServiceAccount.yaml
+- victoria-metrics-stack-victoria-metrics-operator.ClusterRole.yaml
+- victoria-metrics-stack-victoria-metrics-operator.ClusterRoleBinding.yaml
+- victoria-metrics-stack-victoria-metrics-operator.Deployment.yaml
+- victoria-metrics-stack-victoria-metrics-operator.Role.yaml
+- victoria-metrics-stack-victoria-metrics-operator.RoleBinding.yaml
+- victoria-metrics-stack-victoria-metrics-operator.Service.yaml
+- victoria-metrics-stack-victoria-metrics-operator.ServiceAccount.yaml

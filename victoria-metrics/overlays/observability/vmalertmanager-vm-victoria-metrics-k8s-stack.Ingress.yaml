@@ -1,0 +1,39 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/vmcluster/ingress-select.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vmalertmanager-vm-victoria-metrics-k8s-stack
+  namespace: observability
+  labels:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: vm-victoria-metrics-k8s-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vmalertmanager
+    app.kubernetes.io/version: v1.98.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.19.2
+    managed-by: vm-operator
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+    prometheus.io/scrape: "true"
+spec:
+  ingressClassName: kong
+  tls:
+    - hosts:
+        - vmalertmanager.k3s
+      secretName: vmalertmanager.k3s.cloud-tls
+  rules:
+    - host: vmalertmanager.k3s
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vmalertmanager-vm-victoria-metrics-k8s-stack
+                port:
+                  name: http

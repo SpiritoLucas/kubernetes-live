@@ -1,0 +1,39 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/vmsingle/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vmsingle-vm-victoria-metrics-k8s-stack
+  namespace: observability
+  labels:
+    app.kubernetes.io/component: victoria-metrics-k8s-stack-vmsingle
+    helm.sh/chart: victoria-metrics-k8s-stack-0.19.2
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: vm
+    app.kubernetes.io/version: "v1.98.0"
+    app.kubernetes.io/managed-by: Helm
+    managed-by: vm-operator
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+    prometheus.io/scrape: "true"
+spec:
+  ingressClassName: kong
+  tls:
+    - hosts:
+        - victoria-metrics.k3s
+      secretName: victoria-metrics.k3s.cloud-tls
+  rules:
+    - host: victoria-metrics.k3s
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vmsingle-vm-victoria-metrics-k8s-stack
+                port:
+                  number: 8429
