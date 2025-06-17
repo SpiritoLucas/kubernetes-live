@@ -82,10 +82,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              memory: 700Mi
+              memory: 3Gi
             requests:
               cpu: 300m
-              memory: 400Mi
+              memory: 2Gi
 
       volumes:
         - name: library
