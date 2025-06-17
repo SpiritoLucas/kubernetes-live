@@ -22,6 +22,15 @@ spec:
               name: immich-server
               port:
                 name: http
+  - http:  
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: immich-server
+              port:
+                name: http
   tls:
     - hosts:
         - immich.k3s
