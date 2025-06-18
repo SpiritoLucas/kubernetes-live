@@ -10,7 +10,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app.kubernetes.io/name: grafana-central
+      app.kubernetes.io/name: grafana
   template:
     metadata:
       annotations:
