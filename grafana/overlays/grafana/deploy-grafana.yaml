@@ -213,10 +213,10 @@ spec:
       serviceAccountName: sa-grafana
       terminationGracePeriodSeconds: 30
       volumes:
-      - configMap:
+      - name: config
+        configMap:
           defaultMode: 0600
           name: cm-grafana
-        name: config
       - name: storage
         persistentVolumeClaim:
           claimName: grafana-pvc
@@ -229,5 +229,6 @@ spec:
           defaultMode: 0600
           name: cm-grafana-datasource
       - name: sc-dashboard-volume
+        emptyDir: {}
         #persistentVolumeClaim:
         #  claimName: grafana-pvc
