@@ -24,7 +24,10 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - env:
+      - name: grafana-sc-dashboard
+        image: quay.io/kiwigrid/k8s-sidecar:1.25.1
+        imagePullPolicy: IfNotPresent
+        env:
         - name: METHOD
           value: WATCH
         - name: LABEL
@@ -40,20 +43,17 @@ spec:
         - name: REQ_USERNAME
           valueFrom:
             secretKeyRef:
-              key: admin-user
               name: grafana
+              key: admin-user
         - name: REQ_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: admin-password
               name: grafana
+              key: admin-password
         - name: REQ_URL
           value: http://localhost:3000/api/admin/provisioning/dashboards/reload
         - name: REQ_METHOD
           value: POST
-        image: quay.io/kiwigrid/k8s-sidecar:1.25.1
-        imagePullPolicy: IfNotPresent
-        name: grafana-sc-dashboard
         resources:
           limits:
             memory: 400Mi
@@ -63,15 +63,18 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
-            drop:
-            - ALL
+            drop: [ALL]
           seccompProfile:
             type: RuntimeDefault
         volumeMounts:
         - mountPath: /tmp/dashboards
           name: sc-dashboard-volume
           readOnly: false
-      - env:
+
+      - name: grafana-sc-datasources
+        image: quay.io/kiwigrid/k8s-sidecar:1.25.1
+        imagePullPolicy: IfNotPresent
+        env:
         - name: METHOD
           value: WATCH
         - name: LABEL
@@ -85,20 +88,17 @@ spec:
         - name: REQ_USERNAME
           valueFrom:
             secretKeyRef:
-              key: admin-user
               name: grafana
+              key: admin-user
         - name: REQ_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: admin-password
               name: grafana
+              key: admin-password
         - name: REQ_URL
           value: http://localhost:3000/api/admin/provisioning/datasources/reload
         - name: REQ_METHOD
           value: POST
-        image: quay.io/kiwigrid/k8s-sidecar:1.25.1
-        imagePullPolicy: IfNotPresent
-        name: grafana-sc-datasources
         resources:
           limits:
             memory: 400Mi
@@ -108,15 +108,18 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
-            drop:
-            - ALL
+            drop: [ALL]
           seccompProfile:
             type: RuntimeDefault
         volumeMounts:
         - mountPath: /etc/grafana/provisioning/datasources
           name: sc-datasources-volume
           readOnly: false
-      - env:
+
+      - name: grafana
+        image: docker.io/grafana/grafana:10.1.5
+        imagePullPolicy: IfNotPresent
+        env:
         - name: POD_IP
           valueFrom:
             fieldRef:
@@ -125,13 +128,13 @@ spec:
         - name: GF_SECURITY_ADMIN_USER
           valueFrom:
             secretKeyRef:
-              key: admin-user
               name: grafana
+              key: admin-user
         - name: GF_SECURITY_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: admin-password
               name: grafana
+              key: admin-password
         - name: GF_PATHS_DATA
           value: /var/lib/grafana/
         - name: GF_PATHS_observability
@@ -140,25 +143,6 @@ spec:
           value: /var/lib/grafana/plugins
         - name: GF_PATHS_PROVISIONING
           value: /etc/grafana/provisioning
-        image: docker.io/grafana/grafana:10.1.5
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 10
-          httpGet:
-            path: /api/health
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 30
-        name: grafana
-        resources:
-          limits:
-            memory: 400Mi
-          requests:
-            cpu: 100m
-            memory: 200Mi
         ports:
         - containerPort: 3000
           name: grafana
@@ -169,20 +153,33 @@ spec:
         - containerPort: 9094
           name: gossip-udp
           protocol: UDP
-        readinessProbe:
-          failureThreshold: 3
+        livenessProbe:
           httpGet:
             path: /api/health
             port: 3000
-            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 30
           periodSeconds: 10
+          failureThreshold: 10
           successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
           timeoutSeconds: 1
+          periodSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        resources:
+          limits:
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
-            drop:
-            - ALL
+            drop: [ALL]
           seccompProfile:
             type: RuntimeDefault
         volumeMounts:
@@ -200,34 +197,12 @@ spec:
         - mountPath: /etc/grafana/provisioning/datasources
           name: sc-datasources-volume
           readOnly: false
+
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext:
-        fsGroup: 472
-        runAsGroup: 472
         runAsNonRoot: true
         runAsUser: 472
-      serviceAccount: sa-grafana
-      serviceAccountName: sa-grafana
-      terminationGracePeriodSeconds: 30
-      volumes:
-      - configMap:
-          defaultMode: 0600
-          name: cm-grafana
-        name: config
-      - name: storage
-        persistentVolumeClaim:
-          claimName: grafana-pvc
-      - name: sc-dashboard-volume
-      - configMap:
-          defaultMode: 0600
-          name: cm-grafana-config-dashboards
-        name: sc-dashboard-provider
-      - name: sc-datasources-volume
-        configMap:
-          defaultMode: 0600
-          name: cm-grafana-datasource
-        #persistentVolumeClaim:
-        #  claimName: grafana-pvc
+        runAsGroup: 472
