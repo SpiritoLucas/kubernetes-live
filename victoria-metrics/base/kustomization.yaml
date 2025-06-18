@@ -10,7 +10,7 @@ resources:
 - coredns/
 - CustomResources/
 - externalServices/
-- grafana/
+#- grafana/
 - kube-state-metrics/
 - operator/
 - prometheus-node-exporter/
