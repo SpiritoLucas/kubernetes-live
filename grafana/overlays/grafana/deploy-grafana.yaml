@@ -229,7 +229,7 @@ spec:
         configMap:
           name: cm-grafana
       - name: sc-dashboard-volume
-        emptyDir: 
+        emptyDir: {}
       - name: sc-datasources-volume
         configMap:
           name: cm-grafana-datasource
