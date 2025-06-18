@@ -226,7 +226,7 @@ spec:
           name: cm-grafana-config-dashboards
         name: sc-dashboard-provider
       - name: sc-datasources-volume
-      - configMap:
+        configMap:
           defaultMode: 0600
           name: cm-grafana-datasource
         #persistentVolumeClaim:
