@@ -71,6 +71,9 @@ spec:
         - mountPath: /tmp/dashboards
           name: sc-dashboard-volume
           readOnly: false
+        - mountPath: /etc/grafana/provisioning/datasources
+          name: sc-datasources-volume
+          readOnly: false
       - env:
         - name: METHOD
           value: WATCH
