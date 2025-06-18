@@ -206,9 +206,9 @@ spec:
         - mountPath: /etc/grafana/provisioning/dashboards/sc-dashboardproviders.yaml
           name: sc-dashboard-provider
           subPath: provider.yaml
-        - mountPath: /etc/grafana/provisioning/datasources
-          name: sc-datasources-volume
-          readOnly: false
+        #- mountPath: /etc/grafana/provisioning/datasources
+        #  name: sc-datasources-volume
+        #  readOnly: false
         #- name: grafana-plugins
         #  mountPath: /var/lib/grafana/plugins
         #  readOnly: false
