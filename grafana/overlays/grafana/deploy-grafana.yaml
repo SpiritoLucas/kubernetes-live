@@ -228,6 +228,6 @@ spec:
         configMap:
           defaultMode: 0600
           name: cm-grafana-datasource
-      #- name: sc-dashboard-volume
+      - name: sc-dashboard-volume
         #persistentVolumeClaim:
         #  claimName: grafana-pvc
