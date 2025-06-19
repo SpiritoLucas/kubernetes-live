@@ -73,7 +73,7 @@ spec:
         - name: LABEL
           value: grafana_datasource
         - name: LABEL_VALUE
-          value: "1"
+          value: "true"
         - name: FOLDER
           value: /etc/grafana/provisioning/datasources
         - name: RESOURCE
@@ -108,10 +108,10 @@ spec:
             - ALL
           seccompProfile:
             type: RuntimeDefault
-        volumeMounts:
-        - mountPath: /etc/grafana/provisioning/datasources
-          name: sc-datasources-volume
-          readOnly: false
+#        volumeMounts:
+#        - mountPath: /etc/grafana/provisioning/datasources
+#          name: sc-datasources-volume
+#          readOnly: false
       - env:
         - name: POD_IP
           valueFrom:
@@ -230,9 +230,9 @@ spec:
           name: cm-grafana
       - name: sc-dashboard-volume
         emptyDir: {}
-      - name: sc-datasources-volume
-        configMap:
-          name: cm-grafana-datasource
+#      - name: sc-datasources-volume
+#        configMap:
+#          name: cm-grafana-datasource
       - name: sc-dashboard-provider
         configMap:
           name: cm-grafana-config-dashboards
