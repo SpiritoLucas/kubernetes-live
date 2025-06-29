@@ -56,30 +56,30 @@ spec:
           volumeMounts:
             - name: library
               mountPath: /usr/src/app/upload
-          #livenessProbe:
-          #  failureThreshold: 3
-          #  httpGet:
-          #    path: /api/server/ping
-          #    port: http
-          #  initialDelaySeconds: 10
-          #  periodSeconds: 10
-          #  timeoutSeconds: 3
-          #readinessProbe:
-          #  failureThreshold: 3
-          #  httpGet:
-          #    path: /api/server/ping
-          #    port: http
-          #  initialDelaySeconds: 10
-          #  periodSeconds: 10
-          #  timeoutSeconds: 3
-          #startupProbe:
-          #  failureThreshold: 30
-          #  httpGet:
-          #    path: /api/server/ping
-          #    port: http
-          #  initialDelaySeconds: 10
-          #  periodSeconds: 10
-          #  timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/server/ping
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/server/ping
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 3
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /api/server/ping
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
           resources:
             limits:
               memory: 3Gi
