@@ -16,6 +16,15 @@ spec:
       labels:
         app: redis
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - mininet
       containers:
         - name: redis
           image: redis:7
@@ -25,6 +34,12 @@ spec:
             - name: data
               mountPath: /data
           args: ["--appendonly", "yes"]
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              memory: "1Gi"
   volumeClaimTemplates:
     - metadata:
         name: data
