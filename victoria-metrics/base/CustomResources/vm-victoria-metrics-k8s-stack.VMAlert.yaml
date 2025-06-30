@@ -3,7 +3,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMAlert
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack
+  name: vm-victoria-metrics-k8s-stack
   namespace: observability
   labels:
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   datasource:
-    url: http://vmsingle-victoria-metrics-stack-victoria-metrics-k8s-stack.observability.svc:8429/
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/
   evaluationInterval: 15s
   externalLabels: {}
   extraArgs:
@@ -21,9 +21,9 @@ spec:
   image:
     tag: v1.96.0
   notifiers:
-    - url: http://vmalertmanager-victoria-metrics-stack-victoria-metrics-k8s-stack-0.vmalertmanager-victoria-metrics-stack-victoria-metrics-k8s-stack.observability.svc:9093
+  - url: http://vmalertmanager-vm-victoria-metrics-k8s-stack-0.vmalertmanager-vm-victoria-metrics-k8s-stack.observability.svc:9093
   remoteRead:
-    url: http://vmsingle-victoria-metrics-stack-victoria-metrics-k8s-stack.observability.svc:8429/
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/
   remoteWrite:
-    url: http://vmsingle-victoria-metrics-stack-victoria-metrics-k8s-stack.observability.svc:8429/api/v1/write
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/api/v1/write
   selectAllByDefault: true

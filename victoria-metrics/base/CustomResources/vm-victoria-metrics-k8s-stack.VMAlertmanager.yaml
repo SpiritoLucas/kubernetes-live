@@ -3,7 +3,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMAlertmanager
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack
+  name: vm-victoria-metrics-k8s-stack
   namespace: observability
   labels:
     app.kubernetes.io/component: victoria-metrics-k8s-stack-alertmanager
@@ -18,7 +18,7 @@ spec:
     tag: v0.25.0
   routePrefix: /
   selectAllByDefault: true
-  configSecret: victoria-metrics-stack-victoria-metrics-k8s-stack-alertmanager
+  configSecret: vm-victoria-metrics-k8s-stack-alertmanager
   templates:
-    - name: victoria-metrics-stack-victoria-metrics-k8s-stack-alertmanager
-      key: monzo.tmpl
+  - name: vm-victoria-metrics-k8s-stack-alertmanager
+    key: monzo.tmpl

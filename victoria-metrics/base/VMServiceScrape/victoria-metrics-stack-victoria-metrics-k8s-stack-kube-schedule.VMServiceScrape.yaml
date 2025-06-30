@@ -3,7 +3,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-schedule
+  name: vm-victoria-metrics-k8s-stack-kube-schedule
   namespace: observability
   labels:
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
@@ -14,7 +14,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-scheduler
+      app: vm-victoria-metrics-k8s-stack-kube-scheduler
       app.kubernetes.io/instance: "victoria-metrics-stack"
   namespaceSelector:
     matchNames:

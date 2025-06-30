@@ -4,7 +4,7 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMRule
 metadata:
   namespace: observability
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-kubernetes-sy
+  name: vm-victoria-metrics-k8s-stack-kubernetes-sy
   labels:
     app: victoria-metrics-k8s-stack
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11

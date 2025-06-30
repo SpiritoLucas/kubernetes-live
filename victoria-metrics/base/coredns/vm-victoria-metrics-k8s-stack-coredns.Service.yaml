@@ -1,13 +1,13 @@
 ---
-# Source: victoria-metrics-k8s-stack/templates/servicemonitors/kube-etcd.yaml
+# Source: victoria-metrics-k8s-stack/templates/servicemonitors/coredns.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-etcd
+  name: vm-victoria-metrics-k8s-stack-coredns
   namespace: kube-system
   labels:
-    app: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-etcd
-    jobLabel: kube-etcd
+    app: vm-victoria-metrics-k8s-stack-coredns
+    jobLabel: coredns
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/instance: victoria-metrics-stack
@@ -16,10 +16,9 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: http-metrics
-      port: 2379
-      protocol: TCP
-      targetPort: 2379
+  - name: http-metrics
+    port: 9153
+    protocol: TCP
+    targetPort: 9153
   selector:
-    component: etcd
-  type: ClusterIP
+    k8s-app: kube-dns

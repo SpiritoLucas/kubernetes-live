@@ -3,7 +3,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-apiserver
+  name: vm-victoria-metrics-k8s-stack-apiserver
   namespace: observability
   labels:
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
@@ -13,16 +13,16 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   endpoints:
-    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-      port: https
-      scheme: https
-      tlsConfig:
-        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        serverName: kubernetes
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    port: https
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      serverName: kubernetes
   jobLabel: component
   namespaceSelector:
     matchNames:
-      - default
+    - default
   selector:
     matchLabels:
       component: apiserver

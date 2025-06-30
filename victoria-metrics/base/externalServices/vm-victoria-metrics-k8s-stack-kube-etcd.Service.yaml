@@ -1,13 +1,13 @@
 ---
-# Source: victoria-metrics-k8s-stack/templates/servicemonitors/kube-scheduler.yaml
+# Source: victoria-metrics-k8s-stack/templates/servicemonitors/kube-etcd.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-schedule
+  name: vm-victoria-metrics-k8s-stack-kube-etcd
   namespace: kube-system
   labels:
-    app: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-scheduler
-    jobLabel: kube-scheduler
+    app: vm-victoria-metrics-k8s-stack-kube-etcd
+    jobLabel: kube-etcd
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/instance: victoria-metrics-stack
@@ -16,10 +16,10 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: http-metrics
-      port: 10259
-      protocol: TCP
-      targetPort: 10259
+  - name: http-metrics
+    port: 2379
+    protocol: TCP
+    targetPort: 2379
   selector:
-    component: kube-scheduler
+    component: etcd
   type: ClusterIP

@@ -3,10 +3,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-controll
+  name: vm-victoria-metrics-k8s-stack-kube-controll
   namespace: kube-system
   labels:
-    app: victoria-metrics-stack-victoria-metrics-k8s-stack-kube-controller-manager
+    app: vm-victoria-metrics-k8s-stack-kube-controller-manager
     jobLabel: kube-controller-manager
     helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
     app.kubernetes.io/name: victoria-metrics-k8s-stack
@@ -16,10 +16,10 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: http-metrics
-      port: 10257
-      protocol: TCP
-      targetPort: 10257
+  - name: http-metrics
+    port: 10257
+    protocol: TCP
+    targetPort: 10257
   selector:
     component: kube-controller-manager
   type: ClusterIP
