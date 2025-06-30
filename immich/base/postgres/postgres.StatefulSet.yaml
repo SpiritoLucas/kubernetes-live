@@ -6,7 +6,6 @@ metadata:
   namespace: immich
 spec:
   serviceName: "postgres"
-  PriorityClassName: app-high-priority
   replicas: 1
   selector:
     matchLabels:
@@ -16,6 +15,7 @@ spec:
       labels:
         app: postgres
     spec:
+      PriorityClassName: app-high-priority
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
