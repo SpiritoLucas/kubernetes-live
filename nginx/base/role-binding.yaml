@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: prometheus-role-binding
+  namespace: ingress-nginx  # El namespace donde están los recursos que quieres monitorear
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s  # El nombre de la ServiceAccount de Prometheus
+    namespace: monitoring  # El namespace donde está Prometheus
+roleRef:
+  kind: Role
+  name: prometheus-role  # El nombre del Role que creamos en el paso anterior
+  apiGroup: rbac.authorization.k8s.io

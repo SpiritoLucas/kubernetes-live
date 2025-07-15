@@ -1,0 +1,25 @@
+---
+# Source: victoria-metrics-k8s-stack/charts/victoria-metrics-operator/templates/uninstall_hook.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: victoria-metrics-stack-victoria-metrics-operator-cleanup-hook
+  namespace: observability
+  labels:
+    app.kubernetes.io/name: victoria-metrics-operator
+    app.kubernetes.io/instance: victoria-metrics-stack
+    helm.sh/chart: victoria-metrics-operator-0.27.4
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+rules:
+  - apiGroups: ["operator.victoriametrics.com"]
+    resources:
+      - vmagents
+      - vmalerts
+      - vmsingles
+      - vmalertmanagers
+      - vmclusters
+    verbs: ["get", "list", "watch", "delete"]

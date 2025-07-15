@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broidery-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broidery-backend
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+      containers:
+      - image: spirito/broidery-be:latest
+        env:
+          - name: SERVICE_NAME
+            value: broidery-backend
+          - name: SERVICE_VERSION
+            value: "1.0.0"
+          - name: CORS_URL_1
+            value: 'https://broidery.k3s'
+          - name: CORS_URL_2
+            value: 'https://broidery-bg.k3s'
+          - name: OTEL_DOTNET_AUTO_LOGS_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_LOGS_INCLUDE_FORMATTED_MESSAGE
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_TRACES_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
+          - name: OTEL_DOTNET_AUTO_METRICS_CONSOLE_EXPORTER_ENABLED
+            value: 'true'
+          - name: DEFAULT_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: default-connection
+                key: DEFAULT_CONNECTION
+          - name: TRACE_COLLECTOR
+            value: "http://simplest-collector.opentelemetry-operator-system:4317"
+          - name: METRICS_COLLECTOR
+            value: "http://simplest-collector.opentelemetry-operator-system:4317"
+          - name: MI_VARIABLE_DE_ENTORNO
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['role']
+        name: broidery-backend
+

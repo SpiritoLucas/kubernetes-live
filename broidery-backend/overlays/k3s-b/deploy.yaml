@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broidery-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: broidery-backend
+  template:
+    metadata:
+      labels:
+        app: broidery-backend
+    spec:
+      containers:
+      - image: spirito/broidery-be:latest
+        env:
+          - name: CORS_URL_1
+            value: 'https://broidery.k3s'
+          - name: CORS_URL_2
+            value: 'https://broidery-bg.k3s'
+          - name: DEFAULT_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: default-connection
+                key: DEFAULT_CONNECTION
+        name: broidery-backend

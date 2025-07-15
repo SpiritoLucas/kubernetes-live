@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broidery-frontend
+  annotations:
+    sidecar.opentelemetry.io/inject: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broidery-frontend
+  template:
+    metadata:
+      labels:
+        app: broidery-frontend
+    spec:
+      containers:
+      - image: spirito/broidery-fe:latest
+        name: broidery-frontend
+        volumeMounts:
+        - name: broidery-frontend-config
+          mountPath: /usr/share/nginx/html/assets/app.config.json
+          subPath: app.config.json
+          readOnly: true
+      volumes: 
+      - name: broidery-frontend-config
+        configMap:
+          name: broidery-frontend-config-green
+

@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: victoria-metrics
+      type: prometheus
+      url: http://vmselect-vm-victoria-metrics-k8s-stack.observability:8481/
+      access: proxy
+      isDefault: true
+      jsonData:
+        httpMethod: POST
+        timeInterval: 30s
+    - name: Alertmanager
+      type: alertmanager
+      uid: alertmanager
+      url: http://vmalertmanager-vm-victoria-metrics-k8s-stack.observability:9093/
+      access: proxy
+      jsonData:
+        handleGrafanaManagedAlerts: false
+        implementation: prometheus
+kind: ConfigMap
+metadata:
+  labels:
+    app: kube-prometheus-stack-grafana
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 51.10.0
+  name: cm-grafana-datasource
+  namespace: grafana

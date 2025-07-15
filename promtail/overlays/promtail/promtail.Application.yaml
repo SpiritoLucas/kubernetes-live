@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: promtail-daemon
+  namespace: argocd
+spec:
+  project: observability 
+  source:
+    helm:
+      values: |
+        config:
+          # -- Enable Promtail config from Helm chart
+          # Set `configmap.enabled: true` and this to `false` to manage your own Promtail config
+          # See default config in `values.yaml`
+          enabled: true
+          # -- The log level of the Promtail server
+          # Must be reference in `config.file` to configure `server.log_level`
+          # See default config in `values.yaml`
+          logLevel: info
+          # -- The log format of the Promtail server
+          # Must be reference in `config.file` to configure `server.log_format`
+          # Valid formats: `logfmt, json`
+          # See default config in `values.yaml`
+          logFormat: logfmt
+          # -- The port of the Promtail server
+          # Must be reference in `config.file` to configure `server.http_listen_port`
+          # See default config in `values.yaml`
+          serverPort: 3101
+          # -- The config of clients of the Promtail server
+          # Must be reference in `config.file` to configure `clients`
+          # @default -- See `values.yaml`
+          clients:
+            - url: http://loki-loki-distributed-distributor.observability:3100/loki/api/v1/push
+        

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  project: observability
+  source:
+    repoURL: https://github.com/SpiritoLucas/loki.git
+    path: .  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: observability
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - PruneLast=true
+      - ServerSideApply=true

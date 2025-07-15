@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- victoria-metrics-stack-victoria-metrics-k8s-stack-alertmanager.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-etcd.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-general.rules.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-k8s.rules.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-apiserve.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-promethe.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-schedule.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kube-state-me.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kubelet.rules.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kubernetes-ap.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kubernetes-re.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kubernetes-st.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-kubernetes-sy.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-node-exporter.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-node-network.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-node.rules.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-vm-health.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-vmagent.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-vmcluster.VMRule.yaml
+- victoria-metrics-stack-victoria-metrics-k8s-stack-vmsingle.VMRule.yaml

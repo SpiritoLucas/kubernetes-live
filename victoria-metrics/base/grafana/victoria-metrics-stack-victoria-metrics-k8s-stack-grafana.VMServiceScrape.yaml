@@ -1,0 +1,20 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/servicemonitors/grafana.yaml
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: vm-victoria-metrics-k8s-stack-grafana
+  namespace: observability
+  labels:
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/instance: "victoria-metrics-stack"
+  endpoints:
+  - port: service

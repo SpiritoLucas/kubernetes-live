@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: broidery-backend
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+    prometheus.io/scrape: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: broidery-backend.k3s
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: broidery-backend
+              port:
+                name: http
+  tls:
+    - hosts:
+        - broidery-backend.k3s
+      secretName: broidery-backend.k3s.cloud-tls

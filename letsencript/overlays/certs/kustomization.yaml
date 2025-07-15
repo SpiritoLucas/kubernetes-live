@@ -1,0 +1,24 @@
+# Certificates deployment
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- certificates.namespace.yaml
+- cluster-issuer-selfsigned.cluster-issuer.cert-manager.yaml
+- wildcard.deimos.cloud-tls.certificate.cert-manager.yaml
+- broidery.deimos.cloud-tls.certificate.cert-manager.yaml
+- broidery-bg.cloud-tls.certificate.cert-manager.yaml
+- argocd.cloud-tls.certificate.cert-manager.yaml
+- broidery-backend.deimos.cloud-tls.certificate.cert-manager.yaml
+- metrics-server.deimos.cloud-tls.certificate.cert-manager.yaml
+- vault.deimos.cloud-tls.certificate.cert-manager.yaml
+- immich.certificate.cert-manager.yaml
+- longhorn.certificate.cert-manager.yaml
+- prometheus.cloud-tls.certificate.cert-manager.yaml
+- grafana.certificate.cert-manager.yaml
+- victoria-metrics-agent.certificate.cert-manager.yaml
+- argo-rollouts.cloud-tls.certificate.cert-manager.yaml
+- victoria-metrics.certificate.cert-manager.yaml
+- vmalertmanager.certificate.cert-manager.yaml
+- simplest-collector.cloud-tls.certificate.cert-manager.yaml
+- goldilocks.cloud-tls.certificate.cert-manager.yaml

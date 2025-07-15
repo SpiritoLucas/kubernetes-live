@@ -1,0 +1,15 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: labeltransformer
+labels:
+  tags.datadoghq.com/env: development
+  tags.datadoghq.com/service: broidery-backend
+  tags.datadoghq.com/version: "1.4"
+fieldSpecs:
+- path: metadata/labels
+  create: true
+  kind: Deployment
+- path: spec/template/metadata/labels
+  create: true
+  kind: Deployment

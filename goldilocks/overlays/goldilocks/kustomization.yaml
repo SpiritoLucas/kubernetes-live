@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    argocd.argoproj.io/autopilot-annotation: "true"
+
+#images:
+#- name: whatever
+  #newTag: fix-path
+
+resources:
+- manifests/controller/clusterrole.yaml
+- manifests/controller/clusterrolebinding.yaml
+- manifests/controller/deployment.yaml
+- manifests/controller/serviceaccount.yaml
+- manifests/dashboard/clusterrole.yaml
+- manifests/dashboard/clusterrolebinding.yaml
+- manifests/dashboard/deployment.yaml
+- manifests/dashboard/ingress.yaml
+- manifests/dashboard/service.yaml
+- manifests/dashboard/serviceaccount.yaml
+#VPA
+- https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml
+- https://raw.githubusercontent.com/kubernetes/autoscaler/vpa-release-1.0/vertical-pod-autoscaler/deploy/vpa-rbac.yaml

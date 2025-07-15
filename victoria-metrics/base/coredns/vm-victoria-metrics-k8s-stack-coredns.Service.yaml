@@ -1,0 +1,24 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/servicemonitors/coredns.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-victoria-metrics-k8s-stack-coredns
+  namespace: kube-system
+  labels:
+    app: vm-victoria-metrics-k8s-stack-coredns
+    jobLabel: coredns
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 9153
+    protocol: TCP
+    targetPort: 9153
+  selector:
+    k8s-app: kube-dns

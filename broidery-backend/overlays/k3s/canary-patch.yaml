@@ -1,0 +1,44 @@
+- op: replace
+  path: /kind
+  value: Rollout
+- op: replace
+  path: /apiVersion
+  value: argoproj.io/v1alpha1
+- op: add
+  path: /spec/strategy
+  value: {}
+- op: add
+  path: /spec/strategy/canary
+  value: {}
+- op: add
+  path: /spec/strategy/canary/analysis
+  value: 
+    startingStep: 2
+- op: add
+  path: /spec/strategy/canary/analysis/templates
+  value: 
+    - templateName: success-rate
+- op: add
+  path: /spec/strategy/canary/stableMetadata
+  value: 
+    labels:
+        role: stable
+        tags.datadoghq.com/version: "1.4"
+- op: add
+  path: /spec/strategy/canary/canaryMetadata
+  value: 
+    labels:
+        role: canary
+        tags.datadoghq.com/version: "sarasa"
+- op: add
+  path: /spec/strategy/canary/steps
+  value:
+    - setWeight: 30
+    - pause: {}
+    - setWeight: 60
+    - pause:
+        duration: 3m
+    - setWeight: 100
+    - pause:
+        duration: 10s
+

@@ -1,0 +1,68 @@
+---
+# Source: victoria-metrics-k8s-stack/charts/victoria-metrics-operator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: victoria-metrics-stack-victoria-metrics-operator
+  namespace: observability
+  labels:
+    app.kubernetes.io/name: victoria-metrics-operator
+    app.kubernetes.io/instance: victoria-metrics-stack
+    helm.sh/chart: victoria-metrics-operator-0.27.4
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: victoria-metrics-operator
+      app.kubernetes.io/instance: victoria-metrics-stack
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: victoria-metrics-operator
+        app.kubernetes.io/instance: victoria-metrics-stack
+    spec:
+      serviceAccountName: victoria-metrics-stack-victoria-metrics-operator
+      containers:
+        - name: victoria-metrics-operator
+          image: "victoriametrics/operator:v0.39.1"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: WATCH_NAMESPACE
+              value: ""
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: victoria-metrics-operator
+            - name: VM_ENABLEDPROMETHEUSCONVERTER_PODMONITOR
+              value: "false"
+            - name: VM_ENABLEDPROMETHEUSCONVERTER_SERVICESCRAPE
+              value: "false"
+            - name: VM_ENABLEDPROMETHEUSCONVERTER_PROMETHEUSRULE
+              value: "false"
+            - name: VM_ENABLEDPROMETHEUSCONVERTER_PROBE
+              value: "false"
+            - name: VM_ENABLEDPROMETHEUSCONVERTER_ALERTMANAGERCONFIG
+              value: "false"
+            - name: VM_PSPAUTOCREATEENABLED
+              value: "false"
+            - name: VM_ENABLEDPROMETHEUSCONVERTEROWNERREFERENCES
+              value: "false"
+          args:
+            - --zap-log-level=info
+            - --enable-leader-election
+          command:
+            - manager
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 9443
+              name: webhook
+              protocol: TCP
+          volumeMounts:
+          resources: {}
+      volumes:

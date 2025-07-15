@@ -1,0 +1,25 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/servicemonitors/kube-scheduler.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-victoria-metrics-k8s-stack-kube-schedule
+  namespace: kube-system
+  labels:
+    app: vm-victoria-metrics-k8s-stack-kube-scheduler
+    jobLabel: kube-scheduler
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  clusterIP: None
+  ports:
+    - name: http-metrics
+      port: 10259
+      protocol: TCP
+      targetPort: 10259
+  selector:
+    component: kube-scheduler
+  type: ClusterIP

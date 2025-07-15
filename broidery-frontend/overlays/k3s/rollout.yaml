@@ -1,0 +1,80 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: broidery-frontend
+spec:
+  revisionHistoryLimit: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      app: broidery-frontend
+  strategy:
+    blueGreen: 
+      activeService: broidery-frontend-blue
+      previewService: broidery-frontend-green
+      autoPromotionEnabled: false
+      activeMetadata: 
+        labels:
+          role: blue
+      previewMetadata: 
+        labels:
+          role: green
+  template:
+    metadata:
+      labels:
+        app: broidery-frontend
+    spec:
+      containers:
+      - name: broidery-frontend
+        image: spirito/broidery-fe:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+        volumeMounts:
+        - name: broidery-frontend-config
+          mountPath: /usr/share/nginx/html/assets/app.config.json
+          subPath: app.config.json
+          readOnly: true
+      volumes: 
+      - name: broidery-frontend-config
+        configMap:
+          name: broidery-frontend-config-green
+      #trafficRouting:
+      #  nginx: 
+      #    stableIngress: broidery-frontend
+          # additionalIngressAnnotations:   
+          #   canary-by-header: X-Canary
+          #   canary-by-header-value: wepa
+      # steps:
+      # - setWeight: 30
+      # - pause: {}
+      # - setWeight: 60
+      # - pause: {}
+      # - setWeight: 100
+      # - pause: {}     

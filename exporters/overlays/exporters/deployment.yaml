@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exporter
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: '8000'
+        prometheus.io/scrape: 'true'
+      labels:
+        app: exporter
+    spec:
+      containers:
+      - envFrom:
+          - configMapRef:
+              name: exporter-cm
+        image: spirito/last-applied-config-exporter:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
+        name: exporter
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi

@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- vm-victoria-metrics-k8s-stack-kube-controll.Service.yaml
+- vm-victoria-metrics-k8s-stack-kube-etcd.Service.yaml
+- vm-victoria-metrics-k8s-stack-kube-schedule.Service.yaml

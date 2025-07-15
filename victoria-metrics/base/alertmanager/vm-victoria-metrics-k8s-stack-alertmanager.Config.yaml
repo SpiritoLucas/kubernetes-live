@@ -1,0 +1,212 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/alertmanager/vmalertmanager.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vm-victoria-metrics-k8s-stack-alertmanager
+  namespace: observability
+  labels:
+    app.kubernetes.io/component: victoria-metrics-k8s-stack-alertmanager
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+stringData:
+  alertmanager.yaml: "global:
+
+    \  resolve_timeout: 5m
+
+    \  slack_api_url: http://slack:30500/
+
+    inhibit_rules:
+
+    - equal:
+
+    \  - cluster
+
+    \  - namespace
+
+    \  - alertname
+
+    \  source_matchers:
+
+    \  - severity=critical
+
+    \  target_matchers:
+
+    \  - severity=~\"warning|info\"
+
+    - equal:
+
+    \  - cluster
+
+    \  - namespace
+
+    \  - alertname
+
+    \  source_matchers:
+
+    \  - severity=warning
+
+    \  target_matchers:
+
+    \  - severity=info
+
+    - equal:
+
+    \  - cluster
+
+    \  - namespace
+
+    \  source_matchers:
+
+    \  - alertname=InfoInhibitor
+
+    \  target_matchers:
+
+    \  - severity=info
+
+    receivers:
+
+    - name: slack-monitoring
+
+    \  slack_configs:
+
+    \  - actions:
+
+    \    - text: 'Runbook :green_book:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).Annotations.runbook_url }}'
+
+    \    - text: 'Query :mag:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).GeneratorURL }}'
+
+    \    - text: 'Dashboard :grafana:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).Annotations.dashboard }}'
+
+    \    - text: 'Silence :no_bell:'
+
+    \      type: button
+
+    \      url: '{{ template \"__alert_silence_link\" . }}'
+
+    \    - text: '{{ template \"slack.monzo.link_button_text\" . }}'
+
+    \      type: button
+
+    \      url: '{{ .CommonAnnotations.link_url }}'
+
+    \    channel: '#channel'
+
+    \    color: '{{ template \"slack.monzo.color\" . }}'
+
+    \    icon_emoji: '{{ template \"slack.monzo.icon_emoji\" . }}'
+
+    \    send_resolved: true
+
+    \    text: '{{ template \"slack.monzo.text\" . }}'
+
+    \    title: '{{ template \"slack.monzo.title\" . }}'
+
+    - name: slack-code-owners
+
+    \  slack_configs:
+
+    \  - actions:
+
+    \    - text: 'Runbook :green_book:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).Annotations.runbook }}'
+
+    \    - text: 'Query :mag:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).GeneratorURL }}'
+
+    \    - text: 'Dashboard :grafana:'
+
+    \      type: button
+
+    \      url: '{{ (index .Alerts 0).Annotations.dashboard }}'
+
+    \    - text: 'Silence :no_bell:'
+
+    \      type: button
+
+    \      url: '{{ template \"__alert_silence_link\" . }}'
+
+    \    - text: '{{ template \"slack.monzo.link_button_text\" . }}'
+
+    \      type: button
+
+    \      url: '{{ .CommonAnnotations.link_url }}'
+
+    \    channel: '#{{ .CommonLabels.code_owner_channel }}'
+
+    \    color: '{{ template \"slack.monzo.color\" . }}'
+
+    \    icon_emoji: '{{ template \"slack.monzo.icon_emoji\" . }}'
+
+    \    send_resolved: true
+
+    \    text: '{{ template \"slack.monzo.text\" . }}'
+
+    \    title: '{{ template \"slack.monzo.title\" . }}'
+
+    route:
+
+    \  group_by:
+
+    \  - alertgroup
+
+    \  - job
+
+    \  group_interval: 5m
+
+    \  group_wait: 30s
+
+    \  receiver: slack-monitoring
+
+    \  repeat_interval: 12h
+
+    \  routes:
+
+    \  - group_by:
+
+    \    - code_owner_channel
+
+    \    - alertgroup
+
+    \    - job
+
+    \    matchers:
+
+    \    - code_owner_channel!=\"\"
+
+    \    - severity=~\"info|warning|critical\"
+
+    \    receiver: slack-code-owners
+
+    \  - continue: true
+
+    \    matchers:
+
+    \    - severity=~\"info|warning|critical\"
+
+    \    receiver: slack-monitoring
+
+    templates:
+
+    - /etc/vm/configs/**/*.tmpl"

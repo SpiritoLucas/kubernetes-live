@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: broidery-frontend-config-green
+data:
+  app.config.json: |
+    {
+      "BroideryBackendUrl": "https://broidery-backend.k3s"
+    }

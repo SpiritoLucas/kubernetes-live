@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- clusterRoleBindings.yaml
+- clusterRoles.yaml
+- cms.yaml
+- crds.yaml
+- nwPolicies.yaml
+- roleBindings.yaml
+- roles.yaml
+- secrets.yaml
+- statefullSets.yaml
+- svcAccounts.yaml
+- svcs.yaml
+- namespace.yaml
+- ../overlays/argocd-server
+- ../overlays/argocd-applicationset-controller
+- ../overlays/argocd-dex-server
+- ../overlays/argocd-notifications-controller
+- ../overlays/argocd-redis
+- ../overlays/argocd-repo-server
+

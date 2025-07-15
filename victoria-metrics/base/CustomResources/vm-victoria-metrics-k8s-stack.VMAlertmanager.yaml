@@ -1,0 +1,24 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/alertmanager/vmalertmanager.yaml
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlertmanager
+metadata:
+  name: vm-victoria-metrics-k8s-stack
+  namespace: observability
+  labels:
+    app.kubernetes.io/component: victoria-metrics-k8s-stack-alertmanager
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  externalURL: ""
+  image:
+    tag: v0.25.0
+  routePrefix: /
+  selectAllByDefault: true
+  configSecret: vm-victoria-metrics-k8s-stack-alertmanager
+  templates:
+  - name: vm-victoria-metrics-k8s-stack-alertmanager
+    key: monzo.tmpl

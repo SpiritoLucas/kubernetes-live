@@ -1,0 +1,26 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/vmsingle/vmsingle.yml
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  name: vm-victoria-metrics-k8s-stack
+  namespace: observability
+  labels:
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  extraArgs:
+    vmalert.proxyURL: http://vmalert-vm-victoria-metrics-k8s-stack.observability.svc:8080
+  image:
+    tag: v1.96.0
+  replicaCount: 1
+  retentionPeriod: "14"
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi

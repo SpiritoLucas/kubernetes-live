@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- instrumentations.opentelemetry.io.yaml
+- opampbridges.opentelemetry.io.yaml
+- opentelemetry-operator-controller-manager-metrics-service.yaml
+- opentelemetry-operator-controller-manager.yaml
+- opentelemetry-operator-leader-election-role.yaml
+- opentelemetry-operator-leader-election-rolebinding.yaml
+- opentelemetry-operator-manager-role.yaml
+- opentelemetry-operator-manager-rolebinding.yaml
+- opentelemetry-operator-metrics-reader.yaml
+- opentelemetry-operator-mutating-webhook-configuration.yaml
+- opentelemetry-operator-proxy-role.yaml
+- opentelemetry-operator-proxy-rolebinding.yaml
+- opentelemetry-operator-selfsigned-issuer.yaml
+- opentelemetry-operator-serving-cert.yaml
+- opentelemetry-operator-system.yaml
+- opentelemetry-operator-validating-webhook-configuration.yaml
+- opentelemetry-operator-webhook-service.yaml
+- opentelemetrycollectors.opentelemetry.io.yaml
+- deployment.yaml
+
+namespace: opentelemetry-operator-system

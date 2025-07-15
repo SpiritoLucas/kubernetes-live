@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    cert-manager.io/issuer: "cluster-issuer-selfsigned"
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+    prometheus.io/scrape: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: immich.k3s
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: immich-server
+                port:
+                  name: http
+    - http:  # esta es la regla catch-all sin host
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: immich-server
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - immich.k3s
+      secretName: immich.k3s.cloud-tls

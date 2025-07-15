@@ -1,0 +1,23 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/servicescrape.yaml
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: vm-victoria-metrics-k8s-stack-operator
+  namespace: observability
+  labels:
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: "victoria-metrics-stack"
+      app.kubernetes.io/name: victoria-metrics-operator
+  endpoints:
+    - port: http
+  namespaceSelector:
+    matchNames:
+      - observability

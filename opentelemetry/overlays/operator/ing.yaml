@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opentelemetry-collector
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+    #kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    cert-manager.io/issuer-kind: "ClusterIssuer"
+    metallb.uniberse.tf/address-pool: default
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - simplest-collector.k3s
+      secretName: simplest-collector.k3s.cloud-tls
+  rules:
+  - host: simplest-collector.k3s
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: simplest-collector
+            port: 
+              name: otlp-http
+
+

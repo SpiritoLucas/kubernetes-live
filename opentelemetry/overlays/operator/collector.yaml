@@ -1,0 +1,62 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: simplest
+spec:
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+            cors:
+              allowed_origins:
+                - "https://broidery.k3s"
+                - "https://broidery-bg.k3s"
+              #allowed_headers:
+              #  - "*"
+              max_age: 7200
+      #prometheus:
+      #  config:
+      #    scrape_configs:
+      #      - job_name: otel-collector
+      #        scrape_interval: 5s
+      #        static_configs:
+      #          - targets: [http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write]
+    processors:
+      batch:
+
+    #exporters:
+      # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
+    #  debug:
+    exporters:
+      logging:
+        loglevel: info
+      otlp:
+        endpoint: "http://tempo-distributor.observability:4317" 
+        tls:
+          insecure: true
+      prometheusremotewrite:
+        endpoint: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc.cluster.local:8429/api/v1/write
+        resource_to_telemetry_conversion:
+          enabled: true
+        remote_write_queue:
+          enabled: true
+          queue_size: 5000
+          num_consumers: 15
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp]
+        metrics:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp,prometheusremotewrite]
+        logs:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp]

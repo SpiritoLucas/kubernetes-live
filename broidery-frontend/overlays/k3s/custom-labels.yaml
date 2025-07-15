@@ -1,0 +1,15 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: labeltransformer
+labels:
+  tags.datadoghq.com/env: production
+  tags.datadoghq.com/service: ec-store-pickup-listener
+  tags.datadoghq.com/version: PROD-0.3.26
+fieldSpecs:
+- path: metadata/labels
+  create: true
+  kind: Deployment
+- path: spec/template/metadata/labels
+  create: true
+  kind: Deployment

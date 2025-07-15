@@ -1,0 +1,29 @@
+---
+# Source: victoria-metrics-k8s-stack/templates/victoria-metrics-operator/vmalert/vmalert.yaml
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlert
+metadata:
+  name: vm-victoria-metrics-k8s-stack
+  namespace: observability
+  labels:
+    helm.sh/chart: victoria-metrics-k8s-stack-0.18.11
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: victoria-metrics-stack
+    app.kubernetes.io/version: "v1.96.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  datasource:
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/
+  evaluationInterval: 15s
+  externalLabels: {}
+  extraArgs:
+    remoteWrite.disablePathAppend: "true"
+  image:
+    tag: v1.96.0
+  notifiers:
+  - url: http://vmalertmanager-vm-victoria-metrics-k8s-stack-0.vmalertmanager-vm-victoria-metrics-k8s-stack.observability.svc:9093
+  remoteRead:
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/
+  remoteWrite:
+    url: http://vmsingle-vm-victoria-metrics-k8s-stack.observability.svc:8429/api/v1/write
+  selectAllByDefault: true

@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argo-rollouts
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    notifications.argoproj.io/subscribe.discord_k3s_success: ""
+    notifications.argoproj.io/subscribe.discord_k3s_error: ""
+spec:
+  syncWindows:
+    - kind: allow
+      schedule: '* * * * *'
+      duration: 24h
+      namespaces:
+        - argo-rollouts
+      clusters:
+        - in-cluster
+  description: k3s Team
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+    - 'https://github.com/SpiritoLucas/**'
+  # Allow managing monitoring namespace
+  destinations:
+    - namespace: argo-rollouts
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
