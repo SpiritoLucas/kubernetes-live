@@ -5,15 +5,15 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
-    cert-manager.io/issuer: "cluster-issuer-selfsigned" 
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    cert-manager.io/issuer: "cluster-issuer-selfsigned"
     cert-manager.io/issuer-kind: "ClusterIssuer"
     metallb.uniberse.tf/address-pool: default
     prometheus.io/scrape: "true"
   name: vmagent-vm-victoria-metrics-k8s-stack
   namespace: observability
 spec:
-  ingressClassName: kong
+  ingressClassName: nginx
   rules:
     - host: victoria-metrics-agent.k3s
       http:
