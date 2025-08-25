@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: immich
   annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     cert-manager.io/issuer: "cluster-issuer-selfsigned"
