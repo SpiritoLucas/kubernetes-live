@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: machine-learning
-    app.kubernetes.io/version: v2.7.5
+    app.kubernetes.io/version: v1.119.0
     helm.sh/chart: immich-0.9.3
 spec:
   revisionHistoryLimit: 3
@@ -31,7 +31,7 @@ spec:
       enableServiceLinks: true
       containers:
       - name: immich-machine-learning
-        image: ghcr.io/immich-app/immich-machine-learning:v2.7.5
+        image: ghcr.io/immich-app/immich-machine-learning:v1.119.0
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_DATABASE_NAME
