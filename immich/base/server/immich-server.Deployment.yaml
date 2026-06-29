@@ -73,7 +73,7 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 3
         startupProbe:
-          failureThreshold: 120
+          failureThreshold: 180
           httpGet:
             path: /api/server/ping
             port: http
